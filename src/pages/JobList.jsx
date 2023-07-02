@@ -1,3 +1,4 @@
+import LoadingSpinner from "../components/LoadingSpinner";
 import React, { useEffect, useState } from "react";
 import JobItem from "../components/JobItem";
 import { getJobs } from "../api/jobList";
@@ -24,7 +25,7 @@ const JobList = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading ... </div>;
+    return <LoadingSpinner />;
   }
   if (error) {
     return <div>Error :{error} </div>;
