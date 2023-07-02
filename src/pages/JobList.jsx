@@ -30,6 +30,15 @@ const JobList = () => {
   if (error) {
     return <div>Error :{error} </div>;
   }
+  const getFormattedDate = (dateString) => {
+    const formattedDate = new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+    return formattedDate;
+  };
+
   return (
     <div>
       {jobs.map((job, index) => (
@@ -40,7 +49,7 @@ const JobList = () => {
           location={job.location}
           job_type={job.job_type}
           salary={job.salary}
-          expire_date={job.expire_date}
+          expire_date={getFormattedDate(job.expire_date)}
         />
       ))}
     </div>
