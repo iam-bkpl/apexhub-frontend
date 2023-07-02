@@ -22,8 +22,6 @@ ApexHub aims to empower students by providing them with a centralized platform t
 
 The backend repository for ApexHub can be found at [iam-bkpl/apexhub-backend](https://github.com/iam-bkpl/apexhub-backend).
 
----
-
 ## API Documentation
 
 For detailed API documentation, please refer to the [Postman API Documentation](https://documenter.getpostman.com/view/26041818/2s93sW9vqL).
