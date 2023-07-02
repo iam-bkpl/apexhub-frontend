@@ -1,6 +1,8 @@
 import React from "react";
 
-function JobItem() {
+const JobItem = ({ props }) => {
+  const { company_logo, title, location, job_type, salary, expire_date } =
+    props;
   return (
     <div className="container container-fluid">
       <div className="job-item p-4 mb-4">
@@ -48,6 +50,6 @@ function JobItem() {
       </div>
     </div>
   );
-}
+};
 
 export default JobItem;
