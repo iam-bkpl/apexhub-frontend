@@ -1,57 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import JobItem from "../components/JobItem";
+import { getJobs } from "../api/jobList";
+import axios from "axios";
 
-const jobItemsData = [
-  {
-    company_logo: "https://picsum.photos/80/80",
-    title: "Software Engineer",
-    location: "New York, USA",
-    job_type: "Full Time",
-    salary: "$123 - $456",
-    expire_date: "01 Jan, 2045",
-  },
-  {
-    company_logo: "https://picsum.photos/80/80",
-    title: "Web Developer",
-    location: "San Francisco, USA",
-    job_type: "Part Time",
-    salary: "$78 - $234",
-    expire_date: "15 Feb, 2045",
-  },
-  {
-    company_logo: "https://picsum.photos/80/80",
-    title: "Data Analyst",
-    location: "London, UK",
-    job_type: "Contract",
-    salary: "$100 - $200",
-    expire_date: "30 Mar, 2045",
-  },
-  {
-    company_logo: "https://picsum.photos/80/80",
-    title: "UX Designer",
-    location: "Berlin, Germany",
-    job_type: "Remote",
-    salary: "$80 - $150",
-    expire_date: "10 Apr, 2045",
-  },
-];
+const JobList = () => {
+  const [jobs, setJobs] = useState([]);
 
-function App() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getJobs();
+        setJobs(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading ... </div>;
+  }
+  if (error) {
+    return <div>Error :{error} </div>;
+  }
   return (
     <div>
-      {jobItemsData.map((jobItem, index) => (
+      {jobs.map((job, index) => (
         <JobItem
           key={index}
-          company_logo={jobItem.company_logo}
-          title={jobItem.title}
-          location={jobItem.location}
-          job_type={jobItem.job_type}
-          salary={jobItem.salary}
-          expire_date={jobItem.expire_date}
+          company_logo={job.company_logo}
+          title={job.title}
+          location={job.location}
+          job_type={job.job_type}
+          salary={job.salary}
+          expire_date={job.expire_date}
         />
       ))}
     </div>
   );
-}
+};
 
-export default App;
+export default JobList;
