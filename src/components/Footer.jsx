@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-dark navbar navbar-expand-lg  fixed-bottom">
+    <footer className="bg-dark ">
       <div className="container-fluid ">
         <div className="row text-white g-4">
           <div className="col-md-6 col-lg-3">

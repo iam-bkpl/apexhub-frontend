@@ -1,6 +1,6 @@
 import React from "react";
 
-const JobItem = ({ props }) => {
+const JobItem = (props) => {
   const { company_logo, title, location, job_type, salary, expire_date } =
     props;
   return (
@@ -10,22 +10,23 @@ const JobItem = ({ props }) => {
           <div className="col-12 col-md-8 d-flex align-items-center">
             <img
               className="flex-shrink-0 img-fluid border rounded"
-              src="https://picsum.photos/80/80"
+              src={company_logo}
               alt=""
               style={{ width: "80px", height: "80px" }}
             />
             <div className="text-start ps-4">
-              <h5 className="mb-3">Software Engineer</h5>
+              <h5 className="mb-3">{title}</h5>
               <span className="text-truncate me-3">
-                <i className="fa fa-map-marker-alt text-primary me-2"></i>New
-                York, USA
+                <i className="fa fa-map-marker-alt text-primary me-2"></i>
+                {location}
               </span>
               <span className="text-truncate me-3">
-                <i className="far fa-clock text-primary me-2"></i>Full Time
+                <i className="far fa-clock text-primary me-2"></i>
+                {job_type}
               </span>
               <span className="text-truncate me-0">
-                <i className="far fa-money-bill-alt text-primary me-2"></i>$123
-                - $456
+                <i className="far fa-money-bill-alt text-primary me-2"></i>
+                {salary}
               </span>
             </div>
           </div>
@@ -43,7 +44,7 @@ const JobItem = ({ props }) => {
             </div>
             <small className="text-truncate">
               <i className="far fa-calendar-alt text-primary me-2"></i>Date
-              Line: 01 Jan, 2045
+              Line: {expire_date}
             </small>
           </div>
         </div>

@@ -7,7 +7,8 @@ import Footer from "./components/Footer";
 const App = () => {
   return (
     <>
-      <JobItem />
+      <JobList />
+      <div className="m-4"></div>
       <Footer />
     </>
   );
