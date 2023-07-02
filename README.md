@@ -18,6 +18,37 @@ ApexHub aims to empower students by providing them with a centralized platform t
 
 **"Connecting Students, Empowering Dreams: ApexHub."**
 
+## Prerequisites
+
+Before getting started, ensure that you have the following prerequisites installed on your system:
+
+- Node.js (version 14 or later)
+
+## Getting Started
+
+1. Clone this repository to your local machine:
+
+   ```shell
+    git@github.com:iam-bkpl/apexhub-frontend.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```shell
+   cd <project>
+   ```
+
+3. Install the dependencies:
+
+   ```shell
+   npm install
+   ```
+
+4. Start the development server:
+   ```shell
+   npm run dev
+   ```
+
 ## Backend Repository
 
 The backend repository for ApexHub can be found at [iam-bkpl/apexhub-backend](https://github.com/iam-bkpl/apexhub-backend).
@@ -28,4 +59,8 @@ For detailed API documentation, please refer to the [Postman API Documentation](
 
 ---
 
-_Note: This README.md file provides an overview of the Apex Hub platform and its modules. For detailed instructions on how to use the platform, please refer to the official documentation._
+## Contact
+
+If you have any questions or suggestions, feel free to reach out to the project maintainers:
+
+- Kapil Bhandari - i.am.bhandari.kapil@gmail.com
