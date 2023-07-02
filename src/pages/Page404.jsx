@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
+import Button from "../components/Button";
 const Error404 = () => {
   return (
     <header
@@ -31,12 +32,7 @@ const Error404 = () => {
                       in our website! Maybe go to our home page or try to use a
                       search?
                     </p>
-                    <a
-                      href="#"
-                      className="py-3 px-5 mt-5 rounded-pill text-uppercase text-decoration-none main-btn fs-5 text-white"
-                    >
-                      Go Back To Home
-                    </a>
+                    <Button text="Go back to Home page" />
                   </div>
                 </div>
               </div>
