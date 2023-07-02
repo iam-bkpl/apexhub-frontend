@@ -1,15 +1,29 @@
-import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import LoginImg from "../assets/LoginImg.png";
-import { MyContext } from "../MyContext";
+import { connect } from "react-redux";
+import { useState } from "react";
 
 const Login = () => {
-  const { user } = useContext(MyContext);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your login logic here
+    // Login(email, password);
   };
+
+  // if user is authenticated redirect to homepage
 
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
@@ -21,11 +35,12 @@ const Login = () => {
           {/* <p className="text-dark fs-2 p-0 m-0">Be Verified</p>
             <small className="text-dark text-wrap text-center">Join experienced Designers on this platform.</small> */}
         </div>
+
         <div className="col-md-6 right-box">
           <div className="row align-items-center">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => handleSubmit(e)}>
               <div className="header-text mb-4">
-                <h2>Hello, {user}</h2>
+                <h2>Hello, from the other side</h2>
                 <p>We are happy to have you back.</p>
               </div>
               <div className="input-group mb-3">
@@ -33,6 +48,9 @@ const Login = () => {
                   type="text"
                   className="form-control form-control-lg bg-white rounded-pill shadow-sm fs-6"
                   placeholder="Email address"
+                  value={email}
+                  name="email"
+                  onChange={(e) => handleChange(e)}
                   required
                 />
               </div>
@@ -42,6 +60,9 @@ const Login = () => {
                   className="form-control form-control-lg bg-white rounded-pill shadow-sm fs-6"
                   placeholder="Password"
                   required
+                  name="password"
+                  value={password}
+                  onChange={(e) => handleChange(e)}
                 />
               </div>
               <div className="input-group mb-5 mt-3 d-flex justify-content-between">
@@ -50,7 +71,6 @@ const Login = () => {
                     type="checkbox"
                     className="form-check-input"
                     id="formCheck"
-                    required
                   />
                   <label
                     htmlFor="formCheck"
@@ -61,9 +81,8 @@ const Login = () => {
                 </div>
                 <div className="forgot">
                   <small>
-                    <Link to="/password/reset/confirm/:uid/:token">
-                      Forgot Password?
-                    </Link>
+                    {/* <Link to="/password/reset/confirm/:uid/:token"> */}
+                    <Link to="/reset-password">Forgot Password?</Link>
                   </small>
                 </div>
               </div>
@@ -93,4 +112,6 @@ const Login = () => {
   );
 };
 
-export default Login;
+//  
+
+export default connect(null,{})(Login);
