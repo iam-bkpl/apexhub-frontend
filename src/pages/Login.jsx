@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import LoginImg from "../assets/LoginImg.png";
+import { MyContext } from "../MyContext";
 
 const Login = () => {
+  const { user } = useContext(MyContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add your login logic here
@@ -21,7 +25,7 @@ const Login = () => {
           <div className="row align-items-center">
             <form onSubmit={handleSubmit}>
               <div className="header-text mb-4">
-                <h2>Hello, Again</h2>
+                <h2>Hello, {user}</h2>
                 <p>We are happy to have you back.</p>
               </div>
               <div className="input-group mb-3">
@@ -57,7 +61,9 @@ const Login = () => {
                 </div>
                 <div className="forgot">
                   <small>
-                    <a href="./resetPassword.html">Forgot Password?</a>
+                    <Link to="/password/reset/confirm/:uid/:token">
+                      Forgot Password?
+                    </Link>
                   </small>
                 </div>
               </div>
