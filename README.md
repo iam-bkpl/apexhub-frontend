@@ -18,6 +18,10 @@ ApexHub aims to empower students by providing them with a centralized platform t
 
 **"Connecting Students, Empowering Dreams: ApexHub."**
 
+## Backend Repository
+
+The backend repository for ApexHub can be found at [iam-bkpl/apexhub-backend](https://github.com/iam-bkpl/apexhub-backend).
+
 ---
 
-*Note: This README.md file provides an overview of the Apex Hub platform and its modules. For detailed instructions on how to use the platform, please refer to the official documentation.*
+_Note: This README.md file provides an overview of the Apex Hub platform and its modules. For detailed instructions on how to use the platform, please refer to the official documentation._
