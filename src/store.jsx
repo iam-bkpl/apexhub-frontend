@@ -8,9 +8,16 @@ const initialState = {};
 
 const middleware = [thunk];
 
-const store = configureStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+// const store = configureStore(
+//   rootReducer,
+//   initialState,
+//   composeWithDevTools(applyMiddleware(...middleware))
+// );
+const store = configureStore({
+  reducer: rootReducer,
+  preloadedState: initialState,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+  devTools: true,
+});
+
 export default store;

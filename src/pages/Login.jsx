@@ -1,9 +1,10 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import LoginImg from "../assets/LoginImg.png";
 import { connect } from "react-redux";
-import { useState } from "react";
+import { login } from "../actions/auth";
+import LoginImg from "../assets/LoginImg.png";
 
-const Login = () => {
+const Login = ({ login }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,9 +21,9 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Login(email, password);
+    login(email, password);
+    console.log("handle submit button pressed");
   };
-
   // if user is authenticated redirect to homepage
 
   return (
@@ -112,6 +113,4 @@ const Login = () => {
   );
 };
 
-//  
-
-export default connect(null,{})(Login);
+export default connect(null, { login })(Login);
