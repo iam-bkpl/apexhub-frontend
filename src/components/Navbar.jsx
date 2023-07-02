@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -12,15 +13,15 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <a
+        <Link
           className="navbar-brand d-flex justify-content-between align-items-start order-lg-0"
-          href="./index.html"
+          to="/"
         >
           <img src="images/shopping-bag-icon.png" alt="site icon" />
           <span className="text-uppercase fw-lighter ms-2 d-none d-sm-block">
             Apex-HUB
           </span>
-        </a>
+        </Link>
         <div className="order-lg-2 nav-btns text-end py-3">
           <button
             type="button"
@@ -64,12 +65,9 @@ const Navbar = () => {
         <div className="collapse navbar-collapse order-lg-1" id="navMenu">
           <ul className="navbar-nav mx-auto text-center">
             <li className="nav-item px-2 py-2">
-              <a
-                className="nav-link text-uppercase text-dark"
-                href="./index.html"
-              >
+              <Link className="nav-link text-uppercase text-dark" to="/">
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item px-1 py-2">
               <div className="nav-item dropdown">
@@ -81,11 +79,11 @@ const Navbar = () => {
                   Services
                 </a>
                 <div className="dropdown-menu rounded-3 m-0 border-light text-center">
-                  <a href="./pages/jobs.html" className="dropdown-item">
+                  <Link to="/job-list" className="dropdown-item">
                     Job List
-                  </a>
+                  </Link>
                   <hr className="dropdown-divider" />
-                  <a href="./pages/aShop.html" className="dropdown-item">
+                  <a href="/product-list" className="dropdown-item">
                     Product List
                   </a>
                 </div>
