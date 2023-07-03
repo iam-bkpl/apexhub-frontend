@@ -6,9 +6,47 @@ import {
   loginFail,
   userLoadSuccess,
   userLoadFail,
+  authenticationStatus,
+  authenticationSuccess,
+  authenticationFail,
 } from "../reducers/auth";
+import thunk from "redux-thunk";
 
 const apiUrl = "http://localhost:8000/api";
+
+export const checkAuthenticated = createAsyncThunk(
+  "auth/checkAuthenticated",
+  async (thunkAPI) => {
+    if (localStorage.getItem("access")) {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
+        },
+      };
+      const body = JSON.stringify({
+        token: localStorage.getItem("access"),
+      });
+
+      try {
+        const response = await axios.post(
+          `${apiUrl}/auth/jwt/verify/`,
+          body,
+          config
+        );
+        if (response.data.code !== "token_not_valid") {
+          thunkAPI.dispatch(authenticationSuccess());
+        } else {
+          throw new Error("Auth Fail");
+        }
+      } catch (error) {
+        thunkAPI.dispatch(authenticationFail());
+      }
+    } else {
+      thunkAPI.dispatch(authenticationFail);
+    }
+  }
+);
 
 export const loadUser = createAsyncThunk("auth/loadUser", async (thunkAPI) => {
   if (localStorage.getItem("access")) {
@@ -20,8 +58,10 @@ export const loadUser = createAsyncThunk("auth/loadUser", async (thunkAPI) => {
     };
     try {
       const response = await axios.get(`${apiUrl}/auth/users/me/`, config);
+      dispatch(userLoadSuccess(response.data));
       return response.data;
     } catch (error) {
+      dispatch(userLoadFail(response.data));
       throw error.response.data.message;
     }
   } else {
@@ -47,10 +87,16 @@ export const login = createAsyncThunk(
       thunkAPI.dispatch(loginSuccess(response.data));
       thunkAPI.dispatch(loadUser());
     } catch (error) {
+      dispatch(loginFail(response.data));
       throw error.response.data.message;
     }
   }
 );
+
+export const logout = createAsyncThunk("auth/logout", async (thunkAPI) => {
+  thunkAPI.dispatch(logout());
+});
+
 // // old code
 // import axios from "axios";
 
