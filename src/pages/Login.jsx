@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../actions/auth";
 import LoginImg from "../assets/LoginImg.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const Login = ({ login }) => {
-  const data = useSelector((state) => {
-    return state.auth.user;
-  });
+const Login = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -26,8 +25,7 @@ const Login = ({ login }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(email, password);
-    console.log("handle submit button pressed");
+    dispatch(login({ email, password }));
   };
   // if user is authenticated redirect to homepage
 
@@ -46,7 +44,7 @@ const Login = ({ login }) => {
           <div className="row align-items-center">
             <form onSubmit={(e) => handleSubmit(e)}>
               <div className="header-text mb-4">
-                <h2>Hello,|{data} | from the other side</h2>
+                <h2>Hello,|{user} | from the other side</h2>
                 <p>We are happy to have you back.</p>
               </div>
               <div className="input-group mb-3">
@@ -101,10 +99,7 @@ const Login = ({ login }) => {
                 </button>
               </div>
               <div className="input-group mb-3">
-                <button
-                  className="btn btn-lg btn-light w-100 fs-6"
-                  onClick={() => handleClick()}
-                >
+                <button className="btn btn-lg btn-light w-100 fs-6">
                   <small>Sign In with Google</small>
                 </button>
               </div>
@@ -121,4 +116,5 @@ const Login = ({ login }) => {
   );
 };
 
-export default connect(null, { login })(Login);
+// export default connect(null, { login })(Login);
+export default Login;

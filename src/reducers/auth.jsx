@@ -1,9 +1,3 @@
-import {
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  USER_LOADED_SUCCESS,
-  USER_LOADED_FAIL,
-} from "../actions/types";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -29,7 +23,7 @@ const authSlice = createSlice({
     },
     loginFail: (state, action) => {
       localStorage.removeItem("access");
-      localStorage.removeItem("refress");
+      localStorage.removeItem("refresh");
       state.access = null;
       state.refresh = null;
       state.isAuthenticated = false;
