@@ -1,55 +1,88 @@
-  import {
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    USER_LOADED_SUCCESS,
-    USER_LOADED_FAIL,
-  } from "../actions/types";
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  USER_LOADED_SUCCESS,
+  USER_LOADED_FAIL,
+} from "../actions/types";
+import { createSlice } from "@reduxjs/toolkit";
 
-  const initialState = {
-    access: localStorage.getItem("access"),
-    refresh: localStorage.getItem("refresh"),
-    isAuthenticated: null,
-    user: null,
-  };
+const initialState = {
+  access: localStorage.getItem("access"),
+  refresh: localStorage.getItem("refresh"),
+  isAuthenticated: null,
+  user: null,
+};
 
-  const authReducer = (state = initialState, action) => {
-    const { type, payload } = action;
+const authSlice = createSlice({
+  name: "auth",
+  initialState: initialState,
+  reducers: {
+    loginSuccess: (state, action) => {
+      localStorage.setItem("access", action.payload.access);
+      state.access = action.payload.access;
+      state.refresh = action.payload.refresh;
+      state.isAuthenticated = true;
+    },
 
-    switch (type) {
-      case LOGIN_SUCCESS:
-        localStorage.setItem("access", payload.access);
-        return {
-          ...state,
-          isAuthenticated: true,
-          access: payload.access,
-          refresh: payload.refresh,
-        };
+    userLoadSuccess: (state, action) => {
+      state.user = action.payload;
+    },
+    loginFail: (state, action) => {
+      localStorage.removeItem("access");
+      localStorage.removeItem("refress");
+      state.access = null;
+      state.refresh = null;
+      state.isAuthenticated = false;
+    },
+    userLoadFail: (state, action) => {
+      state.user = null;
+    },
+  },
+});
 
-      case USER_LOADED_SUCCESS:
-        return {
-          ...state,
-          user: payload,
-        };
+export const { loginSuccess, loginFail, userLoadSuccess, userLoadFail } =
+  authSlice.actions;
 
-      case USER_LOADED_FAIL:
-        return {
-          ...state,
-          user: null,
-        };
+export default authSlice.reducer;
 
-      case LOGIN_FAIL:
-        localStorage.removeItem("access");
-        localStorage.removeItem("refresh");
-        return {
-          ...state,
-          access: null,
-          refresh: null,
-          isAuthenticated: false,
-        };
+// const authReducer = (state = initialState, action) => {
+//   const { type, payload } = action;
 
-      default:
-        return state;
-    }
-  };
+//   switch (type) {
+//     case LOGIN_SUCCESS:
+//       localStorage.setItem("access", payload.access);
+//       return {
+//         ...state,
+//         isAuthenticated: true,
+//         access: payload.access,
+//         refresh: payload.refresh,
+//       };
 
-  export default authReducer;
+//     case USER_LOADED_SUCCESS:
+//       return {
+//         ...state,
+//         user: payload,
+//       };
+
+//     case USER_LOADED_FAIL:
+//       return {
+//         ...state,
+//         user: null,
+//       };
+
+//     case LOGIN_FAIL:
+//       localStorage.removeItem("access");
+//       localStorage.removeItem("refresh");
+//       return {
+//         ...state,
+//         access: null,
+//         refresh: null,
+//         isAuthenticated: false,
+//       };
+
+//     default:
+//       return state;
+//   }
+// };
+
+// export default authReducer;

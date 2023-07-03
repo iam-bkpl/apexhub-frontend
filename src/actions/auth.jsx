@@ -1,6 +1,6 @@
+// old code
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import MessageBox from "../components/MessageBox";
+
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -9,6 +9,7 @@ import {
 } from "./types";
 
 const apiUrl = "http://localhost:8000/api";
+
 export const load_user = () => async (dispatch) => {
   if (localStorage.getItem("access")) {
     const config = {

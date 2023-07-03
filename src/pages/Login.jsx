@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../actions/auth";
 import LoginImg from "../assets/LoginImg.png";
+import { useSelector } from "react-redux";
 
 const Login = ({ login }) => {
+  const data = useSelector((state) => {
+    return state.auth.user;
+  });
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -41,7 +46,7 @@ const Login = ({ login }) => {
           <div className="row align-items-center">
             <form onSubmit={(e) => handleSubmit(e)}>
               <div className="header-text mb-4">
-                <h2>Hello, from the other side</h2>
+                <h2>Hello,|{data} | from the other side</h2>
                 <p>We are happy to have you back.</p>
               </div>
               <div className="input-group mb-3">
@@ -96,7 +101,10 @@ const Login = ({ login }) => {
                 </button>
               </div>
               <div className="input-group mb-3">
-                <button className="btn btn-lg btn-light w-100 fs-6">
+                <button
+                  className="btn btn-lg btn-light w-100 fs-6"
+                  onClick={() => handleClick()}
+                >
                   <small>Sign In with Google</small>
                 </button>
               </div>
