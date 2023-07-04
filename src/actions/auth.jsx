@@ -1,22 +1,22 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
 import {
   loginSuccess,
   loginFail,
   userLoadSuccess,
   userLoadFail,
-  authenticationStatus,
   authenticationSuccess,
   authenticationFail,
+  logoutSuccess,
 } from "../reducers/auth";
+
 import thunk from "redux-thunk";
 
 const apiUrl = "http://localhost:8000/api";
 
 export const checkAuthenticated = createAsyncThunk(
   "auth/checkAuthenticated",
-  async (thunkAPI) => {
+  async (_, thunkAPI) => {
     if (localStorage.getItem("access")) {
       const config = {
         headers: {
@@ -43,31 +43,35 @@ export const checkAuthenticated = createAsyncThunk(
         thunkAPI.dispatch(authenticationFail());
       }
     } else {
-      thunkAPI.dispatch(authenticationFail);
+      thunkAPI.dispatch(authenticationFail());
     }
   }
 );
 
-export const loadUser = createAsyncThunk("auth/loadUser", async (thunkAPI) => {
-  if (localStorage.getItem("access")) {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `JWT ${localStorage.getItem("access")}`,
-      },
-    };
-    try {
-      const response = await axios.get(`${apiUrl}/auth/users/me/`, config);
-      dispatch(userLoadSuccess(response.data));
-      return response.data;
-    } catch (error) {
-      dispatch(userLoadFail(response.data));
-      throw error.response.data.message;
+export const loadUser = createAsyncThunk(
+  "auth/loadUser",
+  async (_, thunkAPI) => {
+    if (localStorage.getItem("access")) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${localStorage.getItem("access")}`,
+        },
+      };
+      try {
+        const response = await axios.get(`${apiUrl}/auth/users/me/`, config);
+        thunkAPI.dispatch(userLoadSuccess(response.data));
+        return response.data;
+      } catch (error) {
+        // thunkAPI.dispatch(userLoadFail(response.data));
+        // throw error.response.data.message;
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    } else {
+      throw new Error("Access token not found");
     }
-  } else {
-    throw new Error("Access token not found");
   }
-});
+);
 
 export const login = createAsyncThunk(
   "auth/login",
@@ -85,16 +89,17 @@ export const login = createAsyncThunk(
         config
       );
       thunkAPI.dispatch(loginSuccess(response.data));
-      thunkAPI.dispatch(loadUser());
+      thunkAPI.dispatch(loadUser(response.data));
     } catch (error) {
-      dispatch(loginFail(response.data));
-      throw error.response.data.message;
+      // thunkAPI.dispatch(loginFail(response.data));
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }
 );
 
-export const logout = createAsyncThunk("auth/logout", async (thunkAPI) => {
-  thunkAPI.dispatch(logout());
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  // thunkAPI.dispatch(logout());
+  thunkAPI.dispatch(logoutSuccess());
 });
 
 // // old code

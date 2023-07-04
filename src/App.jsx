@@ -1,11 +1,21 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes";
-
-import { Provider } from "react-redux";
-import store from "./store";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUser } from "./actions/auth";
 
 const App = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  const access = useSelector((state) => state.auth.access);
+  useEffect(() => {
+    if (access || isAuthenticated) {
+      // dispatch(loadUser);
+      dispatch(loadUser());
+    }
+  }, [dispatch, isAuthenticated]);
+
   return (
     <div>
       <Router>

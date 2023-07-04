@@ -1,7 +1,48 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../actions/auth";
+import auth from "../reducers/auth";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const user = useSelector((state) => state.auth.user);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  const authLinks = () => {
+    return (
+      <li className="nav-item px-1 py-2 border-0">
+        <button
+          className="nav-link text-uppercase text-dark"
+          onClick={handleLogout}
+          type="button"
+        >
+          Logout
+        </button>
+      </li>
+    );
+  };
+  const guestLinks = () => {
+    return (
+      <li className="nav-item px-1 py-2 border-0">
+        <Link
+          className="nav-link text-uppercase text-dark"
+          // onClick={() => handleLogout()}
+          type="submit"
+          to="/"
+        >
+          Login
+        </Link>
+      </li>
+    );
+  };
   return (
     <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
       <div className="container">
@@ -121,6 +162,7 @@ const Navbar = () => {
                 Contact
               </a>
             </li>
+            {isAuthenticated ? authLinks() : guestLinks()}
           </ul>
         </div>
       </div>

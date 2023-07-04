@@ -1,8 +1,9 @@
 import LoadingSpinner from "../components/LoadingSpinner";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import JobItem from "../components/JobItem";
 import { getJobs } from "../api/jobList";
-import axios from "axios";
+import Navbar from "../components/Navbar";
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
@@ -41,6 +42,7 @@ const JobList = () => {
 
   return (
     <div>
+      <Navbar />
       {jobs.map((job, index) => (
         <JobItem
           key={index}

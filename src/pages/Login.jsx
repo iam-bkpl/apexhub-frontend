@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Link, useInRouterContext } from "react-router-dom";
 import { login } from "../actions/auth";
 import LoginImg from "../assets/LoginImg.png";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { userLoadFail } from "../reducers/auth";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
 
   const [formData, setFormData] = useState({
@@ -27,7 +29,14 @@ const Login = () => {
     e.preventDefault();
     dispatch(login({ email, password }));
   };
-  // if user is authenticated redirect to homepage
+  // if user is  authenticated redirect to homepage
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/home");
+    }
+  }, [user, navigate]);
 
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
@@ -44,7 +53,7 @@ const Login = () => {
           <div className="row align-items-center">
             <form onSubmit={(e) => handleSubmit(e)}>
               <div className="header-text mb-4">
-                <h2>Hello,|{user} | from the other side</h2>
+                <h2>Hello,| | from the other side</h2>
                 <p>We are happy to have you back.</p>
               </div>
               <div className="input-group mb-3">
