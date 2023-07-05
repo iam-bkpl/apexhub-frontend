@@ -62,29 +62,6 @@ const authSlice = createSlice({
     resetPasswordConfirm: () => {},
     resetPasswordConfirmSuccess: () => {},
   },
-  extraReducers: (builder) => {
-    builder;
-    // .addCase(checkAuthenticated.fulfilled, (state) => {})
-    // .addCase(checkAuthenticated.rejected, (state) => {})
-    // .addCase(loadUser.fulfilled, (state) => {})
-    // .addCase(loadUser.rejected, (state) => {})
-    // .addCase(login.fulfilled, (state) => {})
-    // .addCase(login.rejected, (state) => {})
-    // .addCase(resetPassword.fulfilled, (state) => {})
-    // .addCase(resetPassword.rejected, (state) => {})
-    // .addCase(resetPasswordConfirm.fulfilled, (state) => {})
-    // .addCase(resetPasswordConfirm.rejected, (state) => {})
-    // .addCase(logout.fulfilled, (state) => {})
-    // .addCase(passwordResetSuccess.fulfilled, (state) => {
-    //   // Handle password reset success
-    // })
-    // .addCase(resetPasswordConfirmSuccess.fulfilled, (state, action) => {
-    //   console.log("Password change success");
-    // })
-    // .addCase(resetPasswordConfirmSuccess.rejected, (state, action) => {
-    //   console.log("Fail to change password");
-    // });
-  },
 });
 
 export const {

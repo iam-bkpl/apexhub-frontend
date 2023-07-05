@@ -4,26 +4,18 @@ import React, { useEffect, useState } from "react";
 import JobItem from "../components/JobItem";
 import { getJobs } from "../api/jobList";
 import Navbar from "../components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchJobPosts } from "../redux/actions/acs";
 
 const JobList = () => {
-  const [jobs, setJobs] = useState([]);
-
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const jobPosts = useSelector((state) => state.acs.jobPosts);
+  const loading = useSelector((state) => state.acs.loading);
+  const error = useSelector((state) => state.acs.error);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getJobs();
-        setJobs(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+    dispatch(fetchJobPosts());
+  }, [dispatch]);
 
   if (loading) {
     return <LoadingSpinner />;
@@ -43,10 +35,11 @@ const JobList = () => {
   return (
     <div>
       <Navbar />
-      {jobs.map((job, index) => (
+
+      {jobPosts.map((job) => (
         <JobItem
-          key={index}
-          company_logo={job.company_logo}
+          key={job.id}
+          company={job.company_name}
           title={job.title}
           location={job.location}
           job_type={job.job_type}

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppRoutes from "./routes";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUser } from "./actions/auth";
+import { loadUser } from "./redux/actions/auth";
 
 const App = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { resetPassword } from "../actions/auth";
+import { resetPassword } from "../redux/actions/auth";
 
 const ResetPassword = () => {
   const dispatch = useDispatch();

@@ -83,6 +83,7 @@ export const login = createAsyncThunk(
       },
     };
     const body = JSON.stringify({ email, password });
+
     try {
       const response = await axios.post(
         `${apiUrl}/auth/jwt/create/`,
@@ -93,6 +94,8 @@ export const login = createAsyncThunk(
       thunkAPI.dispatch(loadUser(response.data));
     } catch (error) {
       // thunkAPI.dispatch(loginFail(response.data));
+      console.log(error.message);
+
       return thunkAPI.rejectWithValue(error.response.data.message);
     }
   }

@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../actions/auth";
-import auth from "../reducers/auth";
+import { logout } from "../redux/actions/auth";
 
 const Navbar = () => {
   const dispatch = useDispatch();

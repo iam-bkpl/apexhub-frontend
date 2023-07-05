@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LoginImg from "../assets/LoginImg.png";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../actions/auth";
+import { register } from "../redux/actions/auth";
 
 const Register = () => {
   const dispatch = useDispatch();

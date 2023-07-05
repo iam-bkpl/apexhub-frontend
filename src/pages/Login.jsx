@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useInRouterContext } from "react-router-dom";
-import { login } from "../actions/auth";
+import { login } from "../redux/actions/auth";
 import LoginImg from "../assets/LoginImg.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { userLoadFail } from "../reducers/auth";
+import { userLoadFail } from "../redux/reducers/auth";
 
 const Login = () => {
   const dispatch = useDispatch();
