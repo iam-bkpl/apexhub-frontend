@@ -27,6 +27,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(register({ user_type, email, password }));
+    navigate("/login");
   };
 
   useEffect(() => {
