@@ -8,9 +8,10 @@ import {
   authenticationSuccess,
   authenticationFail,
   logoutSuccess,
+  passwordResetSuccess,
+  resetPasswordConfirmSuccess,
+  registerSuccess,
 } from "../reducers/auth";
-
-import thunk from "redux-thunk";
 
 const apiUrl = "http://localhost:8000/api";
 
@@ -97,64 +98,65 @@ export const login = createAsyncThunk(
   }
 );
 
+export const register = createAsyncThunk(
+  "auth/register",
+  async ({ email, password, user_type }, thunkAPI) => {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    const body = JSON.stringify({ email, password, user_type });
+    try {
+      const response = await axios.post(`${apiUrl}/auth/users/`, body, config);
+      console.log(body);
+      thunkAPI.dispatch(registerSuccess(response.data));
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+export const resetPassword = createAsyncThunk(
+  "auth/resetPassword",
+  async (email, thunkAPI) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify({ email });
+    try {
+      await axios.post(`${apiUrl}/auth/users/reset_password/`, body, config);
+      thunkAPI.dispatch(passwordResetSuccess());
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
+export const resetPasswordConfirm = createAsyncThunk(
+  "auth/resetPasswordConfirm",
+  async ({ uid, token, new_password, re_new_password }, thunkAPI) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify({ uid, token, new_password, re_new_password });
+
+    try {
+      await axios.post(
+        `${apiUrl}/auth/users/reset_password_confirm/`,
+        body,
+        config
+      );
+      thunkAPI.dispatch(resetPasswordConfirmSuccess());
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
+    }
+  }
+);
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   // thunkAPI.dispatch(logout());
   thunkAPI.dispatch(logoutSuccess());
 });
-
-// // old code
-// import axios from "axios";
-
-// export const load_user = () => async (dispatch) => {
-//   if (localStorage.getItem("access")) {
-//     const config = {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `JWT ${localStorage.getItem("access")}`,
-//         Accept: "application/json",
-//       },
-//     };
-//     try {
-//       const response = await axios.get(`${apiUrl}/auth/users/me/`, config);
-//       dispatch({
-//         type: USER_LOADED_SUCCESS,
-//         payload: response.data,
-//       });
-//     } catch (error) {
-//       dispatch({
-//         type: USER_LOADED_FAIL,
-//         payload: error.response.data.message,
-//       });
-//     }
-//   } else {
-//     dispatch({
-//       type: USER_LOADED_FAIL,
-//     });
-//   }
-// };
-
-// export const login = (email, password) => async (dispatch) => {
-//   const config = {
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   };
-//   const body = JSON.stringify({ email, password });
-
-//   try {
-//     const response = await axios.post(
-//       `${apiUrl}/auth/jwt/create/`,
-//       body,
-//       config
-//     );
-//     dispatch({
-//       type: LOGIN_SUCCESS,
-//       payload: response.data,
-//     });
-//     dispatch(load_user());
-//   } catch (error) {
-//     dispatch({
-//       type: LOGIN_FAIL,
-//     });
-//   }
-// };

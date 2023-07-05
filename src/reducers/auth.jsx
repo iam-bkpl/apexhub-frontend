@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { checkAuthenticated, loadUser } from "../actions/auth";
 
 const initialState = {
   access: localStorage.getItem("access") || null,
@@ -56,6 +57,33 @@ const authSlice = createSlice({
     authenticationFail: (state) => {
       state.isAuthenticated = false;
     },
+    passwordResetSuccess: () => {},
+    registerSuccess: () => {},
+    resetPasswordConfirm: () => {},
+    resetPasswordConfirmSuccess: () => {},
+  },
+  extraReducers: (builder) => {
+    builder;
+    // .addCase(checkAuthenticated.fulfilled, (state) => {})
+    // .addCase(checkAuthenticated.rejected, (state) => {})
+    // .addCase(loadUser.fulfilled, (state) => {})
+    // .addCase(loadUser.rejected, (state) => {})
+    // .addCase(login.fulfilled, (state) => {})
+    // .addCase(login.rejected, (state) => {})
+    // .addCase(resetPassword.fulfilled, (state) => {})
+    // .addCase(resetPassword.rejected, (state) => {})
+    // .addCase(resetPasswordConfirm.fulfilled, (state) => {})
+    // .addCase(resetPasswordConfirm.rejected, (state) => {})
+    // .addCase(logout.fulfilled, (state) => {})
+    // .addCase(passwordResetSuccess.fulfilled, (state) => {
+    //   // Handle password reset success
+    // })
+    // .addCase(resetPasswordConfirmSuccess.fulfilled, (state, action) => {
+    //   console.log("Password change success");
+    // })
+    // .addCase(resetPasswordConfirmSuccess.rejected, (state, action) => {
+    //   console.log("Fail to change password");
+    // });
   },
 });
 
@@ -67,48 +95,10 @@ export const {
   authenticationFail,
   authenticationSuccess,
   logoutSuccess,
+  passwordResetSuccess,
+  resetPasswordConfirm,
+  resetPasswordConfirmSuccess,
+  registerSuccess,
 } = authSlice.actions;
 
 export default authSlice.reducer;
-
-// const authReducer = (state = initialState, action) => {
-//   const { type, payload } = action;
-
-//   switch (type) {
-//     case LOGIN_SUCCESS:
-//       localStorage.setItem("access", payload.access);
-//       return {
-//         ...state,
-//         isAuthenticated: true,
-//         access: payload.access,
-//         refresh: payload.refresh,
-//       };
-
-//     case USER_LOADED_SUCCESS:
-//       return {
-//         ...state,
-//         user: payload,
-//       };
-
-//     case USER_LOADED_FAIL:
-//       return {
-//         ...state,
-//         user: null,
-//       };
-
-//     case LOGIN_FAIL:
-//       localStorage.removeItem("access");
-//       localStorage.removeItem("refresh");
-//       return {
-//         ...state,
-//         access: null,
-//         refresh: null,
-//         isAuthenticated: false,
-//       };
-
-//     default:
-//       return state;
-//   }
-// };
-
-// export default authReducer;

@@ -1,15 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LoginImg from "../assets/LoginImg.png";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../actions/auth";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [user_type, setUser_type] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleSubmit = () => {};
+  const { email, password } = formData;
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+  const handleOnChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(register({ user_type, email, password }));
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  });
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100">
       <div className="row border rounded-5 p-3 bg-light shadow box-area">
@@ -20,7 +44,7 @@ const Register = () => {
         </div>
         <div className="col-md-6 right-box">
           <div className="row align-items-center">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => handleSubmit(e)}>
               <div className="header-text mb-4">
                 <h2>Sign Up!</h2>
                 <p>Get started with your free account</p>
@@ -30,11 +54,21 @@ const Register = () => {
                   className="form-select bg-white rounded-pill shadow-sm fs-6 py-2 text-secondary"
                   required
                 >
-                  <option disabled value="">
-                    Select User
+                  <option value="">Select User</option>
+                  <option
+                    name="external"
+                    value="external"
+                    onClick={() => setUser_type("external")}
+                  >
+                    External
                   </option>
-                  <option value="external">External</option>
-                  <option value="student">Student</option>
+                  <option
+                    name="student"
+                    value="student"
+                    onClick={() => setUser_type("student")}
+                  >
+                    Student
+                  </option>
                 </select>
               </div>
               <div className="input-group mb-3">
@@ -42,6 +76,9 @@ const Register = () => {
                   type="text"
                   className="form-control form-control-lg bg-white rounded-pill shadow-sm fs-6"
                   placeholder="Email address"
+                  name="email"
+                  value={email}
+                  onChange={(e) => handleOnChange(e)}
                   required
                 />
               </div>
@@ -50,6 +87,9 @@ const Register = () => {
                   type="password"
                   className="form-control form-control-lg bg-white rounded-pill shadow-sm fs-6"
                   placeholder="Password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => handleOnChange(e)}
                   required
                 />
               </div>
