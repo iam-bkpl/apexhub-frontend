@@ -52,3 +52,30 @@ export const fetchJobPost = createAsyncThunk(
     }
   }
 );
+
+export const postJob = createAsyncThunk(
+  "acs/postJob",
+  async (jobData, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+      try {
+        const response = await axios.post(
+          `${API_URL}/jobpost/`,
+          jobData,
+          config
+        );
+      } catch (error) {
+        console.log("Error while posting a job");
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    } else {
+      return thunkAPI.rejectWithValue("User not authorized ");
+    }
+  }
+);

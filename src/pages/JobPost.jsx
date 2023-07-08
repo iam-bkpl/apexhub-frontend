@@ -1,17 +1,40 @@
 import React, { Component } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { useState } from "react";
+import { postJob } from "../redux/actions/acs";
+import { useDispatch } from "react-redux";
 
 const JobPost = () => {
+  const dispatch = useDispatch();
+  const [jobData, setJobData] = useState({
+    title: "",
+    vacancy: "",
+    jobType: "",
+    location: "",
+    salary: "",
+    description: "",
+    text: "<h4> About the job </h4> <br/> <b> Job Responsibilities:</b><p>...</p> <br/> <b> Job Requirements</b><p>...</p>",
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(postJob(jobData));
+    console.log(jobData);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setJobData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
     <>
       <section className="section dashboard">
         <div className="row bg-dark p-3 bg-body rounded mt-4">
-          {/* Job Detail Start */}
           <div className="container-xxl py-5" data-wow-delay="0.1s">
             <div className="container bg-light border rounded-5 shadow p-5">
               <div className="row gy-5 gx-4 justify-content-center">
@@ -22,23 +45,29 @@ const JobPost = () => {
                   onSubmit={(e) => handleSubmit(e)}
                 >
                   <div className="col-md-4">
-                    <label htmlFor="jobTitle" className="form-label">
+                    <label htmlFor="title" className="form-label">
                       Job Title <span className="text-danger">*</span>
                     </label>
                     <input
                       type="text"
                       className="form-control rounded-6 py-2"
-                      id="jobTitle"
+                      id="title"
+                      value={jobData.title}
+                      name="title"
+                      onChange={(e) => handleInputChange(e)}
                     />
                   </div>
                   <div className="col-md-4">
-                    <label htmlFor="inputState" className="form-label">
+                    <label htmlFor="vacancy" className="form-label">
                       No of vacancy <span className="text-danger">*</span>
                     </label>
                     <input
-                      type="number"
+                      type="text"
+                      name="vacancy"
                       className="form-control rounded-6 py-2"
-                      id=""
+                      id="jobVaccancy"
+                      value={jobData.vacancy}
+                      onChange={(e) => handleInputChange(e)}
                     />
                   </div>
                   <div className="col-md-4">
@@ -48,14 +77,16 @@ const JobPost = () => {
                     <select
                       id="inputState"
                       className="form-select rounded-6 py-2"
-                      defaultValue=""
+                      name="jobType"
+                      value={jobData.jobType}
+                      onChange={handleInputChange}
                     >
                       <option disabled value="">
                         Select
                       </option>
-                      <option>on-site</option>
-                      <option>remote</option>
-                      <option>hybrid</option>
+                      <option value="on-site">on-site</option>
+                      <option value="remote">remote</option>
+                      <option value="hybrid">hybrid</option>
                     </select>
                   </div>
                   <div className="col-md-4">
@@ -64,16 +95,9 @@ const JobPost = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control rounded-6 py-2"
-                      id=""
-                    />
-                  </div>
-                  <div className="col-md-4">
-                    <label htmlFor="" className="form-label">
-                      Location <span className="text-danger">*</span>
-                    </label>
-                    <input
-                      type="text"
+                      name="location"
+                      value={jobData.location}
+                      onChange={(e) => handleInputChange(e)}
                       className="form-control rounded-6 py-2"
                       id=""
                     />
@@ -83,27 +107,24 @@ const JobPost = () => {
                       Salary
                     </label>
                     <input
-                      type="number"
+                      type="text"
+                      name="salary"
+                      onChange={(e) => handleInputChange(e)}
                       className="form-control rounded-6 py-2"
-                      id=""
+                      id="salary"
+                      value={jobData.salary}
                     />
                   </div>
-                  <div className="col-md-4">
-                    <label htmlFor="" className="form-label">
-                      Company Logo
-                    </label>
-                    <input
-                      className="form-control py-2 rounded-6"
-                      type="file"
-                      id=""
-                    />
-                  </div>
-                  <div className="col-md-6">
+
+                  <div className="col">
                     <label htmlFor="" className="form-label">
                       About The Company
                     </label>
                     <textarea
-                      type=""
+                      type="text"
+                      name="description"
+                      value={jobData.description}
+                      onChange={(e) => handleInputChange(e)}
                       className="form-control rounded-6"
                       id=""
                       rows="5"
@@ -117,52 +138,21 @@ const JobPost = () => {
                     </label>
                     <CKEditor
                       editor={ClassicEditor}
-                      data="<h4> About the job </h4> <br/> <b> Job Responsibilities:</b><p>...</p> <br/> <b> Job Requirements</b><p>...</p>"
+                      data={jobData.text}
                       onReady={(editor) => {}}
+                      //   onChange={(event, editor) => {
+                      //     setJobData(editor.getData());
+                      //   }}
                       onChange={(event, editor) => {
-                        const data = editor.getData();
+                        setJobData((prevState) => ({
+                          ...prevState,
+                          text: editor.getData(),
+                        }));
                       }}
                       onBlur={(event, editor) => {}}
                       onFocus={(event, editor) => {}}
                     />
                   </div>
-
-                  {/* <div className="col-md-6">
-                    <label htmlFor="" className="form-label">
-                      About The Job
-                    </label>
-                    <textarea
-                      type=""
-                      className="form-control rounded-6"
-                      id=""
-                      rows="5"
-                      placeholder="Enter job description..."
-                    ></textarea>
-                  </div>
-                  <div className="col-md-6">
-                    <label htmlFor="" className="form-label">
-                      Job Responsibility
-                    </label>
-                    <textarea
-                      type=""
-                      className="form-control rounded-6"
-                      id=""
-                      rows="5"
-                      placeholder="Enter company details..."
-                    ></textarea>
-                  </div>
-                  <div className="col-md-6">
-                    <label htmlFor="" className="form-label">
-                      Qualification/Skills
-                    </label>
-                    <textarea
-                      type=""
-                      className="form-control rounded-6"
-                      id=""
-                      rows="5"
-                      placeholder="Enter job description..."
-                    ></textarea>
-                  </div> */}
                   <div className="text-center mt-5">
                     <button
                       type="reset"
@@ -179,7 +169,6 @@ const JobPost = () => {
               </div>
             </div>
           </div>
-          {/* End Left side columns */}
         </div>
       </section>
     </>
