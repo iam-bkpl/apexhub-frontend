@@ -67,8 +67,8 @@ export const postJob = createAsyncThunk(
       try {
         const response = await axios.post(
           `${API_URL}/jobpost/`,
-          config,
-          jobData
+          jobData,
+          config
         );
       } catch (error) {
         console.log("Error while posting a job");

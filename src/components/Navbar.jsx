@@ -35,7 +35,7 @@ const Navbar = () => {
           className="nav-link text-uppercase text-dark"
           // onClick={() => handleLogout()}
           type="submit"
-          to="/"
+          to="/login"
         >
           Login
         </Link>
