@@ -9,6 +9,7 @@ import Error404 from "./pages/Page404";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import JobDetail from "./pages/JobDetail";
+import JobPost from "./pages/JobPost";
 
 const AppRoutes = () => {
   return (
@@ -26,6 +27,7 @@ const AppRoutes = () => {
           element={<ChangePassword />}
         />
         <Route path="/job-detail/:id" element={<JobDetail />} />
+        <Route path="/job-post" element={<JobPost />} />
         {/* <Route
         exact
         path="/activate/:uid/:token"

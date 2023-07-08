@@ -12,6 +12,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^38.1.0",
     "@ckeditor/ckeditor5-react": "^6.1.0",
+    "@ckeditor/ckeditor5-vue2": "^3.0.1",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "dompurify": "^3.0.4",
