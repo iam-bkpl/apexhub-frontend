@@ -6,29 +6,37 @@ import Register from "./pages/Register";
 import ResetPassword from "./pages/ResetPassword";
 import ChangePassword from "./pages/ChangePassword";
 import Error404 from "./pages/Page404";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import JobDetail from "./pages/JobDetail";
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/home" element={<JobList />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/job-list" element={<JobList />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      <Route
-        path="/password/reset/confirm/:uid/:token"
-        element={<ChangePassword />}
-      />
-      {/* <Route
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<JobList />} />
+        <Route path="/home" element={<JobList />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/job-list" element={<JobList />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route
+          path="/password/reset/confirm/:uid/:token"
+          element={<ChangePassword />}
+        />
+        <Route path="/job-detail/:id" element={<JobDetail />} />
+        {/* <Route
         exact
         path="/activate/:uid/:token"
         component={< />}
       /> */}
-      {/* <Route path="/activate/:uid/:token" element={<ResetPassword />} /> */}
-      {/* <Route path="/change-password" element={<ChangePassword />} /> */}
-      <Route path="/*" element={<Error404 />} />
-    </Routes>
+        {/* <Route path="/activate/:uid/:token" element={<ResetPassword />} /> */}
+        {/* <Route path="/change-password" element={<ChangePassword />} /> */}
+        <Route path="/*" element={<Error404 />} />
+      </Routes>
+      <Footer />
+    </>
   );
 };
 
