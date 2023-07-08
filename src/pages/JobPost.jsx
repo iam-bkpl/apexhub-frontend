@@ -1,12 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useState } from "react";
 import { postJob } from "../redux/actions/acs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setJobPosts, setJobPost } from "../redux/reducers/acs";
 
 const JobPost = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [jobData, setJobData] = useState({
     title: "",
     vacancy: "",
@@ -20,7 +24,8 @@ const JobPost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postJob(jobData));
-    console.log(jobData);
+    setJobPost(jobData);
+    navigate("/home");
   };
 
   const handleInputChange = (e) => {

@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import JobDetail from "./pages/JobDetail";
 import JobPost from "./pages/JobPost";
+import JobUpdate from "./pages/JobUpdate";
 
 const AppRoutes = () => {
   return (
@@ -26,8 +27,10 @@ const AppRoutes = () => {
           path="/password/reset/confirm/:uid/:token"
           element={<ChangePassword />}
         />
-        <Route path="/job-detail/:id" element={<JobDetail />} />
         <Route path="/job-post" element={<JobPost />} />
+        <Route path="/job-detail/:id" element={<JobDetail />} />
+        <Route path="/job-update/:id" element={<JobUpdate />} />
+
         {/* <Route
         exact
         path="/activate/:uid/:token"

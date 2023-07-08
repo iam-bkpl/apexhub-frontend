@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   jobPosts: [],
-  jobPost: [],
+  jobPost: "",
 };
 
 const acsSlice = createSlice({
@@ -15,8 +15,11 @@ const acsSlice = createSlice({
     setJobPost: (state, action) => {
       state.jobPost = action.payload;
     },
+    updateJobPost: (state, action) => {
+      state.jobPost = action.payload;
+    },
   },
 });
 
-export const { setJobPosts, setJobPost } = acsSlice.actions;
+export const { setJobPosts, setJobPost, updateJobPost } = acsSlice.actions;
 export default acsSlice.reducer;

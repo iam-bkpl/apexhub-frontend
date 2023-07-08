@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { setJobPosts, setJobPost } from "../reducers/acs";
+import { setJobPosts, setJobPost, updateJobPost } from "../reducers/acs";
 
 const API_URL = "http://localhost:8000/api/acs";
 
@@ -45,7 +45,7 @@ export const fetchJobPost = createAsyncThunk(
         thunkAPI.dispatch(setJobPost(response.data));
         return response.data;
       } catch (error) {
-        console.log("Single job post not found");
+        console.log("Error while fetching job with id ", id);
       }
     } else {
       console.log("User not authorized to view single post ");
@@ -67,8 +67,8 @@ export const postJob = createAsyncThunk(
       try {
         const response = await axios.post(
           `${API_URL}/jobpost/`,
-          jobData,
-          config
+          config,
+          jobData
         );
       } catch (error) {
         console.log("Error while posting a job");
@@ -76,6 +76,34 @@ export const postJob = createAsyncThunk(
       }
     } else {
       return thunkAPI.rejectWithValue("User not authorized ");
+    }
+  }
+);
+
+export const updateJob = createAsyncThunk(
+  "acs/updateJob",
+  async ({ id, jobData }, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+      try {
+        const response = await axios.put(
+          `${API_URL}/jobpost/${id}/`,
+          jobData,
+          config
+        );
+        return response.data;
+      } catch (error) {
+        console.log("Error while updating job post");
+
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    } else {
+      return thunkAPI.rejectWithValue("User not authorized");
     }
   }
 );
