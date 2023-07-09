@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import JobDetail from "./pages/JobDetail";
 import JobPost from "./pages/JobPost";
 import JobUpdate from "./pages/JobUpdate";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 const AppRoutes = () => {
   return (
@@ -30,6 +31,7 @@ const AppRoutes = () => {
         <Route path="/job-post" element={<JobPost />} />
         <Route path="/job-detail/:id" element={<JobDetail />} />
         <Route path="/job-update/:id" element={<JobUpdate />} />
+        <Route path="/loading" element={<LoadingSpinner />} />
 
         {/* <Route
         exact

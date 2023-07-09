@@ -1,10 +1,12 @@
 const LoadingSpinner = () => {
   return (
-    <div className="text-center m-5 text-primary h-100 w-100 ">
-      <div className="spinner-border m-5" role="status">
+    <div
+      className="position-fixed top-0 left-0 d-flex justify-content-center align-items-center h-100 w-100 bg-light"
+      style={{ zIndex: 9999 }}
+    >
+      <div className="spinner-border text-primary" role="status">
         <span className="visually-hidden">Loading...</span>
       </div>
-      <p>Loading ...</p>
     </div>
   );
 };
