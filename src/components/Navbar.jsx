@@ -39,7 +39,7 @@ const Navbar = () => {
         >
           Login
         </Link>
-      </li>
+      </li> 
     );
   };
   return (

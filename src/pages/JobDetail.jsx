@@ -54,68 +54,7 @@ const JobDetail = () => {
                 </div>
               </div>
               <div dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></div>
-              {/* <div className="mb-5">
-                <h4 className="mb-3">Job description</h4>
-                <p>
-                  <div dangerouslySetInnerHTML={{ __html: jobPost.text }}></div>
-                </p>
-                <h4 className="mb-3">Responsibility</h4>
-                <p>
-                  Magna et elitr diam sed lorem. Diam diam stet erat no est est.
-                  Accusam sed lorem stet voluptua sit sit at stet consetetur,
-                  takimata at diam kasd gubergren elitr dolor
-                </p>
-                <ul className="list-unstyled">
-                  <li>
-                    <i className="fa fa-angle-right text-primary me-2"></i>Dolor
-                    justo tempor duo ipsum accusam
-                  </li>
-                  <li>
-                    <i className="fa fa-angle-right text-primary me-2"></i>Elitr
-                    stet dolor vero clita labore gubergren
-                  </li>
-                  <li>
-                    <i className="fa fa-angle-right text-primary me-2"></i>Rebum
-                    vero dolores dolores elitr
-                  </li>
-                  <li>
-                    <i className="fa fa-angle-right text-primary me-2"></i>Est
-                    voluptua et sanctus at sanctus erat
-                  </li>
-                  <li>
-                    <i className="fa fa-angle-right text-primary me-2"></i>Diam
-                    diam stet erat no est est
-                  </li>
-                </ul>
-                <h4 className="mb-3">Qualifications</h4>
-                <p>
-                  Magna et elitr diam sed lorem. Diam diam stet erat no est est.
-                  Accusam sed lorem stet voluptua sit sit at stet consetetur,
-                  takimata at diam kasd gubergren elitr dolor
-                </p>
-                <ul className="list-unstyled">
-                  <li>
-                    <i className="fa fa-angle-right text-primary me-2"></i>Dolor
-                    justo tempor duo ipsum accusam
-                  </li>
-                  <li>
-                    <i className="fa fa-angle-right text-primary me-2"></i>Elitr
-                    stet dolor vero clita labore gubergren
-                  </li>
-                  <li>
-                    <i className="fa fa-angle-right text-primary me-2"></i>Rebum
-                    vero dolores dolores elitr
-                  </li>
-                  <li>
-                    <i className="fa fa-angle-right text-primary me-2"></i>Est
-                    voluptua et sanctus at sanctus erat
-                  </li>
-                  <li>
-                    <i className="fa fa-angle-right text-primary me-2"></i>Diam
-                    diam stet erat no est est
-                  </li>
-                </ul>
-              </div> */}
+
               <div>
                 <h4 className="mb-4">Apply For The Job</h4>
                 <form>

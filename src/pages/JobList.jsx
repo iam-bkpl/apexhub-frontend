@@ -16,7 +16,6 @@ const JobList = () => {
   const jobPosts = useSelector((state) => state.acs.jobPosts);
 
   useEffect(() => {
-    setLoading(true);
     dispatch(fetchJobPosts());
     setLoading(false);
   }, [dispatch]);

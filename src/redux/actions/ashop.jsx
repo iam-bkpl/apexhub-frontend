@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setProducts, setProduct } from "../reducers/ashop";
+import { setProducts, setProduct, setCategorys } from "../reducers/ashop";
 
 const API_URL = "http://localhost:8000/api/ashop";
 
@@ -103,6 +103,28 @@ export const updateProduct = createAsyncThunk(
       }
     } else {
       return thunkAPI.rejectWithValue("User not authorized ");
+    }
+  }
+);
+
+export const fetchCategorys = createAsyncThunk(
+  "ashop/fetchCategorys",
+  async (_, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+
+      try {
+        const response = await axios.get(`${API_URL}/categorys/`, config);
+        thunkAPI.dispatch(setCategorys(response.data));
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
     }
   }
 );
