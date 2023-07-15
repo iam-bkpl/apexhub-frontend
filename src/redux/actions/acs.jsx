@@ -60,7 +60,7 @@ export const postJob = createAsyncThunk(
     if (accessToken) {
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", 
           Authorization: `JWT ${accessToken}`,
         },
       };

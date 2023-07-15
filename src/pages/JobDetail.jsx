@@ -6,13 +6,13 @@ import { useParams } from "react-router-dom";
 
 const JobDetail = () => {
   const dispatch = useDispatch();
-
-  const jobPost = useSelector((state) => state.acs.jobPost);
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(fetchJobPost(id));
   }, [dispatch]);
+
+  const jobPost = useSelector((state) => state.acs.jobPost);
 
   const sanitizedHTML = DOMPurify.sanitize(jobPost.text);
 
