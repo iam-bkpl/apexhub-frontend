@@ -53,6 +53,7 @@ const AppRoutes = () => {
         <Route path="/loading" element={<LoadingSpinner />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
+      <Footer />
     </>
   );
 };
