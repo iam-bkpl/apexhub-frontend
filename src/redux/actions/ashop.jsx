@@ -65,12 +65,12 @@ export const postProduct = createAsyncThunk(
       try {
         const response = await axios.post(
           `${API_URL}/products/`,
-          jobData,
+          productData,
           config
         );
         return response.data;
       } catch (error) {
-        console.log("Error while posting a job");
+        console.log("Error while posting a product: " + error.message);
         return thunkAPI.rejectWithValue(error.response.data.message);
       }
     } else {
