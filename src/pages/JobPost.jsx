@@ -15,6 +15,7 @@ const JobPost = () => {
   const [loading, setLoading] = useState(true);
 
   const user = useSelector((state) => state.auth.user);
+
   useEffect(() => {
     setTimeout(() => {
       if (user) {

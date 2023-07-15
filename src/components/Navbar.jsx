@@ -123,9 +123,9 @@ const Navbar = () => {
                     Job List
                   </Link>
                   <hr className="dropdown-divider" />
-                  <a href="/product-list" className="dropdown-item">
+                  <Link to="/product-list" className="dropdown-item">
                     Product List
-                  </a>
+                  </Link>
                 </div>
               </div>
             </li>

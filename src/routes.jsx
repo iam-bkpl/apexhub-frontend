@@ -11,9 +11,14 @@ import Footer from "./components/Footer";
 import JobDetail from "./pages/JobDetail";
 import JobPost from "./pages/JobPost";
 import JobUpdate from "./pages/JobUpdate";
+import ProductList from "./components/ProductList";
+import { useState } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
+import { useDispatch, useSelector } from "react-redux";
 
 const AppRoutes = () => {
+  const [isAuthorized, setIsAuthorized] = useState(false);
+
   return (
     <>
       <Navbar />
@@ -28,10 +33,13 @@ const AppRoutes = () => {
           path="/password/reset/confirm/:uid/:token"
           element={<ChangePassword />}
         />
+        {/* acs */}
         <Route path="/job-post" element={<JobPost />} />
         <Route path="/job-detail/:id" element={<JobDetail />} />
         <Route path="/job-update/:id" element={<JobUpdate />} />
-        <Route path="/loading" element={<LoadingSpinner />} />
+
+        {/* ashop  */}
+        <Route path="/product-list" element={<ProductList />} />
 
         {/* <Route
         exact
@@ -40,9 +48,9 @@ const AppRoutes = () => {
       /> */}
         {/* <Route path="/activate/:uid/:token" element={<ResetPassword />} /> */}
         {/* <Route path="/change-password" element={<ChangePassword />} /> */}
+        <Route path="/loading" element={<LoadingSpinner />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
-      <Footer />
     </>
   );
 };
