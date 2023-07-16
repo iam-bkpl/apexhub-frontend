@@ -162,3 +162,30 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   // thunkAPI.dispatch(logout());
   thunkAPI.dispatch(logoutSuccess());
 });
+
+export const postContact = createAsyncThunk(
+  "auth/postContact",
+  async (contactData, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+      try {
+        const response = await axios.post(
+          `http://localhost:8000/api/core/contacts/`,
+          contactData,
+          config
+        );
+        return response.data;
+      } catch (error) {
+        console.log("Error While posting contact: " + error);
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    } else {
+      return thunkAPI.rejectWithValue("User not authorized");
+    }
+  }
+);

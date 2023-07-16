@@ -16,6 +16,7 @@ import ProductList from "./components/ProductList";
 import ProductPost from "./components/ProductPost";
 import { useState } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
+import Contact from "./pages/Contact";
 import { useDispatch, useSelector } from "react-redux";
 
 const AppRoutes = () => {
@@ -35,6 +36,7 @@ const AppRoutes = () => {
           path="/password/reset/confirm/:uid/:token"
           element={<ChangePassword />}
         />
+        <Route path="/contact" element={<Contact />} />
         {/* acs */}
         <Route path="/job-post" element={<JobPost />} />
         <Route path="/job-detail/:id" element={<JobDetail />} />
