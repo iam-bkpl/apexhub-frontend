@@ -6,7 +6,6 @@ import { postJob } from "../redux/actions/acs";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setJobPosts, setJobPost } from "../redux/reducers/acs";
-import LoadingSpinner from "../components/LoadingSpinner";
 
 const JobPost = () => {
   const dispatch = useDispatch();

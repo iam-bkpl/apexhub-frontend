@@ -14,14 +14,9 @@ const JobList = () => {
   const [loading, setLoading] = useState(true);
 
   const jobPosts = useSelector((state) => state.acs.jobPosts);
-  const error = useSelector((state) => state.acs.error);
 
   useEffect(() => {
-    setLoading(true);
     dispatch(fetchJobPosts());
-    setTimeout(() => {
-      setLoading(false);
-    }, 10000);
     setLoading(false);
   }, [dispatch]);
 
@@ -38,9 +33,7 @@ const JobList = () => {
     return formattedDate;
   };
 
-  if (error) {
-    return <div>Error :{error} </div>;
-  } else if (loading) {
+  if (loading) {
     return <LoadingSpinner />;
   } else {
     return (

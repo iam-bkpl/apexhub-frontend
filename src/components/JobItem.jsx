@@ -13,7 +13,6 @@ const JobItem = (props) => {
     expire_date,
     applyNow,
   } = props;
-  const navigate = useNavigate();
 
   return (
     <>

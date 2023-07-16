@@ -4,7 +4,6 @@ const initialState = {
   jobPosts: [],
   jobPost: "",
 };
-
 const acsSlice = createSlice({
   name: "acs",
   initialState,

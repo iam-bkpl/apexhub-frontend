@@ -32,7 +32,7 @@ const Navbar = () => {
           <i className="fa-solid fa-right-from-bracket me-3"></i>
           Log In
         </Link>
-      </li>
+      </li> 
     );
   };
   return (
