@@ -39,11 +39,11 @@ const Home = () => {
                 <div className="container">
                   <div className="row justify-content-start">
                     <div className="col-10 col-lg-8">
-                      <h2 className="text-capitalize text-white">best price & offer</h2>
+                      <h2 className="text-capitalize text-white">Best  price & offer</h2>
                       <h1 className="text-uppercase py-2 fw-bold text-white mb-5">new season</h1>
-                      <a href="./pages/aShop.html"
-                        className=" py-3 px-5 rounded-pill text-uppercase text-decoration-none main-btn fs-5 text-white">buy
-                        now</a>
+                      <Link to="/job-list" className=" py-3 px-5 rounded-pill text-uppercase text-decoration-none main-btn fs-5 text-white">buy
+                        now
+                      </Link>
                     </div>
                   </div>
                 </div>
