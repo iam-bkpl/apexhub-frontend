@@ -33,7 +33,8 @@ const ProductList = () => {
             name={product.name}
             category={product.category.name}
             price={product.price}
-            image={product.images.length > 0 ? product.images[0].image : null}
+            // image={product.images.length > 0 ? product.images[0].image : null}
+            image={product.qr_code}
           />
         ))}
       </div>
