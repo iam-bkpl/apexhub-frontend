@@ -10,18 +10,17 @@ const ProductList = () => {
 
   const dispatch = useDispatch();
 
+  // fetching from store
   const products = useSelector((state) => state.ashop.products);
   const categorys = useSelector((state) => state.ashop.categorys);
 
-  console.log(categorys);
-
+  // calling action method to fetch products and category from backend
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCategorys());
     setLoading(false);
   }, [dispatch]);
 
-  console.log("product list ", products);
   if (loading) {
     return (
       <div className="">
