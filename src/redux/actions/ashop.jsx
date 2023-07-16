@@ -55,10 +55,10 @@ export const postProduct = createAsyncThunk(
   "ashop/postProduct",
   async (productData, thunkAPI) => {
     const accessToken = localStorage.getItem("access");
+    console.log(productData);
     if (accessToken) {
       const config = {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `JWT ${accessToken}`,
         },
       };
@@ -68,6 +68,7 @@ export const postProduct = createAsyncThunk(
           productData,
           config
         );
+        console.log(productData);
         return response.data;
       } catch (error) {
         console.log("Error while posting a product: " + error.message);

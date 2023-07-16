@@ -25,7 +25,7 @@ const ProductPost = () => {
     name: "",
     description: "add product description",
     price: "",
-    qr_code: "",
+    qr_code: null,
   });
 
   const handleInputChange = (e) => {
@@ -36,11 +36,28 @@ const ProductPost = () => {
     }));
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setProductData((prevState) => ({
+      ...prevState,
+      qr_code: file,
+    }));
+    // const reader = new FileReader();
+    // reader.readAsDataURL(file);
+    // reader;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postProduct(productData));
+    const formData = new FormData();
+    formData.append("name", productData.name);
+    formData.append("description", productData.description);
+    formData.append("price", productData.price);
+    formData.append("qr_code", productData.qr_code);
+    formData.append("category_id", productData.category_id);
+    dispatch(postProduct(formData));
     console.log(productData);
-    // navigate("/");
+    navigate(`/product-list/`);
   };
   if (loading) {
     return (
@@ -56,6 +73,7 @@ const ProductPost = () => {
         <form
           className="row g-3 col-lg-10 justify-content-center"
           onSubmit={(e) => handleSubmit(e)}
+          encType="multipart/form-data"
         >
           <div className="col-md-10">
             <label className="form-label">
@@ -85,13 +103,18 @@ const ProductPost = () => {
               Select Category<span className="text-danger">*</span>
             </label>
 
-            <select className="form-select rounded-6 py-2" defaultValue="">
+            <select
+              className="form-select rounded-6 py-2"
+              defaultValue="1"
+              name="category"
+              onChange={(e) => handleInputChange(e)}
+            >
               <option disabled value="">
                 Select
               </option>
               {categorys.map((category) => {
                 return (
-                  <option key={category.id} value={category.name}>
+                  <option key={category.id} value={category.id}>
                     {category.name}
                   </option>
                 );
@@ -107,7 +130,7 @@ const ProductPost = () => {
               className="form-control py-2 rounded-6"
               type="file"
               id=""
-              onChange={(e) => handleInputChange(e)}
+              onChange={(e) => handleFileChange(e)}
             />
           </div>
           <div className="col-md-10">
