@@ -13,7 +13,7 @@ const Register = () => {
     email: "",
     password: "",
   });
-  const [user_type, setUser_type] = useState("");
+  const [user_type, setUser_type] = useState("student");
 
   const { email, password } = formData;
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);

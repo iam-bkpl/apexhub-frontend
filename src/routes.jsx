@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import JobList from "./pages/JobList";
 import Register from "./pages/Register";
@@ -24,7 +25,7 @@ const AppRoutes = () => {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<JobList />} />
+        <Route path="/" element={<Home />} />
         <Route path="/home" element={<JobList />} />
         <Route path="/login" element={<Login />} />
         <Route path="/job-list" element={<JobList />} />
