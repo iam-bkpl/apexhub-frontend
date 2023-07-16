@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import carouselImg1 from "../assets/banner-img-1.jpg"
 import carouselImg2 from "../assets/banner-img-2.jpg"
 import HotSales from "../containers/HotSales";
+import TopJobs from "../containers/TopJobs";
+import AboutUs from "../containers/AboutUs";
+import Services from "../containers/Services";
+import Testimonials from "../containers/Testimonials";
+
 const Home = () => {
   return (
     <>
-      <header id="header" className="vh-100 carousel slide" data-bs-ride="carousel">
+      <header id="header" className="vh-90 carousel slide" data-bs-ride="carousel">
         <div id="carouselExampleInterval" className="carousel slide" data-bs-ride="carousel">
           <div className="carousel-inner">
             <div className="carousel-item active" data-bs-interval="5000">
@@ -53,8 +58,13 @@ const Home = () => {
           </div>
         </div>
       </header>
-      
+
       <HotSales/>
+      <TopJobs/>
+      <AboutUs/>
+      <Services/>
+      <Testimonials/>
+
     </>
   );
 };
