@@ -12,7 +12,6 @@ const ProductPost = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const [qr_code, setQr_code] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCategorys());
