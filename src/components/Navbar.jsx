@@ -28,7 +28,7 @@ const Navbar = () => {
   const guestLinks = () => {
     return (
       <li>
-        <Link to="/login" className="dropdown-item" onClick={handleLogout}>
+        <Link to="/login" className="dropdown-item">
           <i className="fa-solid fa-right-from-bracket me-3"></i>
           Log In
         </Link>
