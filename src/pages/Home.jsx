@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import carouselImg1 from "../assets/banner-img-1.jpg"
 import carouselImg2 from "../assets/banner-img-2.jpg"
+import HotSales from "../containers/HotSales";
 const Home = () => {
   return (
     <>
@@ -52,6 +53,8 @@ const Home = () => {
           </div>
         </div>
       </header>
+      
+      <HotSales/>
     </>
   );
 };
