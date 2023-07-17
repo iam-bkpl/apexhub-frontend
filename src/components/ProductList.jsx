@@ -30,14 +30,14 @@ const ProductList = () => {
   } else {
     return (
       <section>
-        <div class="text-center container py-5">
-          <div class="title text-center py-5">
-            <h2 class="position-relative d-inline-block">Apex Shop</h2>
+        <div className="text-center container py-5">
+          <div className="title text-center py-5">
+            <h2 className="position-relative d-inline-block">Apex Shop</h2>
           </div>
-          <div class="d-flex flex-wrap justify-content-center my-3 filter-button-group">
+          <div className="d-flex flex-wrap justify-content-center my-3 filter-button-group">
             <button
               type="button"
-              class="btn m-2  active-filter-btn"
+              className="btn m-2  active-filter-btn"
               data-filter="*"
             >
               All
@@ -46,7 +46,7 @@ const ProductList = () => {
               return (
                 <button
                   type="button"
-                  class="btn m-2 "
+                  className="btn m-2 "
                   data-filter=""
                   key={category.id}
                 >
@@ -55,7 +55,7 @@ const ProductList = () => {
               );
             })}
           </div>
-          <div class="row">
+          <div className="row">
             {products.map((product) => (
               <ProductCard
                 key={product.id}
