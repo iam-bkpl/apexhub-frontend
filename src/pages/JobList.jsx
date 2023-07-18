@@ -49,6 +49,15 @@ const JobList = () => {
           <div className="special-list row g-0">
             <div className="d-block justify-content-center text-center mb-4">
               <div className=" flex-wrap justify-content-center my-3 filter-button-group d-inline">
+<<<<<<< HEAD
+                <button type="button" className="btn m-2  active-filter-btn" data-filter="*">All</button>
+                <button type="button" className="btn m-2 " >Remote</button>
+                <button type="button" className="btn m-2 " >Hybrid</button>
+                <button type="button" className="btn m-2 " >Onsite</button>
+              </div>
+              <select defaultValue={"default"} className="form-select form-select-lg border shadow-none mb-3 w-auto fs-6 end-0 d-inline float-end" aria-label=".form-select-lg example">
+                <option value="default" disabled>Job Type </option>
+=======
                 <button
                   type="button"
                   className="btn m-2  active-filter-btn"
@@ -74,6 +83,7 @@ const JobList = () => {
                 <option value="default" disabled>
                   Job Type{" "}
                 </option>
+>>>>>>> master
                 <option value="1">Internship</option>
                 <option value="2">Entry Level</option>
                 <option value="3">Mid Level</option>
