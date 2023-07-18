@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import JobItem from "../components/JobItem";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchJobPosts } from "../redux/actions/acs";
+import { fetchJobPosts, postJobVote } from "../redux/actions/acs";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,10 @@ const JobList = () => {
 
   const handleApplyNow = (job_id) => {
     navigate(`/job-detail/${job_id}`);
+  };
+
+  const handleJobVote = (job_id) => {
+    console.log("Vote for job: " + job_id);
   };
 
   const getFormattedDate = (dateString) => {
@@ -48,6 +52,7 @@ const JobList = () => {
             job_type={job.job_type}
             salary={job.salary}
             expire_date={getFormattedDate(job.expire_date)}
+            vote={() => handleJobVote(job.id)}
             applyNow={() => handleApplyNow(job.id)}
           />
         ))}
