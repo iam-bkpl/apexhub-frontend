@@ -1,7 +1,12 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { setJobPosts, setJobPost, updateJobPost } from "../reducers/acs";
+import {
+  setJobPosts,
+  setJobPost,
+  updateJobPost,
+  setVote,
+} from "../reducers/acs";
 
 const API_URL = "http://localhost:8000/api/acs";
 
@@ -60,7 +65,7 @@ export const postJob = createAsyncThunk(
     if (accessToken) {
       const config = {
         headers: {
-          "Content-Type": "application/json", 
+          "Content-Type": "application/json",
           Authorization: `JWT ${accessToken}`,
         },
       };
@@ -104,6 +109,59 @@ export const updateJob = createAsyncThunk(
       }
     } else {
       return thunkAPI.rejectWithValue("User not authorized");
+    }
+  }
+);
+
+export const fetchVote = createAsyncThunk(
+  "acs/fetchVote",
+  async (job_id, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+      try {
+        const resoonse = await axios.get(
+          `${API_URL}/jobpost/${job_id}/votes/`,
+          config
+        );
+
+        return resoonse.data;
+      } catch (error) {
+        console.log("error while getting the job");
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    } else {
+      return thunkAPI.rejectWithValue(error.resoonse.data.message);
+    }
+  }
+);
+
+export const postJobVote = createAsyncThunk(
+  "acs/postJobVote",
+  async (job_id, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+      try {
+        const resoonse = await axios.post(
+          `${API_URL}/jobpost/${job_id}/votes/`,
+          config
+        );
+        return resoonse.data;
+      } catch (error) {
+        console.log("error while getting the job");
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    } else {
+      return thunkAPI.rejectWithValue(error.resoonse.data.message);
     }
   }
 );

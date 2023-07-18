@@ -12,6 +12,7 @@ const JobItem = (props) => {
     salary,
     expire_date,
     applyNow,
+    vote,
   } = props;
 
   return (
@@ -45,12 +46,12 @@ const JobItem = (props) => {
             </div>
             <div className="col-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
               <div className="d-flex flex-wrap justify-content-between mb-3">
-                <a
+                <button
                   className="btn btn-light btn-square mb-2 mb-md-0 me-md-2"
-                  href=""
+                  onClick={vote}
                 >
                   <i className="far fa-heart text-secondary"></i>
-                </a>
+                </button>
                 <button className="btn btn-primary" onClick={applyNow}>
                   Apply Now
                 </button>
