@@ -14,6 +14,13 @@ const JobItem = (props) => {
     vote,
   } = props;
 
+  const checkVoteCount = (vote_count) => {
+    if (vote_count) {
+      return <span>{vote_count} </span>;
+    } else {
+      return <span>-</span>;
+    }
+  };
   return (
     <>
       <div className="container container-fluid">
@@ -51,7 +58,7 @@ const JobItem = (props) => {
                 >
                   <span className="d-flex flex-column">
                     <i className="fa fa-caret-up" aria-hidden="true"></i>
-                    <span>{vote_count} </span>
+                    <span>{checkVoteCount(vote_count)}</span>
                   </span>
                 </button>
                 <button className="btn btn-primary" onClick={applyNow}>
