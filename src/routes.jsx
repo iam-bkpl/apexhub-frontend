@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import JobList from "./pages/JobList";
@@ -25,10 +25,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AppRoutes = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const location = useLocation();
+  const hideNavbarAndFooter = [
+    "/dashboard",
+    "/dashboard-job",
+    "/dashboard-user",
+    "/dashboard-product"
+  ].includes(location.pathname);
 
   return (
     <>
-      <Navbar />
+      {!hideNavbarAndFooter && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -66,7 +73,7 @@ const AppRoutes = () => {
         <Route path="/loading" element={<LoadingSpinner />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
-      <Footer />
+      {!hideNavbarAndFooter && <Footer />}
      
     </>
   );
