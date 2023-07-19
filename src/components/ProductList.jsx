@@ -8,6 +8,8 @@ import LoadingSpinner from "./LoadingSpinner";
 const ProductList = () => {
   const [loading, setLoading] = useState(true);
 
+  const [selectCategory, setSelectCategory] = useState("default");
+
   const dispatch = useDispatch();
 
   // fetching from store
@@ -21,6 +23,19 @@ const ProductList = () => {
     setLoading(false);
   }, [dispatch]);
 
+  const handleCategorySelect = (e) => {
+    console.log(e.target.value);
+  };
+
+  const filteredProducts = useSelector((state) => {
+    if (selectCategory === "default") {
+      return state.ashop.products;
+    } else {
+      return state.ashop.products.filter(
+        (product) => product.category === selectCategory
+      );
+    }
+  });
   if (loading) {
     return (
       <div className="">
@@ -38,19 +53,23 @@ const ProductList = () => {
             <div className="mb-4 text-center d-block justify-content-center">
               <div className="flex-wrap my-3 justify-content-center filter-button-group d-inline">
                 <button
+                  value={selectCategory}
                   type="button"
                   className="m-2 btn active-filter-btn"
                   data-filter="*"
+                  onClick={() => setSelectCategory("default")}
                 >
                   All
                 </button>
                 {categorys.map((category) => {
                   return (
                     <button
+                      value={selectCategory}
                       type="button"
                       className="m-2 btn "
                       data-filter=""
                       key={category.id}
+                      onClick={() => setSelectCategory(category.name)}
                     >
                       {category.name}
                     </button>
@@ -62,20 +81,22 @@ const ProductList = () => {
                 className="w-auto mb-3 border shadow-none form-select form-select-lg fs-6 end-0 d-inline float-end"
                 aria-label=".form-select-lg example"
               >
-                <option value="default">Experience Level</option>
-                <option value="internship">Internship</option>
-                <option value="entry_level">Entry Level</option>
-                <option value="mid_level">Mid Level</option>
-                <option value="senior_level">Senior Level</option>
+                <option value="default">Sort </option>
+                <option value="internship">Price : Low to High</option>
+                <option value="entry_level"> Price : High to Low</option>
+                <option value="mid_level">Date added: Newest to Oldest </option>
+                <option value="senior_level">
+                  Date added: Oldest to Newest
+                </option>
               </select>
             </div>
 
             <div className="row">
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   name={product.name}
-                  category={product.category.name}
+                  category={product.category}
                   price={product.price}
                   // image={product.images.length > 0 ? product.images[0].image : null}
                   image={product.qr_code}
