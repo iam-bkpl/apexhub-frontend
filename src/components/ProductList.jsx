@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { fetchProducts, fetchCategorys } from "../redux/actions/ashop";
 import LoadingSpinner from "./LoadingSpinner";
 
@@ -9,11 +8,14 @@ const ProductList = () => {
   const [loading, setLoading] = useState(true);
 
   const [selectCategory, setSelectCategory] = useState("default");
+  const [sortData, setSortData] = useState("default");
+
+  const [sortedProducts, setSortedProducts] = useState();
 
   const dispatch = useDispatch();
 
   // fetching from store
-  const products = useSelector((state) => state.ashop.products);
+
   const categorys = useSelector((state) => state.ashop.categorys);
 
   // calling action method to fetch products and category from backend
@@ -23,19 +25,30 @@ const ProductList = () => {
     setLoading(false);
   }, [dispatch]);
 
-  const handleCategorySelect = (e) => {
-    console.log(e.target.value);
-  };
-
   const filteredProducts = useSelector((state) => {
-    if (selectCategory === "default") {
+    if (selectCategory === "default" || sortData === "default") {
       return state.ashop.products;
+    } else if (selectCategory === "default" && sortData === "default") {
+      return state.ashop.products;
+    } else if (sortData === "price_low_to_high") {
+      return state.ashop.products
+        .filter((product) => product.category === selectCategory)
+        .sort((a, b) => a.price - b.price);
+    } else if (sortData === "price_high_to_low") {
+      return state.ashop.products
+        .filter((product) => product.category === selectCategory)
+        .sort((a, b) => b.price - a.price);
+    } else if (sortData === "date_newest_to_oldest") {
+      return state.ashop.products
+        .filter((product) => product.category === selectCategory)
+        .sort((a, b) => new Date(b.date_added) - new Date(a.date_added));
     } else {
-      return state.ashop.products.filter(
-        (product) => product.category === selectCategory
-      );
+      return state.ashop.products
+        .filter((product) => product.category === selectCategory)
+        .sort((a, b) => new Date(a.date_added) - new Date(b.date_added));
     }
   });
+
   if (loading) {
     return (
       <div className="">
@@ -77,16 +90,22 @@ const ProductList = () => {
                 })}
               </div>
               <select
-                value={"bkpl"}
+                value={sortData}
                 className="w-auto mb-3 border shadow-none form-select form-select-lg fs-6 end-0 d-inline float-end"
                 aria-label=".form-select-lg example"
+                // onChange={(e) => handleSortSelect(e)}
+                onChange={(e) => setSortData(e.target.value)}
               >
-                <option value="default">Sort </option>
-                <option value="internship">Price : Low to High</option>
-                <option value="entry_level"> Price : High to Low</option>
-                <option value="mid_level">Date added: Newest to Oldest </option>
-                <option value="senior_level">
-                  Date added: Oldest to Newest
+                <option value={sortData} disabled>
+                  Sort
+                </option>
+                <option value="price_low_to_high">price_low_to_high</option>
+                <option value="price_high_to_low">price_high_to_low</option>
+                <option value="date_newest_to_oldest">
+                  date_newest_to_oldest
+                </option>
+                <option value="date_oldest_to_newest">
+                  date_oldest_to_newest
                 </option>
               </select>
             </div>
