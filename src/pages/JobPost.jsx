@@ -24,7 +24,7 @@ const JobPost = () => {
     description: "",
     text: "<h4> About the job </h4> <br/> <b> Job Responsibilities:</b><p>...</p> <br/> <b> Job Requirements</b><p>...</p>",
   });
-
+  console.log("helllo this is job data ", jobData);
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postJob(jobData));
