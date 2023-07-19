@@ -55,10 +55,6 @@ const RowProduct = (props) => {
           </button>
         </td>
       </tr>
-
-      <button className="btn bg-white text-dark border-2 shadow-none rounded-pill py-0 ms-0" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
-            View
-          </button>
     </>
   );
 };
