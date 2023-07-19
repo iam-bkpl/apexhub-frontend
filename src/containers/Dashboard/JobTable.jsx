@@ -49,7 +49,7 @@ const JobTable = () => {
                                         <th scope="col">Company&nbsp;Name</th>
                                         <th scope="col">Job&nbsp;title</th>
                                         <th scope="col">Posted&nbsp;Date</th>
-                                        <th scope="col">Applied&nbsp;By</th>
+                                        <th scope="col" className='text-center'>Applied&nbsp;By</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                         <th scope="col">View</th>
