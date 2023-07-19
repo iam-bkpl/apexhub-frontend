@@ -11,6 +11,7 @@ const JobItem = (props) => {
     vote_count,
     expire_date,
     applyNow,
+    experience_level,
     vote,
   } = props;
 

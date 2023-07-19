@@ -1,13 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import {
-  setJobPosts,
-  setJobPost,
-  updateJobPost,
-  setVote,
-  setVotes,
-} from "../reducers/acs";
+import { setJobPosts, setJobPost, setFilteredPost } from "../reducers/acs";
 
 const API_URL = "http://localhost:8000/api/acs";
 
@@ -119,7 +113,7 @@ export const updateJob = createAsyncThunk(
     }
   }
 );
-  
+
 export const postJobVote = createAsyncThunk(
   "acs/postJobVote",
   async ({ job_id, formData }, thunkAPI) => {
@@ -144,6 +138,17 @@ export const postJobVote = createAsyncThunk(
       }
     } else {
       return thunkAPI.rejectWithValue("Access token not found");
+    }
+  }
+);
+
+export const filterJobs = createAsyncThunk(
+  "acs/filterJobs",
+  async (_, thunkAPI) => {
+    try {
+      thunkAPI.dispatch(setFilteredPost());
+    } catch (error) {
+      console.log("Error while filtering jobs");
     }
   }
 );
