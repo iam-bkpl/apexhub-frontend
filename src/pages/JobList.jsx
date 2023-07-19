@@ -28,8 +28,10 @@ const JobList = () => {
   };
 
   const handleVote = (job_id) => {
-    console.log(job_id);
-    dispatch(postJobVote(job_id));
+    const formData = new FormData();
+    formData.append("jobpost", job_id);
+
+    dispatch(postJobVote({ job_id, formData }));
   };
   const getFormattedDate = (dateString) => {
     const formattedDate = new Date(dateString).toLocaleDateString("en-US", {
@@ -46,33 +48,33 @@ const JobList = () => {
     return (
       <section id="special" className="py-5">
         <div className="container">
-          <div className="title text-center py-5">
+          <div className="py-5 text-center title">
             <h2 className="position-relative d-inline-block">Available Jobs</h2>
           </div>
 
           <div className="special-list row g-0">
-            <div className="d-block justify-content-center text-center mb-4">
-              <div className=" flex-wrap justify-content-center my-3 filter-button-group d-inline">
+            <div className="mb-4 text-center d-block justify-content-center">
+              <div className="flex-wrap my-3 justify-content-center filter-button-group d-inline">
                 <button
                   type="button"
-                  className="btn m-2  active-filter-btn"
+                  className="m-2 btn active-filter-btn"
                   data-filter="*"
                 >
                   All
                 </button>
-                <button type="button" className="btn m-2 ">
+                <button type="button" className="m-2 btn ">
                   Remote
                 </button>
-                <button type="button" className="btn m-2 ">
+                <button type="button" className="m-2 btn ">
                   Hybrid
                 </button>
-                <button type="button" className="btn m-2 ">
+                <button type="button" className="m-2 btn ">
                   Onsite
                 </button>
               </div>
               <select
                 defaultValue={"default"}
-                className="form-select form-select-lg border shadow-none mb-3 w-auto fs-6 end-0 d-inline float-end"
+                className="w-auto mb-3 border shadow-none form-select form-select-lg fs-6 end-0 d-inline float-end"
                 aria-label=".form-select-lg example"
               >
                 <option value="default" disabled>
@@ -85,7 +87,7 @@ const JobList = () => {
               </select>
             </div>
             <div className="tab-content">
-              <div id="tab-1" className="tab-pane fade show p-0 active">
+              <div id="tab-1" className="p-0 tab-pane fade show active">
                 <div>
                   {jobPosts.map((job) => (
                     <JobItem

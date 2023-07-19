@@ -67,8 +67,8 @@ const ProductPost = () => {
   } else {
     return (
       <div className="row gy-5 gx-4 justify-content-center">
-        <h1 className="mt-3 p-0 text-center">Add Product</h1>
-        <hr className="m-2 p-0" />
+        <h1 className="p-0 mt-3 text-center">Add Product</h1>
+        <hr className="p-0 m-2" />
         <form
           className="row g-3 col-lg-10 justify-content-center"
           onSubmit={(e) => handleSubmit(e)}
@@ -81,7 +81,7 @@ const ProductPost = () => {
             <input
               type="text"
               name="name"
-              className="form-control rounded-6 py-2"
+              className="py-2 form-control rounded-6"
               onChange={(e) => handleInputChange(e)}
             />
           </div>
@@ -92,7 +92,7 @@ const ProductPost = () => {
             <input
               type="number"
               name="price"
-              className="form-control rounded-6 py-2"
+              className="py-2 form-control rounded-6"
               onChange={(e) => handleInputChange(e)}
             />
           </div>
@@ -103,7 +103,7 @@ const ProductPost = () => {
             </label>
 
             <select
-              className="form-select rounded-6 py-2"
+              className="py-2 form-select rounded-6"
               defaultValue="1"
               name="category"
               onChange={(e) => handleInputChange(e)}
@@ -126,7 +126,7 @@ const ProductPost = () => {
             </label>
             <input
               name="qr_code"
-              className="form-control py-2 rounded-6"
+              className="py-2 form-control rounded-6"
               type="file"
               id=""
               onChange={(e) => handleFileChange(e)}
@@ -151,7 +151,7 @@ const ProductPost = () => {
               onFocus={(event, editor) => { }}
             />
           </div>
-          <div className="text-center mt-5">
+          <div className="mt-5 text-center">
             <button
               type="submit"
               className="btn rounded-5 me-3"
@@ -161,7 +161,7 @@ const ProductPost = () => {
             </button>
             <button
               type="reset"
-              className="btn bg-secondary text-white rounded-5 border-secondary"
+              className="text-white btn bg-secondary rounded-5 border-secondary"
             >
               Reset
             </button>

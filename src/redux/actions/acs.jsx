@@ -142,7 +142,7 @@ export const fetchVote = createAsyncThunk(
 
 export const postJobVote = createAsyncThunk(
   "acs/postJobVote",
-  async (job_id, thunkAPI) => {
+  async ({ job_id, formData }, thunkAPI) => {
     const accessToken = localStorage.getItem("access");
     if (accessToken) {
       const config = {
@@ -150,10 +150,11 @@ export const postJobVote = createAsyncThunk(
           Authorization: `JWT ${accessToken}`,
         },
       };
+
       try {
         const resoonse = await axios.post(
           `${API_URL}/jobpost/${job_id}/votes/`,
-          job_id,
+          formData,
           config
         );
         return resoonse.data;
@@ -162,7 +163,7 @@ export const postJobVote = createAsyncThunk(
         return thunkAPI.rejectWithValue(error.response.data.message);
       }
     } else {
-      return thunkAPI.rejectWithValue(error.resoonse.data.message);
+      return thunkAPI.rejectWithValue("Access token not found");
     }
   }
 );
