@@ -9,9 +9,9 @@ import { Link } from 'react-router-dom';
 
 const ProductTable = () => {
     const [loading, setLoading] = useState(true);
-   
+
     const dispatch = useDispatch();
-    
+
     // fetching from store
     const products = useSelector((state) => state.ashop.products);
     console.log("product table");
@@ -21,16 +21,16 @@ const ProductTable = () => {
         dispatch(fetchProducts());
         setLoading(false);
     }, [dispatch]);
-  
+
     const getFormattedDate = (dateString) => {
         const formattedDate = new Date(dateString).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
         });
         return formattedDate;
-      };
-   
+    };
+
     if (loading) {
         return (
             <div className="">
@@ -49,7 +49,7 @@ const ProductTable = () => {
                         <div className="table-responsive">
                             <table className="table text-start align-middle table-hover table-hover mb-0">
                                 <thead>
-                                
+
                                     <tr className="text-dark">
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
@@ -61,24 +61,24 @@ const ProductTable = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {products.map((product)=>{
+                                    {products.map((product) => {
 
-                                    return(
-                                        <RowProduct 
-                                    key={product.id}
-                                    id={product.id}
-                                    name={product.name}
-                                    description={product.description}
-                                    price={product.price}
-                                    image={product.qr_code}
-                                    category={product.category}
-                                    status={product.is_active}
-                                    date={getFormattedDate(product.date_added)}
-                                    />
-                                    )
-                                }
-                                   
-                                )}
+                                        return (
+                                            <RowProduct
+                                                key={product.id}
+                                                id={product.id}
+                                                name={product.name}
+                                                description={product.description}
+                                                price={product.price}
+                                                image={product.qr_code}
+                                                category={product.category}
+                                                status={product.is_active}
+                                                date={getFormattedDate(product.date_added)}
+                                            />
+                                        )
+                                    }
+
+                                    )}
                                 </tbody>
                             </table>
                         </div>

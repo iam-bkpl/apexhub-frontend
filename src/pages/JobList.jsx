@@ -15,7 +15,6 @@ const JobList = () => {
 
   const jobPosts = useSelector((state) => state.acs.jobPosts);
 
-  console.log(jobPosts);
   //fetching jobType from store
   const jobType = useSelector((state) => state.acs.jobPosts);
   useEffect(() => {
