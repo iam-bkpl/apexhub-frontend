@@ -11,6 +11,7 @@ import {
   passwordResetSuccess,
   resetPasswordConfirmSuccess,
   registerSuccess,
+  setUserList,
 } from "../reducers/auth";
 
 const apiUrl = "http://localhost:8000/api";
@@ -186,6 +187,29 @@ export const postContact = createAsyncThunk(
       }
     } else {
       return thunkAPI.rejectWithValue("User not authorized");
+    }
+  }
+);
+
+export const fetchUserList = createAsyncThunk(
+  "auth/fetchUserList",
+  async (_, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+      try {
+        const response = await axios.get(`${apiUrl}/auth/users/`, config);
+        thunkAPI.dispatch(setUserList(response.data));
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    } else {
+      console.log("User is not authorized");
     }
   }
 );
