@@ -10,9 +10,12 @@ const JobList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [selectedExperienceLevel, setSelectedExperienceLevel] =
+    useState("default");
+
+  const [selectedJobType, setSelectedJobType] = useState("default");
 
   const jobPosts = useSelector((state) => state.acs.jobPosts);
-
   const [company_logo, setCompany_logo] = useState(CompanyLogo);
 
   useEffect(() => {
@@ -40,6 +43,28 @@ const JobList = () => {
     return formattedDate;
   };
 
+  const handleSelectJobType = (e) => {
+    setSelectedExperienceLevel(e.target.value);
+  };
+
+  const filteredJobPosts = useSelector((state) => {
+    if (
+      selectedExperienceLevel === "default" &&
+      selectedJobType === "default"
+    ) {
+      return state.acs.jobPosts;
+    } else {
+      return state.acs.jobPosts.filter((job) => {
+        const byExperince =
+          selectedExperienceLevel === "default" ||
+          job.experience_level === selectedExperienceLevel;
+        const byJobType =
+          selectedJobType === "default" || job.job_type === selectedJobType;
+        return byExperince && byJobType;
+      });
+    }
+  });
+
   if (loading) {
     return <LoadingSpinner />;
   } else {
@@ -57,37 +82,49 @@ const JobList = () => {
                   type="button"
                   className="m-2 btn active-filter-btn"
                   data-filter="*"
+                  onClick={() => setSelectedJobType("default")}
                 >
                   All
                 </button>
-                <button type="button" className="m-2 btn ">
+                <button
+                  type="button"
+                  className="m-2 btn "
+                  onClick={() => setSelectedJobType("remote")}
+                >
                   Remote
                 </button>
-                <button type="button" className="m-2 btn ">
+                <button
+                  type="button"
+                  className="m-2 btn "
+                  onClick={() => setSelectedJobType("hybrid")}
+                >
                   Hybrid
                 </button>
-                <button type="button" className="m-2 btn ">
+                <button
+                  type="button"
+                  className="m-2 btn "
+                  onClick={() => setSelectedJobType("on-site")}
+                >
                   Onsite
                 </button>
               </div>
               <select
-                defaultValue={"default"}
+                value={selectedExperienceLevel}
                 className="w-auto mb-3 border shadow-none form-select form-select-lg fs-6 end-0 d-inline float-end"
                 aria-label=".form-select-lg example"
+                onChange={(e) => handleSelectJobType(e)}
               >
-                <option value="default" disabled>
-                  Job Type
-                </option>
-                <option value="1">Internship</option>
-                <option value="2">Entry Level</option>
-                <option value="3">Mid Level</option>
-                <option value="3">Experienced</option>
+                <option value="default">Experience Level</option>
+                <option value="internship">Internship</option>
+                <option value="entry_level">Entry Level</option>
+                <option value="mid_level">Mid Level</option>
+                <option value="senior_level">Senior Level</option>
               </select>
             </div>
             <div className="tab-content">
               <div id="tab-1" className="p-0 tab-pane fade show active">
                 <div>
-                  {jobPosts.map((job) => {
+                  {filteredJobPosts.map((job) => {
                     return (
                       <JobItem
                         key={job.id}
@@ -102,6 +139,7 @@ const JobList = () => {
                         expire_date={getFormattedDate(job.expire_date)}
                         applyNow={() => handleApplyNow(job.id)}
                         vote={() => handleVote(job.id)}
+                        experience_level={job.experience_level}
                       />
                     );
                   })}
@@ -114,4 +152,5 @@ const JobList = () => {
     );
   }
 };
+
 export default JobList;
