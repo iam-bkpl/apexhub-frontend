@@ -20,7 +20,7 @@ const ProductList = () => {
     dispatch(fetchCategorys());
     setLoading(false);
   }, [dispatch]);
-  
+
   if (loading) {
     return (
       <div className="">
@@ -29,43 +29,59 @@ const ProductList = () => {
     );
   } else {
     return (
-      <section>
-        <div className="text-center container py-5">
-          <div className="title text-center py-5">
+      <section className="py-5">
+        <div className="container text-center">
+          <div className="py-5 text-center title">
             <h2 className="position-relative d-inline-block">Apex Shop</h2>
           </div>
-          <div className="d-flex flex-wrap justify-content-center my-3 filter-button-group">
-            <button
-              type="button"
-              className="btn m-2  active-filter-btn"
-              data-filter="*"
-            >
-              All
-            </button>
-            {categorys.map((category) => {
-              return (
+          <div className="special-list row g-0">
+            <div className="mb-4 text-center d-block justify-content-center">
+              <div className="flex-wrap my-3 justify-content-center filter-button-group d-inline">
                 <button
                   type="button"
-                  className="btn m-2 "
-                  data-filter=""
-                  key={category.id}
+                  className="m-2 btn active-filter-btn"
+                  data-filter="*"
                 >
-                  {category.name}
+                  All
                 </button>
-              );
-            })}
-          </div>
-          <div className="row">
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                name={product.name}
-                category={product.category.name}
-                price={product.price}
-                // image={product.images.length > 0 ? product.images[0].image : null}
-                image={product.qr_code}
-              />
-            ))}
+                {categorys.map((category) => {
+                  return (
+                    <button
+                      type="button"
+                      className="m-2 btn "
+                      data-filter=""
+                      key={category.id}
+                    >
+                      {category.name}
+                    </button>
+                  );
+                })}
+              </div>
+              <select
+                value={"bkpl"}
+                className="w-auto mb-3 border shadow-none form-select form-select-lg fs-6 end-0 d-inline float-end"
+                aria-label=".form-select-lg example"
+              >
+                <option value="default">Experience Level</option>
+                <option value="internship">Internship</option>
+                <option value="entry_level">Entry Level</option>
+                <option value="mid_level">Mid Level</option>
+                <option value="senior_level">Senior Level</option>
+              </select>
+            </div>
+
+            <div className="row">
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  name={product.name}
+                  category={product.category.name}
+                  price={product.price}
+                  // image={product.images.length > 0 ? product.images[0].image : null}
+                  image={product.qr_code}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>

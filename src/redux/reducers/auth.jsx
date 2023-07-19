@@ -7,6 +7,7 @@ const initialState = {
   isAuthenticated: false,
   user: null,
   loading: false,
+  userList: [],
 };
 
 const authSlice = createSlice({
@@ -52,10 +53,14 @@ const authSlice = createSlice({
     },
 
     authenticationSuccess: (state) => {
-      state.isAuthenticated = true;
+      state.isAuthenticated = true; 
     },
     authenticationFail: (state) => {
       state.isAuthenticated = false;
+    },
+    setUserList: (state, action) => {
+      state.userList = action.payload;
+      console.log(state.userList);
     },
     passwordResetSuccess: () => {},
     registerSuccess: () => {},
@@ -76,6 +81,7 @@ export const {
   resetPasswordConfirm,
   resetPasswordConfirmSuccess,
   registerSuccess,
+  setUserList,
 } = authSlice.actions;
 
 export default authSlice.reducer;

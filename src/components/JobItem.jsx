@@ -1,29 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 const JobItem = (props) => {
   const {
     id,
-    company_logo,
+    logo,
     title,
     location,
     job_type,
     salary,
+    vote_count,
     expire_date,
     applyNow,
+    experience_level,
     vote,
   } = props;
 
+  const checkVoteCount = (vote_count) => {
+    if (vote_count) {
+      return <span>{vote_count} </span>;
+    } else {
+      return <span>-</span>;
+    }
+  };
   return (
     <>
       <div className="container container-fluid">
-        <div className="job-item p-4 mb-4">
+        <div className="p-4 mb-4 job-item">
           <div className="row g-4">
             <div className="col-12 col-md-8 d-flex align-items-center">
               <img
-                className="flex-shrink-0 img-fluid border rounded"
-                src={company_logo}
+                className="flex-shrink-0 border rounded img-fluid"
+                src={logo}
                 alt=""
                 style={{ width: "80px", height: "80px" }}
               />
@@ -45,12 +52,15 @@ const JobItem = (props) => {
               </div>
             </div>
             <div className="col-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-              <div className="d-flex flex-wrap justify-content-between mb-3">
+              <div className="flex-wrap mb-3 d-flex justify-content-between">
                 <button
-                  className="btn btn-light btn-square mb-2 mb-md-0 me-md-2"
-                  onClick={vote}
+                  className="mb-2 btn btn-light btn-square mb-md-0 me-md-2"
+                  onClick={() => vote()}
                 >
-                  <i className="far fa-heart text-secondary"></i>
+                  <span className="d-flex flex-column">
+                    <i className="fa fa-caret-up" aria-hidden="true"></i>
+                    <span>{checkVoteCount(vote_count)}</span>
+                  </span>
                 </button>
                 <button className="btn btn-primary" onClick={applyNow}>
                   Apply Now

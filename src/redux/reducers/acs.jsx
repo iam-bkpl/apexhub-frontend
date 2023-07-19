@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { postJobVote } from "../actions/acs";
+
 const initialState = {
   jobPosts: [],
   jobPost: "",
-  filteredPost: "",
-  vote: "",
+  filteredPost: [],
 };
 const acsSlice = createSlice({
   name: "acs",
@@ -19,12 +20,17 @@ const acsSlice = createSlice({
     updateJobPost: (state, action) => {
       state.jobPost = action.payload;
     },
-    setVote: (state, action) => {
-      state.vote = action.payload;
+    setFilteredPost: (state, action) => {
+      state.filteredPost = action.payload;
     },
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase(postJobVote.fulfilled, (state, action) => {});
+    builder.addCase(postJobVote.rejected, (state, action) => {});
   },
 });
 
-export const { setJobPosts, setJobPost, updateJobPost, setVote } =
+export const { setJobPosts, setJobPost, updateJobPost, setFilteredPost } =
   acsSlice.actions;
 export default acsSlice.reducer;
