@@ -98,6 +98,7 @@ const JobList = () => {
                       location={job.location}
                       job_type={job.job_type}
                       salary={job.salary}
+                      vote_count={job.vote_count}
                       expire_date={getFormattedDate(job.expire_date)}
                       applyNow={() => handleApplyNow(job.id)}
                       vote={() => handleVote(job.id)}
