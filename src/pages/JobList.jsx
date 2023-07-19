@@ -4,6 +4,7 @@ import JobItem from "../components/JobItem";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobPosts, postJobVote } from "../redux/actions/acs";
 import { useNavigate } from "react-router-dom";
+import CompanyLogo from "../assets/defaults/iambkpl.jpg";
 
 const JobList = () => {
   const dispatch = useDispatch();
@@ -11,6 +12,8 @@ const JobList = () => {
   const [loading, setLoading] = useState(true);
 
   const jobPosts = useSelector((state) => state.acs.jobPosts);
+
+  const [company_logo, setCompany_logo] = useState(CompanyLogo);
 
   useEffect(() => {
     dispatch(fetchJobPosts());
@@ -90,6 +93,7 @@ const JobList = () => {
                         key={job.id}
                         id={job.id}
                         company={job.company_name}
+                        logo={CompanyLogo}
                         title={job.title}
                         location={job.location}
                         job_type={job.job_type}
