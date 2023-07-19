@@ -21,14 +21,6 @@ const JobsDashboard = () => {
         dispatch(fetchJobPosts());
     }, [dispatch]);
 
-    const getFormattedDate = (dateString) => {
-        const formattedDate = new Date(dateString).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-        });
-        return formattedDate;
-    };
     // Filter active and inactive products
     const activeJobs = jobPosts.filter((jobpost) => jobpost.is_active);
     const inactiveJobs = jobPosts.filter((jobpost) => !jobpost.is_active);
