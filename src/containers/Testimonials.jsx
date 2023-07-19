@@ -6,11 +6,13 @@ const Testimonials = () => {
     <>
       <section className="team section-bg">
         <div className="title text-center pt-3 pb-5">
-          <h2 className="position-relative d-inline-block ms-4">Our Client Says</h2>    
+          <h2 className="position-relative d-inline-block ms-4">
+            Our Client Says
+          </h2>
         </div>
         <div
           id="carouselExampleIndicators"
-        className="carousel slide"
+          className="carousel slide"
           data-bs-ride="carousel"
         >
           <div className="carousel-indicators ">
