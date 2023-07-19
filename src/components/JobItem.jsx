@@ -3,7 +3,7 @@ import React from "react";
 const JobItem = (props) => {
   const {
     id,
-    company_logo,
+    logo,
     title,
     location,
     job_type,
@@ -29,7 +29,7 @@ const JobItem = (props) => {
             <div className="col-12 col-md-8 d-flex align-items-center">
               <img
                 className="flex-shrink-0 border rounded img-fluid"
-                src={company_logo}
+                src={logo}
                 alt=""
                 style={{ width: "80px", height: "80px" }}
               />

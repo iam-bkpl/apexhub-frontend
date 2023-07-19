@@ -17,6 +17,10 @@ import ProductPost from "./components/ProductPost";
 import { useState } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Contact from "./pages/Contact";
+import JobsDashboard from "./containers/Dashboard/JobsDashboard";
+import IndexDashboard from "./containers/Dashboard/index"
+import ProductDashboard from "./containers/Dashboard/ProductDashboard"
+import UserDashboard from "./containers/Dashboard/UserDashboard"
 import { useDispatch, useSelector } from "react-redux";
 
 const AppRoutes = () => {
@@ -46,6 +50,12 @@ const AppRoutes = () => {
         <Route path="/product-list" element={<ProductList />} />
         <Route path="/product-post" element={<ProductPost />} />
 
+        {/* Dashboard */}
+        <Route path="/dashboard" element={<IndexDashboard />} />
+        <Route path="/dashboard-job" element={<JobsDashboard />} />
+        <Route path="/dashboard-user" element={<UserDashboard />} />
+        <Route path="/dashboard-product" element={<ProductDashboard />} />
+
         {/* <Route
         exact
         path="/activate/:uid/:token"
@@ -57,6 +67,7 @@ const AppRoutes = () => {
         <Route path="/*" element={<Error404 />} />
       </Routes>
       <Footer />
+     
     </>
   );
 };

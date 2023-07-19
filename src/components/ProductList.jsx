@@ -20,7 +20,7 @@ const ProductList = () => {
     dispatch(fetchCategorys());
     setLoading(false);
   }, [dispatch]);
-
+  
   if (loading) {
     return (
       <div className="">

@@ -1,5 +1,6 @@
 import React from "react";
-    
+import iambkpl from "../assets/defaults/iambkpl.jpg";
+
 const Testimonials = () => {
   return (
     <>
