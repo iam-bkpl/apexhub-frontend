@@ -4,7 +4,7 @@ import JobItem from "../components/JobItem";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobPosts, postJobVote } from "../redux/actions/acs";
 import { useNavigate } from "react-router-dom";
-import CompanyLogo from "../assets/defaults/iambkpl.jpg";
+import CompanyLogo from "../assets/testImages/about-1.jpg";
 
 const JobList = () => {
   const dispatch = useDispatch();

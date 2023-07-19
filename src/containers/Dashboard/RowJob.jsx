@@ -1,34 +1,54 @@
 import React, { useState, useEffect } from "react";
 
-
 const RowJob = (props) => {
   const { id, title, company, date, description, status, location } = props;
 
+  const [isChecked, setIsChecked] = useState(status);
+  const [jobStatus, setJobStatus] = useState("");
+  const [isBadgeSuccess, setIsBadgeSuccess] = useState(false);
+  const [modalId, setModalId] = useState("");
+
   useEffect(() => {
-    if (status === true) {
+    if (status) {
       setJobStatus("Active");
+      setIsBadgeSuccess(true);
     } else {
       setJobStatus("Inactive");
+      setIsBadgeSuccess(false);
     }
   }, [status]);
-
-  const [isChecked, setIsChecked] = useState(false);
-  const [jobStatus, setJobStatus] = useState("");
-  const [isBadgeDanger, setIsBadgeDanger] = useState(false);
-  const [modalId, setModalId] = useState("");
-  
 
   const toggleJobStatus = () => {
     setIsChecked((prevValue) => !prevValue);
     setJobStatus((prevStatus) => (prevStatus === "Active" ? "Inactive" : "Active"));
-    setIsBadgeDanger((prevValue) => !prevValue);
+    setIsBadgeSuccess((prevValue) => !prevValue);
   };
 
   useEffect(() => {
     setModalId(`exampleModal-${id}`);
   }, [id]);
 
-  const badgeClass = isBadgeDanger ? "badge btn-success rounded-pill " : "badge btn-danger rounded-pill";
+  const badgeClass = isBadgeSuccess ? "badge btn-success rounded-pill" : "badge btn-danger rounded-pill";
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded((prevValue) => !prevValue);
+  };
+
+  const getDescriptionText = () => {
+    if (isExpanded) {
+      return description;
+    } else {
+      const words = description.split(" ");
+      if (words.length > 50) {
+        const shortenedDescription = words.slice(0, 50).join(" ");
+        return `${shortenedDescription}...`;
+      } else {
+        return description;
+      }
+    }
+  };
 
   return (
     <>
@@ -37,11 +57,14 @@ const RowJob = (props) => {
         <td>{company}</td>
         <td>{title}</td>
         <td>{date}</td>
-        <td>7</td>
-        <td><span className={badgeClass}>{jobStatus}</span></td>
-        <td className='m-0 p-0 '>
-          <div className="form-check form-switch mx-2 fs-5 ">
-            <input className="form-check-input shadow-none"
+        <td className="text-center">7</td>
+        <td>
+          <span className={badgeClass}>{jobStatus}</span>
+        </td>
+        <td className="m-0 p-0">
+          <div className="form-check form-switch mx-2 fs-5">
+            <input
+              className="form-check-input shadow-none"
               type="checkbox"
               role="switch"
               checked={isChecked}
@@ -55,27 +78,36 @@ const RowJob = (props) => {
           </button>
         </td>
       </tr>
+      {/* Modal */}
       {/* <!-- Modal --> */}
       <div className="modal fade" id={modalId} aria-labelledby={`${modalId}-label`} aria-hidden="true">
         <div className="modal-dialog">
-          <div className="modal-content w-75">
+          <div className="modal-content w-100">
             <div className="modal-header">
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body d-flex justify-content-center">
               <div class="card text-center border-white" style={{ width: "21rem" }}>
-                <img src={location} class="card-img-top" height="350px" alt="Image" />
+                {/* <img src={location} class="card-img-top" height="350px" alt="Image" /> */}
                 <div class="card-body">
-                  <h5 class="card-title">{company}</h5>
-                  <p class="card-text" dangerouslySetInnerHTML={{ __html: description }}></p>
+                  <h3 class="card-title text-capitalize">{company}</h3>
+                  <p className="card-text">{getDescriptionText()}</p>
+                  {description.length > 50 && (
+                    <button className="btn btn-white bg-white text-primary text-decoration-underline shadow-none border-white" onClick={toggleExpand}>
+                      {isExpanded ? "Read Less" : "Read More"}
+                    </button>
+                  )}
                 </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <span className="fw-bold">Name : &nbsp;</span> {company}
+                <ul class="list-group list-group-flush text-start">
+                  <li class="list-group-item text-capitalize">
+                    <span className="fw-bold ">Name : &nbsp;</span> {company}
                   </li>
-                  <li class="list-group-item">
-                    <span className="fw-bold">Price : &nbsp;</span>
+                  <li class="list-group-item text-capitalize">
+                    <span className="fw-bold">Job Title : &nbsp;</span>
                     {title}
+                  </li>
+                  <li class="list-group-item text-capitalize">
+                    <span className="fw-bold">Location : &nbsp;</span> {location}
                   </li>
                   <li class="list-group-item">
                     <span className="fw-bold">Date: &nbsp;</span>

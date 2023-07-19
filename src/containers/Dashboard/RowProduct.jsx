@@ -6,27 +6,27 @@ const RowProduct = (props) => {
   useEffect(() => {
     if (status === true) {
       setProductStatus("Active");
+      setIsChecked(true);
     } else {
       setProductStatus("Inactive");
+      setIsChecked(false);
     }
   }, [status]);
 
   const [isChecked, setIsChecked] = useState(true);
   const [productStatus, setProductStatus] = useState("");
-  const [isBadgeDanger, setIsBadgeDanger] = useState(false);
   const [modalId, setModalId] = useState("");
 
   const toggleProductStatus = () => {
     setIsChecked((prevValue) => !prevValue);
     setProductStatus((prevStatus) => (prevStatus === "Active" ? "Inactive" : "Active"));
-    setIsBadgeDanger((prevValue) => !prevValue);
   };
 
   useEffect(() => {
     setModalId(`exampleModal-${id}`);
   }, [id]);
 
-  const badgeClass = isBadgeDanger ? "badge btn-danger rounded-pill" : "badge btn-success rounded-pill";
+  const badgeClass = productStatus === "Inactive" ? "btn btn-danger rounded-pill py-0 px-1 " : "btn btn-success rounded-pill py-0 px-2";
 
   return (
     <>
@@ -38,7 +38,7 @@ const RowProduct = (props) => {
         <td>
           <span className={badgeClass}>{productStatus}</span>
         </td>
-        <td className="m-0 p-0 ">
+        <td className="m-0 p-0">
           <div className="form-check form-switch mx-2 fs-5">
             <input
               className="form-check-input shadow-none"
@@ -55,10 +55,38 @@ const RowProduct = (props) => {
           </button>
         </td>
       </tr>
-
-      <button className="btn bg-white text-dark border-2 shadow-none rounded-pill py-0 ms-0" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
-            View
-          </button>
+      {/* <!-- Modal --> */}
+      <div className="modal fade" id={modalId} aria-labelledby={`${modalId}-label`} aria-hidden="true">
+        <div className="modal-dialog">
+          <div className="modal-content w-100">
+            <div className="modal-header">
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body d-flex justify-content-center">
+              <div className="card text-center border-white" style={{ width: "21rem" }}>
+                <img src={image} className="card-img-top" height="350px" alt="Image" />
+                <div className="card-body">
+                  <h3 className="card-title text-capitalize">{name}</h3>
+                  <p className="card-text" dangerouslySetInnerHTML={{ __html: description }}></p>
+                </div>
+                <ul className="list-group list-group-flush text-start">
+                  <li className="list-group-item text-capitalize">
+                    <span className="fw-bold">Name : &nbsp;</span> {name}
+                  </li>
+                  <li className="list-group-item">
+                    <span className="fw-bold">Price : &nbsp;</span>
+                    {price}
+                  </li>
+                  <li className="list-group-item">
+                    <span className="fw-bold">Date: &nbsp;</span>
+                    {date}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
