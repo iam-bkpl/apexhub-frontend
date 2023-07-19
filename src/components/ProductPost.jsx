@@ -140,15 +140,15 @@ const ProductPost = () => {
             <CKEditor
               editor={ClassicEditor}
               data={productData.description}
-              onReady={(editor) => { }}
+              onReady={(editor) => {}}
               onChange={(event, editor) => {
                 setProductData((prevState) => ({
                   ...prevState,
                   description: editor.getData(),
                 }));
               }}
-              onBlur={(event, editor) => { }}
-              onFocus={(event, editor) => { }}
+              onBlur={(event, editor) => {}}
+              onFocus={(event, editor) => {}}
             />
           </div>
           <div className="mt-5 text-center">

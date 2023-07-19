@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 
 const JobItem = (props) => {
   const {
@@ -49,7 +47,7 @@ const JobItem = (props) => {
               <div className="flex-wrap mb-3 d-flex justify-content-between">
                 <button
                   className="mb-2 btn btn-light btn-square mb-md-0 me-md-2"
-                  onClick={vote}
+                  onClick={() => vote()}
                 >
                   <span className="d-flex flex-column">
                     <i className="fa fa-caret-up" aria-hidden="true"></i>

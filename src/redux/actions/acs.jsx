@@ -6,6 +6,7 @@ import {
   setJobPost,
   updateJobPost,
   setVote,
+  setVotes,
 } from "../reducers/acs";
 
 const API_URL = "http://localhost:8000/api/acs";
@@ -24,6 +25,11 @@ export const fetchJobPosts = createAsyncThunk(
       try {
         const response = await axios.get(`${API_URL}/jobpost/`, config);
         thunkAPI.dispatch(setJobPosts(response.data));
+        thunkAPI.dispatch(
+          response.data.map((job) => {
+            return thunkAPI.dispatch(setVotes({ [job.id]: job.vote_count }));
+          })
+        );
         return response.data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.message);
@@ -48,6 +54,7 @@ export const fetchJobPost = createAsyncThunk(
       try {
         const response = await axios.get(`${API_URL}/jobpost/${id}/`, config);
         thunkAPI.dispatch(setJobPost(response.data));
+        console.log("Fetching job post");
         return response.data;
       } catch (error) {
         console.log("Error while fetching job with id ", id);
@@ -112,34 +119,7 @@ export const updateJob = createAsyncThunk(
     }
   }
 );
-
-export const fetchVote = createAsyncThunk(
-  "acs/fetchVote",
-  async (job_id, thunkAPI) => {
-    const accessToken = localStorage.getItem("access");
-    if (accessToken) {
-      const config = {
-        headers: {
-          Authorization: `JWT ${accessToken}`,
-        },
-      };
-      try {
-        const resoonse = await axios.get(
-          `${API_URL}/jobpost/${job_id}/votes/`,
-          config
-        );
-
-        return resoonse.data;
-      } catch (error) {
-        console.log("error while getting the job");
-        return thunkAPI.rejectWithValue(error.response.data.message);
-      }
-    } else {
-      return thunkAPI.rejectWithValue(error.resoonse.data.message);
-    }
-  }
-);
-
+  
 export const postJobVote = createAsyncThunk(
   "acs/postJobVote",
   async ({ job_id, formData }, thunkAPI) => {
@@ -152,15 +132,15 @@ export const postJobVote = createAsyncThunk(
       };
 
       try {
-        const resoonse = await axios.post(
+        const response = await axios.post(
           `${API_URL}/jobpost/${job_id}/votes/`,
           formData,
           config
         );
-        return resoonse.data;
+        return response.data;
       } catch (error) {
-        console.log("error while getting the job");
-        return thunkAPI.rejectWithValue(error.response.data.message);
+        // return thunkAPI.rejectWithValue(error.response.data.message);
+        console.log("Job Vote deleted");
       }
     } else {
       return thunkAPI.rejectWithValue("Access token not found");
