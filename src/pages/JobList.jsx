@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import JobItem from "../components/JobItem";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchJobPosts } from "../redux/actions/acs";
+import { fetchJobPosts, postJobVote } from "../redux/actions/acs";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +27,10 @@ const JobList = () => {
     navigate(`/job-detail/${job_id}`);
   };
 
+  const handleVote = (job_id) => {
+    console.log(job_id);
+    dispatch(postJobVote(job_id));
+  };
   const getFormattedDate = (dateString) => {
     const formattedDate = new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -72,7 +76,7 @@ const JobList = () => {
                 aria-label=".form-select-lg example"
               >
                 <option value="default" disabled>
-                  Job Type{" "}
+                  Job Type
                 </option>
                 <option value="1">Internship</option>
                 <option value="2">Entry Level</option>
@@ -94,6 +98,7 @@ const JobList = () => {
                       salary={job.salary}
                       expire_date={getFormattedDate(job.expire_date)}
                       applyNow={() => handleApplyNow(job.id)}
+                      vote={() => handleVote(job.id)}
                     />
                   ))}
                 </div>
@@ -106,4 +111,4 @@ const JobList = () => {
   }
 };
 
-export default JobList; 
+export default JobList;

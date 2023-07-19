@@ -153,6 +153,7 @@ export const postJobVote = createAsyncThunk(
       try {
         const resoonse = await axios.post(
           `${API_URL}/jobpost/${job_id}/votes/`,
+          job_id,
           config
         );
         return resoonse.data;
