@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
 
 const RowJob = (props) => {
-  const { id, title, company, date, description, status, location } = props;
+  const {
+    id,
+    title,
+    company,
+    date,
+    description,
+    status,
+    location,
+    application_count,
+  } = props;
 
   const [isChecked, setIsChecked] = useState(status);
   const [jobStatus, setJobStatus] = useState("");
@@ -20,7 +29,9 @@ const RowJob = (props) => {
 
   const toggleJobStatus = () => {
     setIsChecked((prevValue) => !prevValue);
-    setJobStatus((prevStatus) => (prevStatus === "Active" ? "Inactive" : "Active"));
+    setJobStatus((prevStatus) =>
+      prevStatus === "Active" ? "Inactive" : "Active"
+    );
     setIsBadgeSuccess((prevValue) => !prevValue);
   };
 
@@ -28,7 +39,9 @@ const RowJob = (props) => {
     setModalId(`exampleModal-${id}`);
   }, [id]);
 
-  const badgeClass = isBadgeSuccess ? "badge btn-success rounded-pill" : "badge btn-danger rounded-pill";
+  const badgeClass = isBadgeSuccess
+    ? "badge btn-success rounded-pill"
+    : "badge btn-danger rounded-pill";
 
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -57,7 +70,7 @@ const RowJob = (props) => {
         <td>{company}</td>
         <td>{title}</td>
         <td>{date}</td>
-        <td className="text-center">7</td>
+        <td className="text-center">{application_count}</td>
         <td>
           <span className={badgeClass}>{jobStatus}</span>
         </td>
@@ -73,27 +86,47 @@ const RowJob = (props) => {
           </div>
         </td>
         <td>
-          <button className="btn bg-white text-dark border-2 shadow-none rounded-pill py-0 ms-0" data-bs-toggle="modal" data-bs-target={`#${modalId}`}>
+          <button
+            className="btn bg-white text-dark border-2 shadow-none rounded-pill py-0 ms-0"
+            data-bs-toggle="modal"
+            data-bs-target={`#${modalId}`}
+          >
             View
           </button>
         </td>
       </tr>
       {/* Modal */}
       {/* <!-- Modal --> */}
-      <div className="modal fade" id={modalId} aria-labelledby={`${modalId}-label`} aria-hidden="true">
+      <div
+        className="modal fade"
+        id={modalId}
+        aria-labelledby={`${modalId}-label`}
+        aria-hidden="true"
+      >
         <div className="modal-dialog">
           <div className="modal-content w-100">
             <div className="modal-header">
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div className="modal-body d-flex justify-content-center">
-              <div className="card text-center border-white" style={{ width: "21rem" }}>
+              <div
+                className="card text-center border-white"
+                style={{ width: "21rem" }}
+              >
                 {/* <img src={location} className="card-img-top" height="350px" alt="Image" /> */}
                 <div className="card-body">
                   <h3 className="card-title text-capitalize">{company}</h3>
                   <p className="card-text">{getDescriptionText()}</p>
                   {description.length > 50 && (
-                    <button className="btn btn-white bg-white text-primary text-decoration-underline shadow-none border-white" onClick={toggleExpand}>
+                    <button
+                      className="btn btn-white bg-white text-primary text-decoration-underline shadow-none border-white"
+                      onClick={toggleExpand}
+                    >
                       {isExpanded ? "Read Less" : "Read More"}
                     </button>
                   )}
@@ -107,7 +140,8 @@ const RowJob = (props) => {
                     {title}
                   </li>
                   <li className="list-group-item text-capitalize">
-                    <span className="fw-bold">Location : &nbsp;</span> {location}
+                    <span className="fw-bold">Location : &nbsp;</span>{" "}
+                    {location}
                   </li>
                   <li className="list-group-item">
                     <span className="fw-bold">Date: &nbsp;</span>

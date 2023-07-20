@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 const RowUser = (props) => {
-  const { id, username, firstname, lastname, date, usertype, status } = props;
+  const { id, username, email, firstname, lastname, date, usertype, status } =
+    props;
   const [userStatus, setUserStatus] = useState("");
   const [isBadgeSuccess, setIsBadgeSuccess] = useState(false);
   const [iconClass, setIconClass] = useState("");
@@ -19,7 +20,9 @@ const RowUser = (props) => {
   }, [status]);
 
   const toggleUserStatus = () => {
-    setUserStatus((prevStatus) => (prevStatus === "Active" ? "Inactive" : "Active"));
+    setUserStatus((prevStatus) =>
+      prevStatus === "Active" ? "Inactive" : "Active"
+    );
     setIsBadgeSuccess((prevValue) => !prevValue);
     setIconClass((prevClass) =>
       prevClass === "fa-solid fa-circle-check p-2 text-success rounded-pill"
@@ -30,20 +33,43 @@ const RowUser = (props) => {
 
   return (
     <>
-      <tr>
+      <tr
+        className={
+          usertype === "external" ? "table-info text-dark" : "text-secondary"
+        }
+      >
         <td>{id}</td>
-        <td>{username}</td>
+        <td>{email}</td>
         <td>{date}</td>
-        <td>{usertype}</td>
+        <td>
+          <span
+            className={usertype === "external" ? "text-dark" : "text-secondary"}
+          >
+            {usertype}
+          </span>
+        </td>
 
         <td>
-          <span className={isBadgeSuccess ? "badge btn-success rounded-pill" : "badge btn-danger rounded-pill"}>
+          <span
+            className={
+              isBadgeSuccess
+                ? "badge btn-success rounded-pill"
+                : "badge btn-danger rounded-pill"
+            }
+          >
             {userStatus}
           </span>
         </td>
         <td className="action-delete m-0 p-0">
-          <i className="fa-solid fa-pen-to-square p-2 text-dark rounded-pill" style={{ cursor: "pointer" }}></i>
-          <i className={iconClass} style={{ cursor: "pointer" }} onClick={toggleUserStatus}></i>
+          <i
+            className="fa-solid fa-pen-to-square p-2 text-dark rounded-pill"
+            style={{ cursor: "pointer" }}
+          ></i>
+          <i
+            className={iconClass}
+            style={{ cursor: "pointer" }}
+            onClick={toggleUserStatus}
+          ></i>
         </td>
       </tr>
     </>
