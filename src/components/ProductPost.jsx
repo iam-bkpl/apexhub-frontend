@@ -151,7 +151,7 @@ const ProductPost = () => {
               onFocus={(event, editor) => {}}
             />
           </div>
-          <button type="button" class="border col-md-4 mt-4 py-1  w-auto">Save Changes To Continue</button>
+          <button type="button" className="border col-md-4 mt-4 py-1  w-auto">Save Changes To Continue</button>
           <div className="col-md-10">
             <label htmlFor="" className="form-label">
               Choose Product Photo

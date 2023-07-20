@@ -18,6 +18,7 @@ import ProductPost from "./components/ProductPost";
 import { useState } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
 import JobsDashboard from "./containers/Dashboard/JobsDashboard";
 import IndexDashboard from "./containers/Dashboard/index"
 import ProductDashboard from "./containers/Dashboard/ProductDashboard"
@@ -48,6 +49,7 @@ const AppRoutes = () => {
           path="/password/reset/confirm/:uid/:token"
           element={<ChangePassword />}
         />
+        <Route path="/profile" element={<Profile/>} />
         <Route path="/contact" element={<Contact />} />
         {/* acs */}
         <Route path="/job-post" element={<JobPost />} />
