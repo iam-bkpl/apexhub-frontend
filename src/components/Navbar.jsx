@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/actions/auth";
+import default_user from "../assets/defaults/user.png";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -10,6 +11,8 @@ const Navbar = () => {
 
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  console.log(isAuthenticated);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -35,12 +38,13 @@ const Navbar = () => {
       </li>
     );
   };
+
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+      <nav className="p-0 bg-white shadow navbar navbar-expand-lg navbar-light sticky-top">
         <div className="container pe-1 ms-1 mw-100">
           <button
-            className="navbar-toggler border-0"
+            className="border-0 navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navMenu"
@@ -56,11 +60,11 @@ const Navbar = () => {
               Apex-Hub
             </span>
           </Link>
-          <div className="order-lg-2 nav-btns text-end py-3">
-            <div className="d-inline h-auto">
+          <div className="py-3 order-lg-2 nav-btns text-end">
+            <div className="h-auto d-inline">
               <button
                 type="button"
-                className="btn position-relative shadow-none ps-0  p-0 me-4"
+                className="p-0 shadow-none btn position-relative ps-0 me-4"
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
               >
@@ -69,17 +73,18 @@ const Navbar = () => {
               <Link
                 to="/notification"
                 type="button"
-                className=" text-dark position-relative shadow-none p-1 "
+                className="p-1 shadow-none text-dark position-relative"
               >
                 <i className="fa fa-bell fs-4 "></i>
-                <span className="position-absolute top-0 start-100 translate-middle badge bg-primary rounded-circle ms-1">
+                <span className="top-0 position-absolute start-100 translate-middle badge bg-primary rounded-circle ms-1">
                   2
                 </span>
               </Link>
             </div>
+
             <button
               type="button"
-              className="btn position-relative ps-4 px-1 py-0 shadow-none"
+              className="px-1 py-0 shadow-none btn position-relative ps-4"
             >
               <Link
                 className="nav-link nav-profile d-flex align-items-center dropdown-toggle text-dark"
@@ -89,50 +94,66 @@ const Navbar = () => {
                 id="dropdownMenuLink"
               >
                 <img
-                  src="https://lh3.googleusercontent.com/ogw/AOLn63G1kDp1EeTErP0dkuwBHG__AgdaHXm4jbaON9IPc0M=s32-c-mo"
+                  src={default_user}
                   alt="Profile"
                   className="rounded-circle"
                   height="40px"
                   width="40px"
                 />
                 <span className="d-none d-lg-block text-dark ps-2">
-                  Roshan Nyaupane
+                  {isAuthenticated ? user.username : "Sign In"}
                 </span>
               </Link>
-
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li>
-                  <Link to="/profile" className="dropdown-item">
-                    <i className="fa-solid fa-user me-3"></i>Profile
-                  </Link>
-                </li>
-                <hr className="dropdown-divider" />
-                <li>
-                  <a className="dropdown-item" href="#">
-                    <i className="fa-solid fa-circle-half-stroke me-3"></i>
-                    Change Theme
-                  </a>
-                </li>
-                <hr className="dropdown-divider" />
-                <li>
-                  <Link className="dropdown-item" to="/dashboard">
-                    <i className="fa-solid fa-gauge me-3"></i>Dashboard
-                  </Link>
-                </li>
-                <hr className="dropdown-divider" />
-                {isAuthenticated ? authLinks() : guestLinks()}
-              </ul>
+              {isAuthenticated ? (
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuLink"
+                >
+                  <li>
+                    <Link to="/profile" className="dropdown-item">
+                      <i className="fa-solid fa-user me-3"></i>Profile
+                    </Link>
+                  </li>
+                  <hr className="dropdown-divider" />
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      <i className="fa-solid fa-circle-half-stroke me-3"></i>
+                      Change Theme
+                    </a>
+                  </li>
+                  <hr className="dropdown-divider" />
+                  <li>
+                    <Link className="dropdown-item" to="/dashboard">
+                      <i className="fa-solid fa-gauge me-3"></i>Dashboard
+                    </Link>
+                  </li>
+                  <hr className="dropdown-divider" />
+                  {authLinks()}
+                </ul>
+              ) : (
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuLink"
+                >
+                  <li>
+                    <Link to="/login" className="dropdown-item">
+                      <i className="fa-solid fa-right-from-bracket me-3"></i>
+                      Log In
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </button>
           </div>
 
           <div className="collapse navbar-collapse order-lg-1" id="navMenu">
-            <ul className="navbar-nav mx-auto text-center ">
-              <li className="nav-item px-2 py-2">
+            <ul className="mx-auto text-center navbar-nav ">
+              <li className="px-2 py-2 nav-item">
                 <Link to="/" className="nav-link text-uppercase text-dark">
                   Home
                 </Link>
               </li>
-              <li className="nav-item px-1 py-2">
+              <li className="px-1 py-2 nav-item">
                 <div className=" dropdown">
                   <a
                     href="#"
@@ -141,7 +162,7 @@ const Navbar = () => {
                   >
                     Services
                   </a>
-                  <div className="dropdown-menu rounded-3 m-0 border-light text-center">
+                  <div className="m-0 text-center dropdown-menu rounded-3 border-light">
                     <Link to="/job-list" className="dropdown-item ">
                       Job List
                     </Link>
@@ -152,12 +173,12 @@ const Navbar = () => {
                   </div>
                 </div>
               </li>
-              <li className="nav-item px-1 py-2">
+              <li className="px-1 py-2 nav-item">
                 <Link to="/about" className="nav-link text-uppercase text-dark">
                   About
                 </Link>
               </li>
-              <li className="nav-item px-1 py-2 d-lg-none">
+              <li className="px-1 py-2 nav-item d-lg-none">
                 <Link
                   to="/notification"
                   className="nav-link text-uppercase text-dark"
@@ -165,12 +186,12 @@ const Navbar = () => {
                   Notification
                 </Link>
               </li>
-              <li className="nav-item px-1 py-2">
+              <li className="px-1 py-2 nav-item">
                 <Link to="/blog" className="nav-link text-uppercase text-dark">
                   blogs
                 </Link>
               </li>
-              <li className="nav-item px-1 py-2 border-0">
+              <li className="px-1 py-2 border-0 nav-item">
                 <Link
                   to="/contact"
                   className="nav-link text-uppercase text-dark"
@@ -182,19 +203,19 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      {/* Search Modal  */}
+
       <div
-        className="modal fade mt-5 "
+        className="mt-5 modal fade "
         id="staticBackdrop"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog mt-5 ">
+        <div className="mt-5 modal-dialog ">
           <div className="modal-content bg-dark">
-            <div className="modal-body bg-transparent">
+            <div className="bg-transparent modal-body">
               <form className="d-flex">
                 <input
-                  className="form-control me-2 py-2 bg-transparent shadow-none border-none text-white"
+                  className="py-2 text-white bg-transparent border-none shadow-none form-control me-2"
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
