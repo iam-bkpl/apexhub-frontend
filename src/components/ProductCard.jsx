@@ -1,5 +1,13 @@
 const ProductCard = (props) => {
-  const { name, category, price, image, handleClick } = props;
+  const { name, category, price, image, handleClick, is_featured } = props;
+
+  const span_icon = () => {
+    if (is_featured) {
+      return <i class="fa-solid fa-heart"></i>;
+    } else {
+      return;
+    }
+  };
   return (
     <>
       <div
@@ -16,7 +24,7 @@ const ProductCard = (props) => {
               <div className="mask">
                 <div className="d-flex justify-content-start align-items-end h-100">
                   <h5 className="product-badge">
-                    <span className="badge bg-primary ms-2">New</span>
+                    <span className="badge text-danger">{span_icon()}</span>
                   </h5>
                 </div>
               </div>
