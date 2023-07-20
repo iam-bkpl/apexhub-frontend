@@ -53,14 +53,13 @@ const authSlice = createSlice({
     },
 
     authenticationSuccess: (state) => {
-      state.isAuthenticated = true; 
+      state.isAuthenticated = true;
     },
     authenticationFail: (state) => {
       state.isAuthenticated = false;
     },
     setUserList: (state, action) => {
       state.userList = action.payload;
-      console.log(state.userList);
     },
     passwordResetSuccess: () => {},
     registerSuccess: () => {},

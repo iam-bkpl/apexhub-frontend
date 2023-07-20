@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchJobPosts } from "../../redux/actions/acs";
 import { fetchUserList } from "../../redux/actions/auth";
-import { fetchProducts } from "../../redux/actions/ashop"
+import { fetchProducts } from "../../redux/actions/ashop";
 import CardSmall from "./CardSmall";
 import SmallTableJobs from "./smallTableJobs";
 import DashboardNavbar from "./Navbar";
@@ -50,18 +50,33 @@ const Dashboard = () => {
 
           <div className="container-fluid pt-4 px-4">
             <div className="row g-4">
-
-              <CardSmall cardTitle="Total&nbsp;Users" number={totalUser} iconClass="fa fa-users fa-4x text-primary" />
-              <CardSmall cardTitle="Active&nbsp;Users" number={totalActiveUsers} iconClass="fa fa-user-plus fa-4x text-primary"/>
-              <CardSmall cardTitle="Total&nbsp;Jobs" number={totalJobs} iconClass="fa-solid fa-briefcase fa-4x text-primary"/>
-              <CardSmall cardTitle="Total&nbsp;Products" number={totalProducts} iconClass="fa-solid fa-bag-shopping fa-4x text-primary" />
+              <CardSmall
+                cardTitle="Total&nbsp;Users"
+                number={totalUser}
+                iconClass="fa fa-users fa-4x text-primary"
+              />
+              <CardSmall
+                cardTitle="Active&nbsp;Users"
+                number={totalActiveUsers}
+                iconClass="fa fa-user-plus fa-4x text-primary"
+              />
+              <CardSmall
+                cardTitle="Total&nbsp;Jobs"
+                number={totalJobs}
+                iconClass="fa-solid fa-briefcase fa-4x text-primary"
+              />
+              <CardSmall
+                cardTitle="Total&nbsp;Products"
+                number={totalProducts}
+                iconClass="fa-solid fa-bag-shopping fa-4x text-primary"
+              />
             </div>
           </div>
           <div className="container-fluid pt-4 px-4">
             <div className="row g-4">
               <SmallTableJobs />
 
-              <SmallTableProduct/>
+              <SmallTableProduct />
             </div>
           </div>
           <div className="container-fluid pt-4 px-4">
@@ -72,7 +87,7 @@ const Dashboard = () => {
         </div>
       </div>
     </>
-  )
+  );
 };
 
 export default Dashboard;

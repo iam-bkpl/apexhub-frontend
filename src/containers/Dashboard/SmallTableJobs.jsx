@@ -1,10 +1,9 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { fetchJobPosts } from '../../redux/actions/acs';
-import { useDispatch, useSelector } from 'react-redux';
-import LoadingSpinner from '../../components/LoadingSpinner';
-import { Link } from 'react-router-dom';
-
+import React from "react";
+import { useState, useEffect } from "react";
+import { fetchJobPosts } from "../../redux/actions/acs";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 const SmallTableJobs = () => {
   const [loading, setLoading] = useState(true);
@@ -20,20 +19,20 @@ const SmallTableJobs = () => {
 
   const getFormattedDate = (dateString) => {
     const formattedDate = new Date(dateString).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
     return formattedDate;
-};
-
-  console.log("Job posts are ", jobPosts);
+  };
 
   if (loading) {
     return <LoadingSpinner />;
   } else {
     // Sort jobPosts by date_added in descending order
-    const sortedJobPosts = [...jobPosts].sort((a, b) => new Date(b.date_added) - new Date(a.date_added));
+    const sortedJobPosts = [...jobPosts].sort(
+      (a, b) => new Date(b.date_added) - new Date(a.date_added)
+    );
     // Get the most recent 6 job posts
     const recentJobs = sortedJobPosts.slice(0, 4);
 
@@ -48,18 +47,28 @@ const SmallTableJobs = () => {
             <table className="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col" width="20%">Job&nbsp;Id</th>
-                  <th scope="col" width="30%">Company</th>
-                  <th scope="col" width="40%">Job&nbsp;Title</th>
-                  <th scope="col" width="20%">Job&nbsp;Type</th>
-                  <th scope="col" width="20%">Created&nbsp;Date</th>
+                  <th scope="col" width="20%">
+                    Job&nbsp;Id
+                  </th>
+                  <th scope="col" width="30%">
+                    Company
+                  </th>
+                  <th scope="col" width="40%">
+                    Job&nbsp;Title
+                  </th>
+                  <th scope="col" width="20%">
+                    Job&nbsp;Type
+                  </th>
+                  <th scope="col" width="20%">
+                    Created&nbsp;Date
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {recentJobs.map((jobpost) => {
                   return (
                     <tr key={jobpost.id}>
-                      <td >#{jobpost.id}</td>
+                      <td>#{jobpost.id}</td>
                       <td>{jobpost.company}</td>
                       <td>{jobpost.title}</td>
                       <td>{jobpost.job_type}</td>
