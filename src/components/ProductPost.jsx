@@ -66,7 +66,7 @@ const ProductPost = () => {
     );
   } else {
     return (
-      <div className="row gy-5 gx-4 justify-content-center">
+      <div className="row gy-5 gx-4 justify-content-center mt-5">
         <h1 className="p-0 mt-3 text-center">Add Product</h1>
         <hr className="p-0 m-2" />
         <form
@@ -151,17 +151,30 @@ const ProductPost = () => {
               onFocus={(event, editor) => {}}
             />
           </div>
+          <button type="button" class="border col-md-4 mt-4 py-1  w-auto">Save Changes To Continue</button>
+          <div className="col-md-10">
+            <label htmlFor="" className="form-label">
+              Choose Photo
+            </label>
+            <input
+              name="qr_code"
+              className="py-2 form-control rounded-6"
+              type="file"
+              id=""
+              onChange={(e) => handleFileChange(e)}
+            />
+          </div>
           <div className="mt-5 text-center">
             <button
               type="submit"
-              className="btn rounded-5 me-3"
+              className="btn btn-primary rounded-pill px-4 me-3"
               onClick={(e) => handleSubmit(e)}
             >
               Submit
             </button>
             <button
               type="reset"
-              className="text-white btn bg-secondary rounded-5 border-secondary"
+              className="text-white btn bg-secondary rounded-5 px-4 border-secondary"
             >
               Reset
             </button>
