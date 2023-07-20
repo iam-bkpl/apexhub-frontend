@@ -87,10 +87,10 @@ const RowJob = (props) => {
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body d-flex justify-content-center">
-              <div class="card text-center border-white" style={{ width: "21rem" }}>
-                {/* <img src={location} class="card-img-top" height="350px" alt="Image" /> */}
-                <div class="card-body">
-                  <h3 class="card-title text-capitalize">{company}</h3>
+              <div className="card text-center border-white" style={{ width: "21rem" }}>
+                {/* <img src={location} className="card-img-top" height="350px" alt="Image" /> */}
+                <div className="card-body">
+                  <h3 className="card-title text-capitalize">{company}</h3>
                   <p className="card-text">{getDescriptionText()}</p>
                   {description.length > 50 && (
                     <button className="btn btn-white bg-white text-primary text-decoration-underline shadow-none border-white" onClick={toggleExpand}>
@@ -98,18 +98,18 @@ const RowJob = (props) => {
                     </button>
                   )}
                 </div>
-                <ul class="list-group list-group-flush text-start">
-                  <li class="list-group-item text-capitalize">
+                <ul className="list-group list-group-flush text-start">
+                  <li className="list-group-item text-capitalize">
                     <span className="fw-bold ">Name : &nbsp;</span> {company}
                   </li>
-                  <li class="list-group-item text-capitalize">
+                  <li className="list-group-item text-capitalize">
                     <span className="fw-bold">Job Title : &nbsp;</span>
                     {title}
                   </li>
-                  <li class="list-group-item text-capitalize">
+                  <li className="list-group-item text-capitalize">
                     <span className="fw-bold">Location : &nbsp;</span> {location}
                   </li>
-                  <li class="list-group-item">
+                  <li className="list-group-item">
                     <span className="fw-bold">Date: &nbsp;</span>
                     {date}
                   </li>

@@ -35,9 +35,9 @@ const ProductDashboard = () => {
 
                     <div className="container-fluid pt-4 px-4">
                         <div className="row g-4">
-                            <CardBig cardTitle="Total Product" number={totalProducts} />
-                            <CardBig cardTitle="Active Product" number={totalActiveProducts}/>
-                            <CardBig cardTitle="Inactive Product" number={totalInactiveProducts}/>
+                            <CardBig cardTitle="Total Product" number={totalProducts} iconClass="fa fa-briefcase fa-4x text-primary"/>
+                            <CardBig cardTitle="Active Product" number={totalActiveProducts} iconClass="fas fa-business-time fa-4x text-primary"/>
+                            <CardBig cardTitle="Inactive Product" number={totalInactiveProducts} iconClass="fa-solid fa-eye-slash fa-4x text-primary"/>
                         </div>
                     </div>
 

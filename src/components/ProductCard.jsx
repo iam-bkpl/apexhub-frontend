@@ -24,7 +24,7 @@ const ProductCard = (props) => {
               <h5 className="mb-3 card-title">{name}</h5>
             </a>
             <a href="" className="text-reset">
-              <p>This is categorgy: {category}</p>
+              <p> {category}</p>
             </a>
             <h6 className="mb-3">Rs.{price}</h6>
           </div>
