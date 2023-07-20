@@ -13,7 +13,6 @@ const Home = () => {
   return (
     <>
       <Header/>
-
       <HotSales />
       <TopJobs />
       <AboutUs />
