@@ -20,7 +20,7 @@ const ProfileBigCard = () => {
       } else {
         navigate("/");
       }
-    }, 1000);
+    });
     return () => clearTimeout(timer);
   }, [navigate]);
 
@@ -67,7 +67,7 @@ const ProfileBigCard = () => {
                   className="tab-pane fade show active profile-overview"
                   id="profile-overview"
                 >
-                  <ProfileDetail />
+                  <ProfileDetail user={user} />
                 </div>
 
                 {/* Edit */}
@@ -90,7 +90,7 @@ const ProfileBigCard = () => {
         </div>
       </>
     );
-  } else {
+  } else if (loading) {
     return <LoadingSpinner />;
   }
 };

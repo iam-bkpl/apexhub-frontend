@@ -12,11 +12,10 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  const handleLogout = () => {
-    dispatch(logout());
+  const handleLogout = async () => {
+    navigate("/home");
+    await dispatch(logout());
   };
-
-  useEffect(() => {}, [dispatch]);
 
   const authLinks = () => {
     return (
