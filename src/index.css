@@ -3,6 +3,7 @@
 :root{
   --primary: #00B074;
   --text-primary: black;
+  --bg-color:#ffffff;
   --text-secondary:rgb(73, 73, 73);
   --text-link:#009CFF;
   --white:#ffffff;
@@ -12,7 +13,9 @@
   --shadow-product: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   --auth-bg:#0000000d;
 }
-
+body{
+  background-color: var(--bg-color);
+}
 
 /* button */
 .bg-primary{
@@ -500,7 +503,7 @@ footer a:hover{
   }
   .nav-content {
       width: 100%;
-      /* margin-left: 0px; */
+      margin-left: 250px;
   }
 }
 /*** Navbar ***/
@@ -593,7 +596,8 @@ footer a:hover{
       margin-left: 15px;
   }
 }
-.fa-trash:hover,
+.fa-circle-xmark:hover,
+.fa-circle-check:hover,
 .fa-pen-to-square:hover{
   background-color: #ffffff;
 }

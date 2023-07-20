@@ -14,8 +14,8 @@ const ProductTable = () => {
 
     // fetching from store
     const products = useSelector((state) => state.ashop.products);
-    console.log("product table");
-    console.log(products)
+    
+    
     // calling action method to fetch products and category from backend
     useEffect(() => {
         dispatch(fetchProducts());

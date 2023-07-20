@@ -38,8 +38,8 @@ const JobTable = () => {
                 <div className="container-fluid pt-4 px-4">
                     <div className="bg-light-custom text-center rounded p-4">
                         <div className="d-flex align-items-center justify-content-between mb-4">
-                            <h6 className="mb-0">User Management</h6>
-                            <a href="">Show All</a>
+                            <h4 className="mb-0">Jobs Management</h4>
+                            {/* <a href="">Show All</a> */}
                         </div>
                         <div className="table-responsive">
                             <table className="table text-start align-middle table-hover table-hover mb-0">
