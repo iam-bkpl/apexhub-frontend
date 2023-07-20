@@ -133,6 +133,7 @@ const ProductList = () => {
                   name={product.name}
                   category={product.category}
                   price={product.price}
+                  is_featured={product.is_featured}
                   image={
                     product.images.length > 0 ? product.images[0].image : null
                   }
