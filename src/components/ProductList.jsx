@@ -26,27 +26,37 @@ const ProductList = () => {
   }, [dispatch]);
 
   const filteredProducts = useSelector((state) => {
-    if (selectCategory === "default" || sortData === "default") {
-      return state.ashop.products;
-    } else if (selectCategory === "default" && sortData === "default") {
-      return state.ashop.products;
-    } else if (sortData === "price_low_to_high") {
-      return state.ashop.products
-        .filter((product) => product.category === selectCategory)
-        .sort((a, b) => a.price - b.price);
-    } else if (sortData === "price_high_to_low") {
-      return state.ashop.products
-        .filter((product) => product.category === selectCategory)
-        .sort((a, b) => b.price - a.price);
-    } else if (sortData === "date_newest_to_oldest") {
-      return state.ashop.products
-        .filter((product) => product.category === selectCategory)
-        .sort((a, b) => new Date(b.date_added) - new Date(a.date_added));
-    } else {
-      return state.ashop.products
-        .filter((product) => product.category === selectCategory)
-        .sort((a, b) => new Date(a.date_added) - new Date(b.date_added));
+    // let filtered = state.ashop.products;
+    let filtered = state.ashop.products.slice();
+
+    if (selectCategory !== "default") {
+      filtered = filtered.filter(
+        (product) => product.category === selectCategory
+      );
     }
+    if (sortData !== "default") {
+      switch (sortData) {
+        case "price_low_to_high":
+          filtered.sort((a, b) => a.price - b.price);
+          break;
+        case "price_high_to_low":
+          filtered.sort((a, b) => b.price - a.price);
+          break;
+        case "date_newest_to_oldest":
+          filtered.sort(
+            (a, b) => new Date(b.date_added) - new Date(a.date_added)
+          );
+          break;
+        case "date_oldest_to_newest":
+          filtered.sort(
+            (a, b) => new Date(a.date_added) - new Date(b.date_added)
+          );
+          break;
+        default:
+          break;
+      }
+    }
+    return filtered;
   });
 
   if (loading) {
