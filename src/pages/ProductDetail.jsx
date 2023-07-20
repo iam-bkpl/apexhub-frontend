@@ -5,9 +5,9 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 import LoadingSpinner from "../components/LoadingSpinner";
-LoadingSpinner;
-
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import CommentList from "../containers/CommentList";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,6 @@ const ProductDetail = () => {
 
   useEffect(() => {
     dispatch(fetchProduct(id));
-
     setLoading(false);
   }, [id]);
 
@@ -46,6 +45,7 @@ const ProductDetail = () => {
     });
     return formattedDate;
   };
+
   if (loading) {
     return <LoadingSpinner />;
   } else if (product && images) {
@@ -182,6 +182,7 @@ const ProductDetail = () => {
                 </div>
               </div>
             </div>
+            <CommentList />
           </div>
         </section>
       </>

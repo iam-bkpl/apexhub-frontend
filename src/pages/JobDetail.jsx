@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchJobPosts, fetchJobPost } from "../redux/actions/acs";
 import DOMPurify from "isomorphic-dompurify";
 import { useParams } from "react-router-dom";
-import Comments from "../containers/Comments";
 
 const JobDetail = () => {
   const dispatch = useDispatch();
