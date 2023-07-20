@@ -12,6 +12,7 @@ const JobTable = () => {
 
   //Fetching Jobposts from store
   const jobPosts = useSelector((state) => state.acs.jobPosts);
+
   //Fetching Jobtype from store
   const jobType = useSelector((state) => state.acs.jobPosts);
 
@@ -19,8 +20,6 @@ const JobTable = () => {
     dispatch(fetchJobPosts());
     setLoading(false);
   }, [dispatch]);
-
-  console.log("Josposts are ", jobPosts);
 
   const getFormattedDate = (dateString) => {
     const formattedDate = new Date(dateString).toLocaleDateString("en-US", {
