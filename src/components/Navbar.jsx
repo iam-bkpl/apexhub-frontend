@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,11 +12,11 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  console.log(isAuthenticated);
-
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  useEffect(() => {}, [dispatch]);
 
   const authLinks = () => {
     return (
@@ -94,14 +94,14 @@ const Navbar = () => {
                 id="dropdownMenuLink"
               >
                 <img
-                  src={default_user}
+                  src={user ? user.avatar : default_user}
                   alt="Profile"
                   className="rounded-circle"
                   height="40px"
                   width="40px"
                 />
                 <span className="d-none d-lg-block text-dark ps-2">
-                  {isAuthenticated ? user.username : "Sign In"}
+                  {user ? user.username : "Sign In"}
                 </span>
               </Link>
               {isAuthenticated ? (
@@ -139,6 +139,12 @@ const Navbar = () => {
                     <Link to="/login" className="dropdown-item">
                       <i className="fa-solid fa-right-from-bracket me-3"></i>
                       Log In
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/register" className="dropdown-item">
+                      <i className="fa-solid fa-right-from-bracket me-3"></i>
+                      Register
                     </Link>
                   </li>
                 </ul>
