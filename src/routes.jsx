@@ -13,6 +13,7 @@ import JobDetail from "./pages/JobDetail";
 import JobPost from "./pages/JobPost";
 import JobUpdate from "./pages/JobUpdate";
 import ProductList from "./components/ProductList";
+import ProductDetail from "./pages/ProductDetail";
 import ProductPost from "./components/ProductPost";
 import { useState } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -55,6 +56,7 @@ const AppRoutes = () => {
 
         {/* ashop  */}
         <Route path="/product-list" element={<ProductList />} />
+        <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/product-post" element={<ProductPost />} />
 
         {/* Dashboard */}
