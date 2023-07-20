@@ -6,9 +6,13 @@ import ProductCard from "../components/ProductCard";
 const HotSales = () => {
   const dispatch = useDispatch();
 
+  const products = useSelector((state) => state.ashop.products)
   const featured_products = useSelector((state) =>
     state.ashop.products.filter((product) => product.is_featured === true)
   );
+  console.log("This is featured products");
+  console.log(featured_products);
+
 
   useEffect(() => {
     dispatch(fetchProducts());

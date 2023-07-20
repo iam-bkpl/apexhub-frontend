@@ -16,6 +16,7 @@ import JobUpdate from "./pages/JobUpdate";
 import ProductList from "./components/ProductList";
 import ProductDetail from "./pages/ProductDetail";
 import ProductPost from "./components/ProductPost";
+import ProductBuyPage from "./pages/ProductBuyPage";
 import { useState } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Contact from "./pages/Contact";
@@ -62,6 +63,8 @@ const AppRoutes = () => {
         <Route path="/product-list" element={<ProductList />} />
         <Route path="/product-detail/:id" element={<ProductDetail />} />
         <Route path="/product-post" element={<ProductPost />} />
+        <Route path="/product-buy" element={<ProductBuyPage />} />
+
 
         {/* Dashboard */}
         <Route path="/dashboard" element={<IndexDashboard />} />
