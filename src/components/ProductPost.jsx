@@ -94,7 +94,7 @@ const ProductPost = () => {
     e.preventDefault();
     navigate(`/product-detail/${id}/`);
   };
-  
+
   if (loading) {
     return (
       <>
