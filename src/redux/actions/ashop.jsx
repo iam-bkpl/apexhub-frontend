@@ -156,6 +156,35 @@ export const postProduct = createAsyncThunk(
   }
 );
 
+export const postComment = createAsyncThunk(
+  "ashop/postComment",
+  async ({ id, formData }, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+      try {
+        const response = await axios.post(
+          `${API_URL}/products/${id}/comments/`,
+          formData,
+          config
+        );
+
+        thunkAPI.dispatch(setComments(response.data));
+        return response.data;
+      } catch (error) {
+        console.log("Error while posting a product: " + error.message);
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    } else {
+      return thunkAPI.rejectWithValue("User not authorized ");
+    }
+  }
+);
+
 export const updateProduct = createAsyncThunk(
   "ashop/updateProduct",
   async ({ id, productData }) => {
