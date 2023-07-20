@@ -1,20 +1,21 @@
-import React from 'react'
-import ProfileSmallCard from '../components/ProfileSmallCard'
-import ProfileBigCard from '../containers/ProfileBigCard'
+import React from "react";
+import ProfileSmallCard from "../components/ProfileSmallCard";
+import ProfileBigCard from "../containers/ProfileBigCard";
+import { useDispatch, useSelector } from "react-redux";
 
 const Profile = () => {
-    return (
-        <>
-            <section className="section profile mt-5">
-                <div className="row">
+  //   const user = useSelector((state) => state.auth.users);
 
-                    <ProfileSmallCard/>
-                    <ProfileBigCard />
+  return (
+    <>
+      <section className="mt-5 section profile">
+        <div className="row">
+          <ProfileSmallCard />
+          <ProfileBigCard />
+        </div>
+      </section>
+    </>
+  );
+};
 
-                </div>
-            </section>
-        </>
-    )
-}
-
-export default Profile
+export default Profile;
