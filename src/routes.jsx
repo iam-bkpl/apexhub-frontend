@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import JobList from "./pages/JobList";
@@ -13,6 +13,7 @@ import JobDetail from "./pages/JobDetail";
 import JobPost from "./pages/JobPost";
 import JobUpdate from "./pages/JobUpdate";
 import ProductList from "./components/ProductList";
+import ProductDetail from "./pages/ProductDetail";
 import ProductPost from "./components/ProductPost";
 import { useState } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -25,10 +26,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AppRoutes = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const location = useLocation();
+  const hideNavbarAndFooter = [
+    "/dashboard",
+    "/dashboard-job",
+    "/dashboard-user",
+    "/dashboard-product"
+  ].includes(location.pathname);
 
   return (
     <>
-      <Navbar />
+      {!hideNavbarAndFooter && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -48,6 +56,7 @@ const AppRoutes = () => {
 
         {/* ashop  */}
         <Route path="/product-list" element={<ProductList />} />
+        <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/product-post" element={<ProductPost />} />
 
         {/* Dashboard */}
@@ -66,7 +75,7 @@ const AppRoutes = () => {
         <Route path="/loading" element={<LoadingSpinner />} />
         <Route path="/*" element={<Error404 />} />
       </Routes>
-      <Footer />
+      {!hideNavbarAndFooter && <Footer />}
      
     </>
   );
