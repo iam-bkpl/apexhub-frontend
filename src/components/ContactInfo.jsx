@@ -1,7 +1,7 @@
 import React from "react";
 const ContactInfo = ({ icon, title, info }) => {
   return (
-    <div className="bg-light d-flex align-items-center w-100 p-4 mb-3 rounded-5">
+    <div className="bg-white shadow-sm d-flex align-items-center w-100 p-4 mb-3 rounded-5">
       <div
         className="d-flex flex-shrink-0 align-items-center justify-content-center bg-dark rounded-pill"
         style={{ width: "55px", height: "55px" }}
