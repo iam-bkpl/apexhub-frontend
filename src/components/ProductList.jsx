@@ -133,8 +133,10 @@ const ProductList = () => {
                   name={product.name}
                   category={product.category}
                   price={product.price}
-                  // image={product.images.length > 0 ? product.images[0].image : null}
-                  image={product.qr_code}
+                  image={
+                    product.images.length > 0 ? product.images[0].image : null
+                  }
+                  // image={product.qr_code}
                   handleClick={() => handleProductSelect(product.id)}
                 />
               ))}
