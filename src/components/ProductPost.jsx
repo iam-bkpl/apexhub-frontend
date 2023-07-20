@@ -5,13 +5,21 @@ import { useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
-import { fetchCategorys, postProduct } from "../redux/actions/ashop";
+import {
+  fetchCategorys,
+  postProduct,
+  postImages,
+} from "../redux/actions/ashop";
 import LoadingSpinner from "./LoadingSpinner";
+import { setProduct } from "../redux/reducers/ashop";
 
 const ProductPost = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+
+  const [product_id, setProduct_id] = useState();
+  const [id, setID] = useState();
 
   useEffect(() => {
     dispatch(fetchCategorys());
@@ -26,6 +34,9 @@ const ProductPost = () => {
     price: "",
     qr_code: null,
   });
+  const [imageData, setImageData] = useState({
+    image: [],
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,17 +47,18 @@ const ProductPost = () => {
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    const files = e.target.files;
     setProductData((prevState) => ({
       ...prevState,
-      qr_code: file,
+      qr_code: files[0],
     }));
-    // const reader = new FileReader();
-    // reader.readAsDataURL(file);
-    // reader;
+    setImageData((prevState) => ({
+      ...prevState,
+      image: files[0],
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", productData.name);
@@ -54,10 +66,35 @@ const ProductPost = () => {
     formData.append("price", productData.price);
     formData.append("qr_code", productData.qr_code);
     formData.append("category_id", productData.category_id);
-    dispatch(postProduct(formData));
-    console.log(productData);
-    navigate(`/product-list/`);
+
+    const response = await dispatch(postProduct(formData));
+    const id = await response.payload.id;
+    console.log(id);
+    await setID(id);
   };
+
+  useEffect(() => {
+    setProduct_id(productData);
+  }, [productData]);
+
+  const handleImageSubmit = async (e) => {
+    e.preventDefault();
+    console.log(id);
+
+    const imgData = new FormData();
+    imgData.append("product", id);
+    imgData.append("image", imageData.image);
+    console.log(imgData);
+
+    const img_response = await dispatch(postImages({ id, imgData }));
+    console.log(img_response);
+  };
+
+  const handleFinalSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/product-detail/${id}/`);
+  };
+  
   if (loading) {
     return (
       <>
@@ -66,7 +103,7 @@ const ProductPost = () => {
     );
   } else {
     return (
-      <div className="row gy-5 gx-4 justify-content-center mt-5">
+      <div className="mt-5 row gy-5 gx-4 justify-content-center">
         <h1 className="p-0 mt-3 text-center">Add Product</h1>
         <hr className="p-0 m-2" />
         <form
@@ -151,16 +188,21 @@ const ProductPost = () => {
               onFocus={(event, editor) => {}}
             />
           </div>
-          <button type="button" className="border col-md-4 mt-4 py-1  w-auto">Save Changes To Continue</button>
+          <button
+            type="button"
+            className="w-auto py-1 mt-4 border col-md-4"
+            onClick={(e) => handleSubmit(e)}
+          >
+            Save Changes To Continue
+          </button>
           <div className="col-md-10">
             <label htmlFor="" className="form-label">
               Choose Product Photo
             </label>
             <input
-              name="qr_code"
+              name="images"
               className="py-2 form-control rounded-6"
               type="file"
-              multiple="multiple"
               id=""
               onChange={(e) => handleFileChange(e)}
             />
@@ -168,18 +210,19 @@ const ProductPost = () => {
           <div className="mt-5 text-center">
             <button
               type="submit"
-              className="btn btn-primary rounded-pill px-4 me-3"
-              onClick={(e) => handleSubmit(e)}
+              className="px-4 btn btn-primary rounded-pill me-3"
+              onClick={(e) => handleImageSubmit(e)}
             >
-              Submit
+              Add Image
             </button>
             <button
               type="reset"
-              className="text-white btn bg-secondary rounded-5 px-4 border-secondary"
+              className="px-4 text-white btn bg-secondary rounded-5 border-secondary"
             >
               Reset
             </button>
           </div>
+          <button onClick={(e) => handleFinalSubmit(e)}>Done</button>
         </form>
       </div>
     );

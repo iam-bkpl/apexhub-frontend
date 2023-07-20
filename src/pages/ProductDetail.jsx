@@ -54,10 +54,10 @@ const ProductDetail = () => {
         <section className="bg-light">
           <div className="container pb-5">
             <div className="row">
-              <div className="col-lg-5 mt-5">
-                <div className="card mb-3 bg-transparent border-light d-flex align-items-center">
+              <div className="mt-5 col-lg-5">
+                <div className="mb-3 bg-transparent card border-light d-flex align-items-center">
                   <img
-                    className="card-img img-fluid border"
+                    className="border card-img img-fluid"
                     src={lastImage}
                     alt="Card image cap"
                     id="product-detail"
@@ -78,7 +78,7 @@ const ProductDetail = () => {
 
                   <div
                     id="multi-item-example"
-                    className="col-10 carousel slide carousel-multi-item mt-5"
+                    className="mt-5 col-10 carousel slide carousel-multi-item"
                     data-bs-ride="carousel"
                   >
                     <div
@@ -89,10 +89,10 @@ const ProductDetail = () => {
                         <div className="row">
                           {images.map((image, index) => {
                             return (
-                              <div className="col-4 p-1" key={index}>
+                              <div className="p-1 col-4" key={index}>
                                 <a href="#">
                                   <img
-                                    className="card-img img-fluid border"
+                                    className="border card-img img-fluid"
                                     src={image.image}
                                     alt="Product Image 1"
                                   />
@@ -118,11 +118,11 @@ const ProductDetail = () => {
                 </div>
               </div>
 
-              <div className="col-lg-7 mt-5">
-                <div className="card border-white">
+              <div className="mt-5 col-lg-7">
+                <div className="border-white card">
                   <div className="card-body">
                     <h1 className="h2">{product.name} </h1>
-                    <p className="h3 py-2">Rs: {product.price} </p>
+                    <p className="py-2 h3">Rs: {product.price} </p>
                     <ul className="list-inline">
                       <li className="list-inline-item">
                         <strong>Category:</strong>
@@ -166,11 +166,11 @@ const ProductDetail = () => {
                       </li>
                     </ul>
 
-                    <div className="row pb-3 mt-5">
+                    <div className="pb-3 mt-5 row">
                       <div className="col d-grid">
                         <button
                           type="submit"
-                          className="btn btn-primary py-2 btn-md"
+                          className="py-2 btn btn-primary btn-md"
                           name="submit"
                           value="buy"
                         >

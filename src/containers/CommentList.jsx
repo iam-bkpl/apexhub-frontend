@@ -19,7 +19,6 @@ const CommentList = () => {
     const fetchCommentsData = async () => {
       try {
         const commentsData = await dispatch(fetchComments(id));
-        console.log(comments);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching comments:", error);
