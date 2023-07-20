@@ -122,7 +122,7 @@ const ProductPost = () => {
           </div>
           <div className="col-md-10">
             <label htmlFor="" className="form-label">
-              Choose Photo
+              Choose QR Code
             </label>
             <input
               name="qr_code"
@@ -154,12 +154,13 @@ const ProductPost = () => {
           <button type="button" class="border col-md-4 mt-4 py-1  w-auto">Save Changes To Continue</button>
           <div className="col-md-10">
             <label htmlFor="" className="form-label">
-              Choose Photo
+              Choose Product Photo
             </label>
             <input
               name="qr_code"
               className="py-2 form-control rounded-6"
               type="file"
+              multiple="multiple"
               id=""
               onChange={(e) => handleFileChange(e)}
             />

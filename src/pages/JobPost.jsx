@@ -165,12 +165,12 @@ const JobPost = () => {
                   <div className="text-center mt-5">
                     <button
                       type="reset"
-                      className="btn bg-secondary text-white rounded-5 border-secondary"
+                      className="btn bg-secondary text-white rounded-5 px-5 border-secondary"
                     >
                       Reset
                     </button>
                     <span className="m-2"></span>
-                    <button type="submit" className="btn rounded-5">
+                    <button type="submit" className="btn px-5 btn-primary rounded-5">
                       Submit
                     </button>
                   </div>
