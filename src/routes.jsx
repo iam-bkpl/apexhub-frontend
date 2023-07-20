@@ -19,9 +19,9 @@ import { useState } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Contact from "./pages/Contact";
 import JobsDashboard from "./containers/Dashboard/JobsDashboard";
-import IndexDashboard from "./containers/Dashboard/index"
-import ProductDashboard from "./containers/Dashboard/ProductDashboard"
-import UserDashboard from "./containers/Dashboard/UserDashboard"
+import IndexDashboard from "./containers/Dashboard/index";
+import ProductDashboard from "./containers/Dashboard/ProductDashboard";
+import UserDashboard from "./containers/Dashboard/UserDashboard";
 import { useDispatch, useSelector } from "react-redux";
 
 const AppRoutes = () => {
@@ -31,7 +31,7 @@ const AppRoutes = () => {
     "/dashboard",
     "/dashboard-job",
     "/dashboard-user",
-    "/dashboard-product"
+    "/dashboard-product",
   ].includes(location.pathname);
 
   return (
@@ -56,7 +56,7 @@ const AppRoutes = () => {
 
         {/* ashop  */}
         <Route path="/product-list" element={<ProductList />} />
-        <Route path="/product-detail" element={<ProductDetail />} />
+        <Route path="/product-detail/:id" element={<ProductDetail />} />
         <Route path="/product-post" element={<ProductPost />} />
 
         {/* Dashboard */}
@@ -76,7 +76,6 @@ const AppRoutes = () => {
         <Route path="/*" element={<Error404 />} />
       </Routes>
       {!hideNavbarAndFooter && <Footer />}
-     
     </>
   );
 };

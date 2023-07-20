@@ -1,8 +1,11 @@
 const ProductCard = (props) => {
-  const { name, category, price, image } = props;
+  const { name, category, price, image, handleClick } = props;
   return (
     <>
-      <div className="mb-4 col-6 col-lg-3 col-md-4 col-sm-6 ashop-product-card">
+      <div
+        className="mb-4 col-6 col-lg-3 col-md-4 col-sm-6 ashop-product-card"
+        onClick={handleClick}
+      >
         <div className="border-white card product-cardd">
           <div
             className="bg-image hover-zoom ripple ripple-surface ripple-surface-light"

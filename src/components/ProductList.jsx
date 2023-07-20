@@ -3,6 +3,7 @@ import ProductCard from "./ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, fetchCategorys } from "../redux/actions/ashop";
 import LoadingSpinner from "./LoadingSpinner";
+import { useNavigate } from "react-router-dom";
 
 const ProductList = () => {
   const [loading, setLoading] = useState(true);
@@ -13,6 +14,7 @@ const ProductList = () => {
   const [sortedProducts, setSortedProducts] = useState();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // fetching from store
 
@@ -58,6 +60,10 @@ const ProductList = () => {
     }
     return filtered;
   });
+
+  const handleProductSelect = (product_id) => {
+    navigate(`/product-detail/${product_id}/`);
+  };
 
   if (loading) {
     return (
@@ -129,6 +135,7 @@ const ProductList = () => {
                   price={product.price}
                   // image={product.images.length > 0 ? product.images[0].image : null}
                   image={product.qr_code}
+                  handleClick={() => handleProductSelect(product.id)}
                 />
               ))}
             </div>
