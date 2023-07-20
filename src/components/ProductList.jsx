@@ -130,7 +130,7 @@ const ProductList = () => {
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
-                  name={product.name}
+                  name={product.name} 
                   category={product.category}
                   price={product.price}
                   // image={product.images.length > 0 ? product.images[0].image : null}
