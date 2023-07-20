@@ -4,12 +4,12 @@ import TeamCard from '../components/TeamCard'
 const Team = () => {
   return (
     <>
-        <section id="team" class="team section-bg ">
-        {/* <div class="container "> */}
-            <div class="title text-center pt-3 pb-5">
-                <h2 class="position-relative d-inline-block ms-4">Out Team</h2>
+        <section id="team" className="team section-bg ">
+        {/* <div className="container "> */}
+            <div className="title text-center pt-3 pb-5">
+                <h2 className="position-relative d-inline-block ms-4">Out Team</h2>
             </div>
-            <div class="row ps-xs-4 mx-3 d-flex justify-content-center">
+            <div className="row ps-xs-4 mx-3 d-flex justify-content-center">
                 <TeamCard 
                     img={image} 
                     name="Kapil&nbsp;Bhandari"
