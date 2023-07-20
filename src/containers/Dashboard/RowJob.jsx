@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchJobPost, updateJob } from "../../redux/actions/acs";
 
 const RowJob = (props) => {
   const {
@@ -7,9 +9,9 @@ const RowJob = (props) => {
     company,
     date,
     description,
-    status,
     location,
     application_count,
+    status,
   } = props;
 
   const [isChecked, setIsChecked] = useState(status);
@@ -17,27 +19,53 @@ const RowJob = (props) => {
   const [isBadgeSuccess, setIsBadgeSuccess] = useState(false);
   const [modalId, setModalId] = useState("");
 
+  const dispatch = useDispatch();
+  const jobPost = useSelector((state) => state.acs.jobPost);
+
   useEffect(() => {
-    if (status) {
-      setJobStatus("Active");
-      setIsBadgeSuccess(true);
-    } else {
-      setJobStatus("Inactive");
-      setIsBadgeSuccess(false);
+    // Fetch the job post when the component mounts or whenever the id changes
+    dispatch(fetchJobPost(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (jobPost) {
+      // Update the local state when the job post data is fetched or updated
+      setIsChecked(jobPost.status);
+      setJobStatus(jobPost.status ? "Active" : "Inactive");
+      setIsBadgeSuccess(jobPost.status);
     }
+  }, [jobPost]);
+
+  useEffect(() => {
+    // Set the initial state when the component mounts or whenever the status changes
+    setIsChecked(status);
   }, [status]);
 
-  const toggleJobStatus = () => {
-    setIsChecked((prevValue) => !prevValue);
-    setJobStatus((prevStatus) =>
-      prevStatus === "Active" ? "Inactive" : "Active"
-    );
-    setIsBadgeSuccess((prevValue) => !prevValue);
-  };
-
   useEffect(() => {
+    // Update the modalId when the id changes
     setModalId(`exampleModal-${id}`);
   }, [id]);
+
+  const toggleJobStatus = () => {
+    // Toggle the local state
+    setIsChecked((prevStatus) => !prevStatus);
+    setIsBadgeSuccess((prevValue) => !prevValue);
+
+    // Update the job status in the Redux store and the job.is_active attribute
+    if (jobPost) {
+      const newStatus = !jobPost.status;
+      dispatch(
+        updateJob({
+          id: jobPost.id,
+          jobData: {
+            ...jobPost,
+            status: newStatus,
+            is_active: newStatus, // Update the is_active attribute
+          },
+        })
+      );
+    }
+  };
 
   const badgeClass = isBadgeSuccess
     ? "badge btn-success rounded-pill"
@@ -103,55 +131,7 @@ const RowJob = (props) => {
         aria-labelledby={`${modalId}-label`}
         aria-hidden="true"
       >
-        <div className="modal-dialog">
-          <div className="modal-content w-100">
-            <div className="modal-header">
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body d-flex justify-content-center">
-              <div
-                className="card text-center border-white"
-                style={{ width: "21rem" }}
-              >
-                {/* <img src={location} className="card-img-top" height="350px" alt="Image" /> */}
-                <div className="card-body">
-                  <h3 className="card-title text-capitalize">{company}</h3>
-                  <p className="card-text">{getDescriptionText()}</p>
-                  {description.length > 50 && (
-                    <button
-                      className="btn btn-white bg-white text-primary text-decoration-underline shadow-none border-white"
-                      onClick={toggleExpand}
-                    >
-                      {isExpanded ? "Read Less" : "Read More"}
-                    </button>
-                  )}
-                </div>
-                <ul className="list-group list-group-flush text-start">
-                  <li className="list-group-item text-capitalize">
-                    <span className="fw-bold ">Name : &nbsp;</span> {company}
-                  </li>
-                  <li className="list-group-item text-capitalize">
-                    <span className="fw-bold">Job Title : &nbsp;</span>
-                    {title}
-                  </li>
-                  <li className="list-group-item text-capitalize">
-                    <span className="fw-bold">Location : &nbsp;</span>{" "}
-                    {location}
-                  </li>
-                  <li className="list-group-item">
-                    <span className="fw-bold">Date: &nbsp;</span>
-                    {date}
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* ... (rest of your modal JSX) */}
       </div>
     </>
   );
