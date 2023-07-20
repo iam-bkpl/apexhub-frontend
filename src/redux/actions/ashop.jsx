@@ -1,6 +1,11 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setProducts, setProduct, setCategorys } from "../reducers/ashop";
+import {
+  setProducts,
+  setProduct,
+  setCategorys,
+  setSortedProducts,
+} from "../reducers/ashop";
 
 const API_URL = "http://localhost:8000/api/ashop";
 
@@ -20,6 +25,30 @@ export const fetchProducts = createAsyncThunk(
         const response = await axios.get(`${API_URL}/products/`, config);
         console.log("Fetching products");
         thunkAPI.dispatch(setProducts(response.data));
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    }
+  }
+);
+
+export const sortProducts = createAsyncThunk(
+  "ashop/sortProducts",
+  async (params, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+      try {
+        const response = await axios.get(
+          `${API_URL}/products/${params}`,
+          config
+        );
+        thunkAPI.dispatch(setSortedProducts(response.data));
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data.message);
       }

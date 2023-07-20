@@ -4,6 +4,7 @@ const initialState = {
   products: [],
   product: "",
   categorys: [],
+  sortedProducts: [],
 };
 
 const ashopSlice = createSlice({
@@ -22,9 +23,17 @@ const ashopSlice = createSlice({
     setCategorys: (state, action) => {
       state.categorys = action.payload;
     },
+    setSortedProducts: (state, action) => {
+      state.sortedProducts = action.payload;
+    },
   },
 });
 
-export const { setProducts, setProduct, updateProduct, setCategorys } =
-  ashopSlice.actions;
+export const {
+  setProducts,
+  setProduct,
+  updateProduct,
+  setCategorys,
+  setSortedProducts,
+} = ashopSlice.actions;
 export default ashopSlice.reducer;
