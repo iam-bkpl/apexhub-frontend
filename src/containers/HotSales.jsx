@@ -16,7 +16,7 @@ const HotSales = () => {
 
   return (
     <>
-      <section> 
+      <section>
         <div className="container py-5 text-center">
           <div className="py-5 text-center title">
             <h2 className="position-relative d-inline-block">
