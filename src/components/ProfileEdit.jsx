@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { updateProfile, updateAvatar } from "../redux/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import default_user from "../assets/defaults/user.png";
+import { passwordResetSuccess } from "../redux/reducers/auth";
 
 const ProfileEdit = ({ user }) => {
   const [profileData, setProfileData] = useState({
@@ -53,6 +54,7 @@ const ProfileEdit = ({ user }) => {
     dispatch(updateProfile(formData));
   };
   const handleChangeAvatar = (e) => {
+    e.preventDefault();
     setSelectedAvatar(e.target.files[0]);
   };
 
@@ -80,7 +82,6 @@ const ProfileEdit = ({ user }) => {
                 type="file"
                 className="form-control"
                 id="avatar"
-                value={selectedAvatar}
                 onChange={(e) => handleChangeAvatar(e)}
               />
             </div>
