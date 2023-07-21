@@ -71,7 +71,7 @@ const ProfileEdit = ({ user }) => {
           <label className="col-md-4 col-lg-3 col-form-label">
             Profile Image :
           </label>
-          <div className="col-md-8 col-lg-5 ms-5">
+          <div className="col-md-8 col-lg-9">
           <img src={user.avatar || default_user} alt="Profile" />
             <div className="pt-2">
               <input
