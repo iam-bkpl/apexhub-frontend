@@ -1,121 +1,263 @@
-import React from 'react'
+import React from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { updateProfile, updateAvatar } from "../redux/actions/auth";
+import { useDispatch, useSelector } from "react-redux";
 
-const ProfileEdit = () => {
-    return (
-        <>
-            <form>
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Profile Image</label>
-                    <div className="col-md-8 col-lg-9">
-                        <img src="https://cdn.pixabay.com/photo/2015/07/09/00/29/woman-837156_1280.jpg" alt="Profile" />
-                        <div className="pt-2">
-                            <a href="#" className="btn btn-primary btn-sm rounded-4" title="Upload new profile image">
-                                <i className="fa-solid fa-upload "></i>
-                            </a>
-                            <a href="#" className="btn btn-danger bg-white text-danger btn-sm rounded-5 ms-2" title="Remove my profile image">
-                                <i className="fa-solid fa-trash "></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+const ProfileEdit = ({ user }) => {
+  const [profileData, setProfileData] = useState({
+    email: user.email,
+    username: user.username,
+    contact: user.contact,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    gender: user.gender,
+    program: user.program,
+    enrollment_date: user.enrollment_date,
+    name: user.name,
+    address: user.address,
+    phone: user.phone,
+    description: user.description,
+    website: user.website,
+    github: user.github,
+    twitter: user.twitter,
+    facebook: user.facebook,
+    instagram: user.instagram,
+    linkedin: user.linkedin,
+    password: "",
+  });
+  const [selectedAvatar, setSelectedAvatar] = useState();
+  // Set default avatar from user.avatar when the component mounts
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Full Name</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" className="form-control" id="fullName" value="Kevin Anderson" />
-                    </div>
-                </div>
+  // useEffect(() => {
+  //   setSelectedAvatar(user.avatar);
+  // }, []);
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">About</label>
-                    <div className="col-md-8 col-lg-9">
-                        <textarea name="about" className="form-control" id="about"
-                            style={{ height: "100px" }}>Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</textarea>
-                    </div>
-                </div>
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfileData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Company</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="company" type="text" className="form-control" id="company"
-                            value="Lueilwitz, Wisoky and Leuschke" />
-                    </div>
-                </div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    Object.entries(profileData).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Job</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="job" type="text" className="form-control" id="Job" value="Web Designer" />
-                    </div>
-                </div>
+    dispatch(updateProfile(formData));
+  };
+  const handleChangeAvatar = (e) => {
+    setSelectedAvatar(e.target.files[0]);
+  };
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Country</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="country" type="text" className="form-control" id="Country" value="USA" />
-                    </div>
-                </div>
+  const handleAvatarUpdate = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("avatar", selectedAvatar);
+    formData.append("email", profileData.email);
+    formData.append("password", profileData.password);
+    dispatch(updateAvatar(formData));
+  };
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Address</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="address" type="text" className="form-control" id="Address"
-                            value="A108 Adam Street, New York, NY 535022" />
-                    </div>
-                </div>
+  return (
+    <>
+      <form onSubmit={(e) => handleSubmit(e)} encType="multipart/form-data">
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">
+            Profile Image
+          </label>
+          <div className="col-md-8 col-lg-9">
+            <img src={user.avatar} alt="Profile" />
+            <div className="pt-2">
+              <input
+                name="avatar"
+                type="file"
+                className="form-control"
+                id="avatar"
+                onChange={(e) => handleChangeAvatar(e)}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">Email</label>
+          <div className="col-md-8 col-lg-9">
+            <input
+              name="email"
+              type="email"
+              className="form-control"
+              id="Email"
+              value={profileData.email}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">Password</label>
+          <div className="col-md-8 col-lg-9">
+            <input
+              name="password"
+              type="password"
+              id="password"
+              className="form-control"
+              placeholder="Enter password to update your account"
+              value={profileData.password}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+        <button onClick={(e) => handleAvatarUpdate(e)}>Update</button>
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">First Name</label>
+          <div className="col-md-8 col-lg-9">
+            <input
+              name="first_name"
+              type="text"
+              className="form-control"
+              id="fullName"
+              value={profileData.first_name}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Phone</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="phone" type="text" className="form-control" id="Phone" value="(436) 486-3538 x29071" />
-                    </div>
-                </div>
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">Last Name</label>
+          <div className="col-md-8 col-lg-9">
+            <input
+              name="last_name"
+              type="text"
+              className="form-control"
+              id="fullName"
+              value={profileData.last_name}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Email</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="email" type="email" className="form-control" id="Email" value="k.anderson@example.com" />
-                    </div>
-                </div>
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">About</label>
+          <div className="col-md-8 col-lg-9">
+            <textarea
+              name="description"
+              className="form-control"
+              id="about"
+              style={{ height: "100px" }}
+              value={profileData.description}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+        </div>
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" className="form-control" id="Twitter"
-                            value="https://twitter.com/#" />
-                    </div>
-                </div>
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">Address</label>
+          <div className="col-md-8 col-lg-9">
+            <input
+              name="address"
+              type="text"
+              className="form-control"
+              id="Address"
+              value={profileData.address}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" className="form-control" id="Facebook"
-                            value="https://facebook.com/#" />
-                    </div>
-                </div>
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">Phone</label>
+          <div className="col-md-8 col-lg-9">
+            <input
+              name="phone"
+              type="text"
+              className="form-control"
+              id="Phone"
+              value={profileData.phone}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" className="form-control" id="Instagram"
-                            value="https://instagram.com/#" />
-                    </div>
-                </div>
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">
+            Twitter Profile
+          </label>
+          <div className="col-md-8 col-lg-9">
+            <input
+              name="twitter"
+              type="text"
+              className="form-control"
+              id="Twitter"
+              value={profileData.twitter}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
-                <div className="row mb-3">
-                    <label className="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                    <div className="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" className="form-control" id="Linkedin"
-                            value="https://linkedin.com/#" />
-                    </div>
-                </div>
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">
+            Facebook Profile
+          </label>
+          <div className="col-md-8 col-lg-9">
+            <input
+              name="facebook"
+              type="text"
+              className="form-control"
+              id="Facebook"
+              value={profileData.facebook}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
-                <div className="text-center">
-                    <button type="submit" className="btn btn-primary px-3">Save Changes</button>
-                </div>
-            </form>
-        </>
-    )
-}
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">
+            Instagram Profile
+          </label>
+          <div className="col-md-8 col-lg-9">
+            <input
+              name="instagram"
+              type="text"
+              className="form-control"
+              id="Instagram"
+              value={profileData.instagram}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
-export default ProfileEdit
+        <div className="mb-3 row">
+          <label className="col-md-4 col-lg-3 col-form-label">
+            Linkedin Profile
+          </label>
+          <div className="col-md-8 col-lg-9">
+            <input
+              name="linkedin"
+              type="text"
+              className="form-control"
+              id="Linkedin"
+              value={profileData.linkedin}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="text-center">
+          <button
+            type="submit"
+            className="px-3 btn btn-primary"
+            onClick={(e) => handleSubmit(e)}
+          >
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </>
+  );
+};
+
+export default ProfileEdit;

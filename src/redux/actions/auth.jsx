@@ -1,5 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
+
 import {
   loginSuccess,
   loginFail,
@@ -210,6 +212,68 @@ export const fetchUserList = createAsyncThunk(
       }
     } else {
       console.log("User is not authorized");
+    }
+  }
+);
+
+export const updateProfile = createAsyncThunk(
+  "auth/updateProfile",
+  async (profileData, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+      console.log("Inside profile update");
+      try {
+        console.log("Inside profile update try block");
+
+        const response = await axios.put(
+          `${apiUrl}/auth/users/me/`,
+          profileData,
+          config
+        );
+        thunkAPI.dispatch(loginSuccess(response.data));
+        thunkAPI.dispatch(loadUser(response.data));
+        return response.data;
+      } catch (error) {
+        console.log("Error while updating profile: " + error.message);
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    } else {
+      return thunkAPI.rejectWithValue("User not authorized ");
+    }
+  }
+);
+
+export const updateAvatar = createAsyncThunk(
+  "auth/updateAvatar",
+  async (profileData, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+
+      try {
+        const response = await axios.put(
+          `${apiUrl}/auth/users/me/`,
+          profileData,
+          config
+        );
+        thunkAPI.dispatch(loginSuccess(response.data));
+        thunkAPI.dispatch(loadUser(response.data));
+        return response.data;
+      } catch (error) {
+        console.log("Error while updating profile: " + error.message);
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      }
+    } else {
+      return thunkAPI.rejectWithValue("User not authorized ");
     }
   }
 );
