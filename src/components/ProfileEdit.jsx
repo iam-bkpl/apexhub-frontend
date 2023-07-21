@@ -53,7 +53,9 @@ const ProfileEdit = ({ user }) => {
     dispatch(updateProfile(formData));
   };
   const handleChangeAvatar = (e) => {
+    e.preventDefault();
     setSelectedAvatar(e.target.files[0]);
+    
   };
 
   const handleAvatarUpdate = (e) => {
