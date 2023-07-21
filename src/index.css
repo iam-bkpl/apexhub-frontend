@@ -774,5 +774,5 @@ li {
   }
 }
 .btn{
-  box-shadow: none;
+  border: #000;
 }

@@ -67,11 +67,11 @@ const ProfileEdit = ({ user }) => {
   return (
     <>
       <form onSubmit={(e) => handleSubmit(e)} encType="multipart/form-data">
-        <div className="mb-3 row">
+        <div className="mb-3 row ">
           <label className="col-md-4 col-lg-3 col-form-label">
-            Profile Image
+            Profile Image :
           </label>
-          <div className="col-md-8 col-lg-9">
+          <div className="col-md-8 col-lg-5 ms-5">
             <img src={user.avatar} alt="Profile" />
             <div className="pt-2">
               <input
@@ -84,9 +84,9 @@ const ProfileEdit = ({ user }) => {
             </div>
           </div>
         </div>
-        <div className="mb-3 row">
-          <label className="col-md-4 col-lg-3 col-form-label">Email</label>
-          <div className="col-md-8 col-lg-9">
+        <div className="mb-3 row ms-5">
+          <label className="col-md-4 col-lg-3 col-form-label ">Email :</label>
+          <div className="col-md-8 col-lg-5">
             <input
               name="email"
               type="email"
@@ -97,9 +97,9 @@ const ProfileEdit = ({ user }) => {
             />
           </div>
         </div>
-        <div className="mb-3 row">
-          <label className="col-md-4 col-lg-3 col-form-label">Password</label>
-          <div className="col-md-8 col-lg-9">
+        <div className="mb-3 row ms-5">
+          <label className="col-md-4 col-lg-3 col-form-label">Password :</label>
+          <div className="col-md-8 col-lg-5">
             <input
               name="password"
               type="password"
@@ -111,9 +111,16 @@ const ProfileEdit = ({ user }) => {
             />
           </div>
         </div>
-        <button onClick={(e) => handleAvatarUpdate(e)}>Update</button>
+        <div>
+          <div className="mb-3 row ms-5">
+            <label className="col-md-4 col-lg-3 col-form-label"></label>
+            <button className="py-2 btn-light border rounded-3 shadow-none ms-3 mt-4 mb-5 w-25" onClick={(e) => handleAvatarUpdate(e)}>Update</button>
+          </div>
+        </div>
+
+        {/* <button className="btn btn-primary mb-5" onClick={(e) => handleAvatarUpdate(e)}>Update</button> */}
         <div className="mb-3 row">
-          <label className="col-md-4 col-lg-3 col-form-label">First Name</label>
+          <label className="col-md-4 col-lg-3 col-form-label">First Name :</label>
           <div className="col-md-8 col-lg-9">
             <input
               name="first_name"
@@ -127,7 +134,7 @@ const ProfileEdit = ({ user }) => {
         </div>
 
         <div className="mb-3 row">
-          <label className="col-md-4 col-lg-3 col-form-label">Last Name</label>
+          <label className="col-md-4 col-lg-3 col-form-label">Last Name :</label>
           <div className="col-md-8 col-lg-9">
             <input
               name="last_name"
@@ -141,7 +148,7 @@ const ProfileEdit = ({ user }) => {
         </div>
 
         <div className="mb-3 row">
-          <label className="col-md-4 col-lg-3 col-form-label">About</label>
+          <label className="col-md-4 col-lg-3 col-form-label">About :</label>
           <div className="col-md-8 col-lg-9">
             <textarea
               name="description"
@@ -155,7 +162,7 @@ const ProfileEdit = ({ user }) => {
         </div>
 
         <div className="mb-3 row">
-          <label className="col-md-4 col-lg-3 col-form-label">Address</label>
+          <label className="col-md-4 col-lg-3 col-form-label">Address :</label>
           <div className="col-md-8 col-lg-9">
             <input
               name="address"
@@ -169,7 +176,7 @@ const ProfileEdit = ({ user }) => {
         </div>
 
         <div className="mb-3 row">
-          <label className="col-md-4 col-lg-3 col-form-label">Phone</label>
+          <label className="col-md-4 col-lg-3 col-form-label">Phone :</label>
           <div className="col-md-8 col-lg-9">
             <input
               name="phone"
@@ -184,7 +191,7 @@ const ProfileEdit = ({ user }) => {
 
         <div className="mb-3 row">
           <label className="col-md-4 col-lg-3 col-form-label">
-            Twitter Profile
+            Twitter Profile :
           </label>
           <div className="col-md-8 col-lg-9">
             <input
@@ -200,7 +207,7 @@ const ProfileEdit = ({ user }) => {
 
         <div className="mb-3 row">
           <label className="col-md-4 col-lg-3 col-form-label">
-            Facebook Profile
+            Facebook Profile :
           </label>
           <div className="col-md-8 col-lg-9">
             <input
@@ -216,7 +223,7 @@ const ProfileEdit = ({ user }) => {
 
         <div className="mb-3 row">
           <label className="col-md-4 col-lg-3 col-form-label">
-            Instagram Profile
+            Instagram Profile :
           </label>
           <div className="col-md-8 col-lg-9">
             <input
@@ -232,7 +239,7 @@ const ProfileEdit = ({ user }) => {
 
         <div className="mb-3 row">
           <label className="col-md-4 col-lg-3 col-form-label">
-            Linkedin Profile
+            Linkedin Profile :
           </label>
           <div className="col-md-8 col-lg-9">
             <input
@@ -249,7 +256,7 @@ const ProfileEdit = ({ user }) => {
         <div className="text-center">
           <button
             type="submit"
-            className="px-3 btn btn-primary"
+            className="px-4 py-2 btn btn-primary"
             onClick={(e) => handleSubmit(e)}
           >
             Save Changes
