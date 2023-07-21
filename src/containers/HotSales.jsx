@@ -2,21 +2,25 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/actions/ashop";
 import ProductCard from "../components/ProductCard";
+import { useNavigate } from "react-router-dom";
 
 const HotSales = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const products = useSelector((state) => state.ashop.products)
   const featured_products = useSelector((state) =>
     state.ashop.products.filter((product) => product.is_featured === true)
   );
-  console.log("This is featured products");
-  console.log(featured_products);
-
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+
+  const handleProductSelect = (product_id) => {
+    navigate(`/product-detail/${product_id}/`);
+  };
+  const firstThreeProducts = featured_products.slice(0, 3);
+  const nextThreeProducts = featured_products.slice(3, 6);
 
   return (
     <>
@@ -36,50 +40,40 @@ const HotSales = () => {
             <div className="carousel-inner">
               <div className="carousel-item active">
                 <div className="row justify-content-center">
-                  <ProductCard />
-                  <ProductCard />
-                  <ProductCard />
+                  {firstThreeProducts.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      id={product.id}
+                      name={product.name}
+                      image={
+                        product.images.length > 0 ? product.images[0].image : null
+                      }
+                      category={product.category}
+                      price={product.price}
+                      handleClick={() => handleProductSelect(product.id)}
+                      is_featured={product.is_featured}
+                    />
+                  ))}
+                  {/* <ProductCard />
+                  <ProductCard /> */}
                 </div>
               </div>
               <div className="carousel-item">
                 <div className="row justify-content-center">
-                  <div className="mb-4 col-6 col-lg-3 col-md-4 col-sm-6">
-                    <div className="border-white card product-cardd">
-                      <div
-                        className="p-2 bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                        data-mdb-ripple-color="light"
-                      >
-                        <a href="#!">
-                          <img
-                            src="./images/book3.jpg"
-                            className="w-100"
-                            style={{ height: "250px" }}
-                          />
-                          <div className="mask">
-                            <div className="d-flex justify-content-start align-items-end h-100">
-                              <h5 className="product-badge">
-                                <span className="badge bg-success ms-2">
-                                  Eco
-                                </span>
-                              </h5>
-                            </div>
-                          </div>
-                          <div className="hover-overlay">
-                            <div className="mask"></div>
-                          </div>
-                        </a>
-                      </div>
-                      <div className="card-body">
-                        <a href="" className="text-reset">
-                          <h5 className="mb-3 card-title">Math</h5>
-                        </a>
-                        <a href="" className="text-reset text-decoration-none">
-                          <p>(Category)</p>
-                        </a>
-                        <h6 className="mb-3 fw-bold">$61.99</h6>
-                      </div>
-                    </div>
-                  </div>
+                  {nextThreeProducts.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      id={product.id}
+                      name={product.name}
+                      image={
+                        product.images.length > 0 ? product.images[0].image : null
+                      }
+                      category={product.category}
+                      price={product.price}
+                      handleClick={() => handleProductSelect(product.id)}
+                      is_featured={product.is_featured}
+                    />
+                  ))}
                 </div>
               </div>
             </div>

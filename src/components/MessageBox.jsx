@@ -1,16 +1,12 @@
-const MessageBox = ({ type, message }) => {
+import React from "react";
+
+const MessageBox = (props) => {
+  const { className, title, text } = props;
+
   return (
-    <div
-      className="alert alert-warning alert-dismissible fade show"
-      role="alert"
-    >
-      <strong>{{ type }}:</strong> {message}
-      <button
-        type="button"
-        className="btn-close"
-        onClick={handleRemoveMessage}
-        aria-label="Close"
-      ></button>
+    <div className={`alert ${className} alert-dismissible fade show`} role="alert">
+      {title && <strong>{title}</strong>} {text}
+      <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   );
 };

@@ -694,7 +694,7 @@ footer a:hover {
 
 li {
   list-style: none;
-  line-height: 50px;
+  line-height: 35px;
   color: #000
 }
 
@@ -772,4 +772,7 @@ li {
       margin: 0 auto;
       margin-right: 40px
   }
+}
+.btn{
+  box-shadow: none;
 }

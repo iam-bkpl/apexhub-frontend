@@ -3,7 +3,7 @@ const ProductCard = (props) => {
 
   const span_icon = () => {
     if (is_featured) {
-      return <i class="fa-solid fa-heart"></i>;
+      return <i className="fa-solid fa-heart"></i>;
     } else {
       return;
     }
@@ -20,7 +20,7 @@ const ProductCard = (props) => {
             data-mdb-ripple-color="light"
           >
             <a href="#!">
-              <img src={image} className="w-100" style={{ height: "250px" }} />
+              <img src={image} className="w-100" style={{ height: "230px" }} />
               <div className="mask">
                 <div className="d-flex justify-content-start align-items-end h-100">
                   <h5 className="product-badge">

@@ -69,7 +69,7 @@ const Navbar = () => {
               >
                 <i className="fa fa-search fs-4 "></i>
               </button>
-              <Link
+              {/* <Link
                 to="/notification"
                 type="button"
                 className="p-1 shadow-none text-dark position-relative"
@@ -78,7 +78,7 @@ const Navbar = () => {
                 <span className="top-0 position-absolute start-100 translate-middle badge bg-primary rounded-circle ms-1">
                   2
                 </span>
-              </Link>
+              </Link> */}
             </div>
 
             <button
@@ -107,6 +107,7 @@ const Navbar = () => {
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuLink"
+                  style={{marginLeft:"-20px"}}
                 >
                   <li>
                     <Link to="/profile" className="dropdown-item">
@@ -140,6 +141,7 @@ const Navbar = () => {
                       Log In
                     </Link>
                   </li>
+                  <hr className="dropdown-divider" />
                   <li>
                     <Link to="/register" className="dropdown-item">
                       <i className="fa-solid fa-right-from-bracket me-3"></i>

@@ -80,7 +80,7 @@ const JobList = () => {
               <div className="flex-wrap my-3 justify-content-center filter-button-group d-inline">
                 <button
                   type="button"
-                  className="m-2 btn active-filter-btn"
+                  className="m-2 btn shadow-none active-filter-btn rounded-pill"
                   data-filter="*"
                   onClick={() => setSelectedJobType("default")}
                 >
@@ -88,21 +88,21 @@ const JobList = () => {
                 </button>
                 <button
                   type="button"
-                  className="m-2 btn "
+                  className="m-2 btn shadow-none rounded-pill"
                   onClick={() => setSelectedJobType("remote")}
                 >
                   Remote
                 </button>
                 <button
                   type="button"
-                  className="m-2 btn "
+                  className="m-2 btn shadow-none rounded-pill "
                   onClick={() => setSelectedJobType("hybrid")}
                 >
                   Hybrid
                 </button>
                 <button
                   type="button"
-                  className="m-2 btn "
+                  className="m-2 btn shadow-none rounded-pill"
                   onClick={() => setSelectedJobType("on-site")}
                 >
                   Onsite
