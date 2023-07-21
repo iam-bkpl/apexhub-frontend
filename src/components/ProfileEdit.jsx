@@ -72,7 +72,7 @@ const ProfileEdit = ({ user }) => {
             Profile Image :
           </label>
           <div className="col-md-8 col-lg-5 ms-5">
-            <img src={user.avatar} alt="Profile" />
+          <img src={user.avatar || default_user} alt="Profile" />
             <div className="pt-2">
               <input
                 name="avatar"
