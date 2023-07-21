@@ -84,7 +84,7 @@ const ProductList = () => {
                 <button
                   value={selectCategory}
                   type="button"
-                  className="m-2 btn active-filter-btn"
+                  className="m-2 btn active-filter-btn rounded-pill shadow-none"
                   data-filter="*"
                   onClick={() => setSelectCategory("default")}
                 >
@@ -95,7 +95,7 @@ const ProductList = () => {
                     <button
                       value={selectCategory}
                       type="button"
-                      className="m-2 btn "
+                      className="m-2 btn rounded-pill shadow-none text-capitalize"
                       data-filter=""
                       key={category.id}
                       onClick={() => setSelectCategory(category.name)}
@@ -126,7 +126,7 @@ const ProductList = () => {
               </select>
             </div>
 
-            <div className="row">
+            <div className="row justify-content-center">
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
