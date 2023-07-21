@@ -75,7 +75,7 @@ const ProfileBigCard = () => {
                   className="pt-3 tab-pane fade profile-edit"
                   id="profile-edit"
                 >
-                  <ProfileEdit />
+                  <ProfileEdit user={user} />
                 </div>
 
                 <div

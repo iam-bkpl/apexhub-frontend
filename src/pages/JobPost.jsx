@@ -43,12 +43,12 @@ const JobPost = () => {
   return (
     <>
       <section className="section dashboard">
-        <div className="row bg-dark p-3 bg-body rounded mt-4">
-          <div className="container-xxl py-5" data-wow-delay="0.1s">
-            <div className="container bg-light border rounded-5 shadow p-5">
+        <div className="p-3 mt-4 rounded row bg-dark bg-body">
+          <div className="py-5 container-xxl" data-wow-delay="0.1s">
+            <div className="container p-5 border shadow bg-light rounded-5">
               <div className="row gy-5 gx-4 justify-content-center">
-                <h1 className="mt-3 p-0 text-center">Post a Job</h1>
-                <hr className="m-2 p-0" />
+                <h1 className="p-0 mt-3 text-center">Post a Job</h1>
+                <hr className="p-0 m-2" />
                 <form
                   className="row g-3 col-lg-10"
                   onSubmit={(e) => handleSubmit(e)}
@@ -59,7 +59,7 @@ const JobPost = () => {
                     </label>
                     <input
                       type="text"
-                      className="form-control rounded-6 py-2"
+                      className="py-2 form-control rounded-6"
                       id="title"
                       value={jobData.title}
                       name="title"
@@ -73,7 +73,7 @@ const JobPost = () => {
                     <input
                       type="text"
                       name="vacancy"
-                      className="form-control rounded-6 py-2"
+                      className="py-2 form-control rounded-6"
                       id="jobVaccancy"
                       value={jobData.vacancy}
                       onChange={(e) => handleInputChange(e)}
@@ -85,7 +85,7 @@ const JobPost = () => {
                     </label>
                     <select
                       id="inputState"
-                      className="form-select rounded-6 py-2"
+                      className="py-2 form-select rounded-6"
                       name="jobType"
                       value={jobData.jobType}
                       onChange={handleInputChange}
@@ -107,7 +107,7 @@ const JobPost = () => {
                       name="location"
                       value={jobData.location}
                       onChange={(e) => handleInputChange(e)}
-                      className="form-control rounded-6 py-2"
+                      className="py-2 form-control rounded-6"
                       id=""
                     />
                   </div>
@@ -119,7 +119,7 @@ const JobPost = () => {
                       type="text"
                       name="salary"
                       onChange={(e) => handleInputChange(e)}
-                      className="form-control rounded-6 py-2"
+                      className="py-2 form-control rounded-6"
                       id="salary"
                       value={jobData.salary}
                     />
@@ -142,7 +142,7 @@ const JobPost = () => {
                   </div>
 
                   <div className="">
-                    <label htmlFor="" className="form-label text-center">
+                    <label htmlFor="" className="text-center form-label">
                       Explain job
                     </label>
                     <CKEditor
@@ -162,15 +162,18 @@ const JobPost = () => {
                       onFocus={(event, editor) => {}}
                     />
                   </div>
-                  <div className="text-center mt-5">
+                  <div className="mt-5 text-center">
                     <button
                       type="reset"
-                      className="btn bg-secondary text-white rounded-5 px-5 border-secondary"
+                      className="px-5 text-white btn bg-secondary rounded-5 border-secondary"
                     >
                       Reset
                     </button>
                     <span className="m-2"></span>
-                    <button type="submit" className="btn px-5 btn-primary rounded-5">
+                    <button
+                      type="submit"
+                      className="px-5 btn btn-primary rounded-5"
+                    >
                       Submit
                     </button>
                   </div>
