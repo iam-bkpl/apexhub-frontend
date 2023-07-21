@@ -20,7 +20,7 @@ const ProfileSmallCard = () => {
               <h3 className="mt-2">{user.user_type} </h3>
             </div>
           </div>
-          {user.user_type === "student" ? (
+          {user ? (
             <div class="card mt-3 bg-white">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">

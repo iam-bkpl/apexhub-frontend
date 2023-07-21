@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const ProfileDetail = ({ user }) => {
+  useEffect(() => {}, [user]);
+  console.log("Profile Detail", user);
+
   const links = () => {
     if (user.user_type === "student") {
       return (
@@ -37,7 +40,7 @@ const ProfileDetail = ({ user }) => {
           </div>
         </>
       );
-    } else if (user.user_type == "external") {
+    } else {
       return (
         <>
           <p className="small fst-italic">{user.description}</p>

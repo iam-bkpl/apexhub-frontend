@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { updateProfile, updateAvatar } from "../redux/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
+import default_user from "../assets/defaults/user.png";
 
 const ProfileEdit = ({ user }) => {
   const [profileData, setProfileData] = useState({
@@ -26,7 +27,7 @@ const ProfileEdit = ({ user }) => {
     linkedin: user.linkedin,
     password: "",
   });
-  const [selectedAvatar, setSelectedAvatar] = useState();
+  const [selectedAvatar, setSelectedAvatar] = useState("");
   // Set default avatar from user.avatar when the component mounts
 
   // useEffect(() => {
@@ -72,13 +73,14 @@ const ProfileEdit = ({ user }) => {
             Profile Image
           </label>
           <div className="col-md-8 col-lg-9">
-            <img src={user.avatar} alt="Profile" />
+            <img src={user.avatar || default_user} alt="Profile" />
             <div className="pt-2">
               <input
                 name="avatar"
                 type="file"
                 className="form-control"
                 id="avatar"
+                value={selectedAvatar}
                 onChange={(e) => handleChangeAvatar(e)}
               />
             </div>
