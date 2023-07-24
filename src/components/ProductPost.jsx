@@ -177,24 +177,27 @@ const ProductPost = () => {
             <CKEditor
               editor={ClassicEditor}
               data={productData.description}
-              onReady={(editor) => {}}
+              onReady={(editor) => { }}
               onChange={(event, editor) => {
                 setProductData((prevState) => ({
                   ...prevState,
                   description: editor.getData(),
                 }));
               }}
-              onBlur={(event, editor) => {}}
-              onFocus={(event, editor) => {}}
+              onBlur={(event, editor) => { }}
+              onFocus={(event, editor) => { }}
             />
           </div>
-          <button
-            type="button"
-            className="w-auto py-1 mt-4 border col-md-4"
-            onClick={(e) => handleSubmit(e)}
-          >
-            Save Changes To Continue
-          </button>
+
+          <div className="col-md-10">
+            <button
+              type="btn btn-primary"
+              className="w-auto py-1 mt-4 border col-md-4 "
+              onClick={(e) => handleSubmit(e)}
+            >
+              Save Changes To Continue
+            </button>
+          </div>
           <div className="col-md-10">
             <label htmlFor="" className="form-label">
               Choose Product Photo
@@ -222,7 +225,7 @@ const ProductPost = () => {
               Reset
             </button>
           </div>
-          <button onClick={(e) => handleFinalSubmit(e)}>Done</button>
+          <button className="col-lg-3 btn btn-main" onClick={(e) => handleFinalSubmit(e)}>Done</button>
         </form>
       </div>
     );

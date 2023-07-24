@@ -8,11 +8,13 @@ import AboutUs from "../containers/AboutUs";
 import Services from "../containers/Services";
 import Testimonials from "../containers/Testimonials";
 import Header from "../containers/Header";
+import image1 from "../assets/banner-img-1.jpg"
+import image2 from "../assets/backgrounds/bg1.jpg"
 
 const Home = () => {
   return (
     <>
-      <Header/>
+      <Header img1={image1} img2={image2} />
       <HotSales />
       <TopJobs />
       <AboutUs />
