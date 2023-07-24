@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/actions/auth";
 import default_user from "../assets/defaults/user.png";
+import apexHubLogo from "../assets/defaults/Apex_hub_logo.png"
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const Navbar = () => {
   const authLinks = () => {
     return (
       <li>
-        <Link className="dropdown-item" onClick={handleLogout}>
+        <Link to="/login" className="dropdown-item" onClick={handleLogout}>
           <i className="fa-solid fa-right-from-bracket me-3"></i>
           Log Out
         </Link>
@@ -38,6 +39,25 @@ const Navbar = () => {
     );
   };
 
+  const setDarkMode = () =>{
+    document.querySelector("body").setAttribute('data-theme','dark')
+  }
+  const setLightMode = () =>{
+    document.querySelector("body").setAttribute('data-theme','light')
+  }
+  const [mode, setMode]= useState(setLightMode)
+  const toggleDarkMode = (e) => {
+    if(setLightMode){
+      setDarkMode();
+      setMode(setDarkMode);
+    }
+    else{
+      setLightMode();
+      setMode(setDarkMode);
+    }
+  }
+
+
   return (
     <>
       <nav className="p-0 bg-white shadow navbar navbar-expand-lg navbar-light sticky-top">
@@ -54,9 +74,9 @@ const Navbar = () => {
             to="/"
             className="navbar-brand d-flex justify-content-between align-items-start order-lg-0"
           >
-            <img src="images/shopping-bag-icon.png" alt="" />
+            <img src={apexHubLogo} alt="" />
             <span className="text-uppercase fw-lighter ms-2 d-none d-sm-block">
-              Apex-Hub
+              
             </span>
           </Link>
           <div className="py-3 order-lg-2 nav-btns text-end">
@@ -70,7 +90,7 @@ const Navbar = () => {
                 <i className="fa fa-search fs-4 "></i>
               </button>
               {/* <Link
-                to="/notification"
+                to="/notification"  
                 type="button"
                 className="p-1 shadow-none text-dark position-relative"
               >
@@ -116,10 +136,10 @@ const Navbar = () => {
                   </li>
                   <hr className="dropdown-divider" />
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <button className="dropdown-item" onClick={toggleDarkMode}>
                       <i className="fa-solid fa-circle-half-stroke me-3"></i>
                       Change Theme
-                    </a>
+                    </button>
                   </li>
                   <hr className="dropdown-divider" />
                   <li>
@@ -169,13 +189,21 @@ const Navbar = () => {
                   >
                     Services
                   </a>
-                  <div className="m-0 text-center dropdown-menu rounded-3 border-light">
+                  <div className="m-0 text-center dropdown-menu rounded-3 border-light borderP">
                     <Link to="/job-list" className="dropdown-item ">
                       Job List
                     </Link>
                     <hr className="dropdown-divider" />
                     <Link to="/product-list" className="dropdown-item">
                       Product List
+                    </Link>
+                    <hr className="dropdown-divider" />
+                    <Link to="/product-post" className="dropdown-item ">
+                      Post a Product
+                    </Link>
+                    <hr className="dropdown-divider" />
+                    <Link to="/job-post" className="dropdown-item">
+                      Post a Job
                     </Link>
                   </div>
                 </div>
@@ -218,11 +246,11 @@ const Navbar = () => {
         aria-hidden="true"
       >
         <div className="mt-5 modal-dialog ">
-          <div className="modal-content bg-dark">
+          <div className="modal-content "style={{background:"#0006"}}>
             <div className="bg-transparent modal-body">
               <form className="d-flex">
                 <input
-                  className="py-2 text-white bg-transparent border-none shadow-none form-control me-2"
+                  className="py-2 text-white bg-transparent border-secondary shadow-none form-control me-2"
                   type="search"
                   placeholder="Search"
                   aria-label="Search"

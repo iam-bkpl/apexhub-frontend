@@ -56,7 +56,7 @@ const Login = () => {
             <div className="row align-items-center">
               <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="header-text mb-4">
-                  <h2>Hello,| | from the other side</h2>
+                  <h2>Welcome !</h2>
                   <p>We are happy to have you back.</p>
                 </div>
                 <div className="input-group mb-3">

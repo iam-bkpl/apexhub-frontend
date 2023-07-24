@@ -49,23 +49,15 @@ const RowJob = (props) => {
   const toggleJobStatus = () => {
     // Toggle the local state
     setIsChecked((prevStatus) => !prevStatus);
-    setIsBadgeSuccess((prevValue) => !prevValue);
-
-    // Update the job status in the Redux store and the job.is_active attribute
-    if (jobPost) {
-      const newStatus = !jobPost.status;
-      dispatch(
-        updateJob({
-          id: jobPost.id,
-          jobData: {
-            ...jobPost,
-            status: newStatus,
-            is_active: newStatus, // Update the is_active attribute
-          },
-        })
-      );
-    }
   };
+
+  useEffect(() => {
+    // Update the jobStatus based on the isChecked state
+    setJobStatus(isChecked ? "Inactive" : "Active");
+
+    // Update the badgeClass based on the isChecked state
+    setIsBadgeSuccess(isChecked);
+  }, [isChecked]);
 
   const badgeClass = isBadgeSuccess
     ? "badge btn-success rounded-pill"

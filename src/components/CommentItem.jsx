@@ -13,7 +13,7 @@ const CommentItem = (props) => {
     });
     return formattedDate;
   };
-
+console.log(user,"Iam comment user");
   return (
     <div>
       <div className="commented-section mt-2">
@@ -21,7 +21,7 @@ const CommentItem = (props) => {
           <div className="profile-image">
             <img
               className="rounded-circle"
-              src={user.avatar ? user.avatar : default_user}
+              src={`http://localhost:8000${user.avatar ? user.avatar : default_user}`}
               width="45"
               alt="Profile"
             />

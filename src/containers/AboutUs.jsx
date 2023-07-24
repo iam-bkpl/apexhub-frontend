@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import img1 from "../assets/testImages/about-1.jpg";
+import img1 from "../assets/backgrounds/bhawana-roshan.jpg";
+import img2 from "../assets/backgrounds/sabita-kapil.jpg";
+import img3 from "../assets/backgrounds/group.jpg";
+import img4 from "../assets/backgrounds/group1.jpg";
 const AboutUs = () => {
   return (
     <>
@@ -15,24 +18,24 @@ const AboutUs = () => {
                 <div className="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                   <div className="row g-0 about-bg rounded overflow-hidden">
                     <div className="col-6 text-start">
-                      <img className="img-fluid w-100" src="" />
+                      <img className="img-fluid w-100" src={img4} />
                     </div>
                     <div className="col-6 text-start">
                       <img
                         className="img-fluid"
-                        src={img1}
+                        src={img2}
                         style={{ width: "100%", height: "80%" }}
                       />
                     </div>
                     <div className="col-6 text-end">
                       <img
                         className="img-fluid"
-                        src=""
+                        src={img1}
                         style={{ width: "85%" }}
                       />
                     </div>
                     <div className="col-6 text-end">
-                      <img className="img-fluid w-100" src="" />
+                      <img className="img-fluid w-100" src={img3} />
                     </div>
                   </div>
                 </div>

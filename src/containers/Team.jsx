@@ -1,5 +1,9 @@
 import React from 'react'
-import image from "../assets/defaults/iambkpl.jpg"
+import kapil from "../assets/defaults/iambkpl.jpg"
+import sabita from "../assets/defaults/sabita.png"
+import bhawana from "../assets/defaults/bhawana.jpg"
+import roshan from "../assets/defaults/img35.png"
+
 import TeamCard from '../components/TeamCard'
 const Team = () => {
   return (
@@ -11,7 +15,7 @@ const Team = () => {
             </div>
             <div className="row ps-xs-4 mx-3 d-flex justify-content-center">
                 <TeamCard 
-                    img={image} 
+                    img={kapil} 
                     name="Kapil&nbsp;Bhandari"
                     title="Backend&nbsp;Developer"
                     facebook=""
@@ -20,27 +24,27 @@ const Team = () => {
                     github=""
                 />
                 <TeamCard 
-                    img={image} 
-                    name="Kapil&nbsp;Bhandari"
-                    title="Backend&nbsp;Developer"
+                    img={sabita} 
+                    name="Sabita&nbsp;Shrestha"
+                    title="UI/UX&nbsp;Designer"
                     facebook=""
                     instagram=""
                     linkedin=""
                     github=""
                     />
                     <TeamCard 
-                    img={image} 
-                    name="Kapil&nbsp;Bhandari"
-                    title="Backend&nbsp;Developer"
+                    img={bhawana} 
+                    name="Bhawana&nbsp;Shrestha"
+                    title="Database&nbsp;Designer"
                     facebook=""
                     instagram=""
                     linkedin=""
                     github=""
                     />
                     <TeamCard 
-                    img={image} 
-                    name="Kapil&nbsp;Bhandari"
-                    title="Backend&nbsp;Developer"
+                    img={roshan} 
+                    name="Roshan&nbsp;Nyaupane"
+                    title="Frontend&nbsp;Developer"
                     facebook=""
                     instagram=""
                     linkedin=""

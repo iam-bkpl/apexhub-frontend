@@ -8,6 +8,9 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import CommentList from "../containers/CommentList";
+import KhaltiCheckout from "khalti-checkout-web";
+// import config from "../khalti/khaltiConfig";
+import config from "../khalti/khaltiConfig";
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -44,6 +47,13 @@ const ProductDetail = () => {
       day: "numeric",
     });
     return formattedDate;
+  };
+
+  let checkout = new KhaltiCheckout(config);
+
+  const handleBuy = (price) => {
+    console.log("handle buy function", price);
+    checkout.show({ amount: price });
   };
 
   if (loading) {
@@ -174,7 +184,21 @@ const ProductDetail = () => {
                           name="submit"
                           value="buy"
                         >
-                          Buy
+                          Pay to Seller
+                        </button>
+                      </div>
+                    </div>
+                    <div className="pb-3 mt-2 row">
+                      <div className="col d-grid">
+                        <button
+                          type="submit"
+                          className="py-2 btn btn-primary btn-md"
+                          name="submit"
+                          value="buy"
+                          style={{backgroundColor:"#56308E"}}
+                          onClick={()=> handleBuy(product.price)}
+                        >
+                          Pay To Merchant
                         </button>
                       </div>
                     </div>
