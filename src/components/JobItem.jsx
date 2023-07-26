@@ -14,7 +14,6 @@ const JobItem = (props) => {
     experience_level,
     vote,
   } = props;
-
   const checkVoteCount = (vote_count) => {
     if (vote_count) {
       return <span>{vote_count} </span>;

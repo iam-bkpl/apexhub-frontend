@@ -51,11 +51,16 @@ const ProfileEdit = ({ user }) => {
   };
 
   const handleChangeAvatar = (e) => {
+
     console.log("avatae change avatar");
     setSelectedAvatar(e.target.files[0]);
     console.log("avatar");
     console.log(e.target.files[0]);
-    console.log("------------------------------------------------");
+    
+    e.preventDefault();
+    setSelectedAvatar(e.target.files[0]);
+    
+
   };
 
   const handleAvatarUpdate = (e) => {

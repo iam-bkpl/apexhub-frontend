@@ -4,7 +4,7 @@ import JobItem from "../components/JobItem";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchJobPosts, postJobVote } from "../redux/actions/acs";
 import { useNavigate } from "react-router-dom";
-import CompanyLogo from "../assets/testImages/about-1.jpg";
+
 
 const JobList = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const JobList = () => {
   const [selectedJobType, setSelectedJobType] = useState("default");
 
   const jobPosts = useSelector((state) => state.acs.jobPosts);
-  const [company_logo, setCompany_logo] = useState(CompanyLogo);
+  // const [company_logo, setCompany_logo] = useState(nabilLogo);
 
   useEffect(() => {
     dispatch(fetchJobPosts());
@@ -64,7 +64,6 @@ const JobList = () => {
       });
     }
   });
-
   if (loading) {
     return <LoadingSpinner />;
   } else {
@@ -130,7 +129,7 @@ const JobList = () => {
                         key={job.id}
                         id={job.id}
                         company={job.company_name}
-                        logo={CompanyLogo}
+                        logo={`http://localhost:8000${job.user.avatar}`}
                         title={job.title}
                         location={job.location}
                         job_type={job.job_type}

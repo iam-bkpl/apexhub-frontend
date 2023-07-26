@@ -15,9 +15,35 @@
   --shadow-product: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   --auth-bg: #0000000d;
 }
-
+[data-theme="dark"]{
+  --primary: #a688fa;
+  --text-primary: white;
+  --bg-color: #1a1625;
+  --card-bg: #2f2b3a;
+  --text-secondary: #282828;
+  --text-link: #a688fa;
+  --main-btn-hover: #7659c5;
+  --white: #000000;
+  --border-light: rgba(0, 0, 0, .08);
+  --black: white;
+  --light: #1a1625;
+  --shadow-product: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  --auth-bg: #1a1625;
+}
 .dark-theme {
-  --primary: #435EBE;
+  --primary: #a688fa;
+  --text-primary: white;
+  --bg-color: #1a1625;
+  --card-bg: #2f2b3a;
+  --text-secondary: #282828;
+  --text-link: #a688fa;
+  --main-btn-hover: #7659c5;
+  --white: #000000;
+  --border-light: rgba(0, 0, 0, .08);
+  --black: white;
+  --light: #1a1625;
+  --shadow-product: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  --auth-bg: #1a1625;
 }
 
 body {
@@ -55,7 +81,8 @@ body {
 /* navbar */
 
 .navbar-brand img {
-  width: 30px;
+  width: 165px;
+  height: 80px;
 }
 
 .navbar-brand span {
@@ -215,12 +242,12 @@ carousel-img {
 
 /* about */
 .about-bg {
-  background-image: -webkit-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
+  /* background-image: -webkit-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
   background-image: -moz-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
   background-image: -ms-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
   background-image: -o-repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
   background-image: repeating-radial-gradient(center center, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 1px, transparent 1px, transparent 100%);
-  background-size: 5px 5px;
+  background-size: 5px 5px; */
 }
 
 /* Our Teams */

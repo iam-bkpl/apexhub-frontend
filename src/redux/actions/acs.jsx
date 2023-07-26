@@ -152,3 +152,33 @@ export const filterJobs = createAsyncThunk(
     }
   }
 );
+
+export const applyJob = createAsyncThunk(
+  "acs/applyJob",
+  async ({ job_id, formData }, thunkAPI) => {
+    const accessToken = localStorage.getItem("access");
+    if (accessToken) {
+      const config = {
+        headers: {
+          Authorization: `JWT ${accessToken}`,
+        },
+      };
+
+      try {
+        console.log(job_id);
+        console.log(formData)
+        const response = await axios.post(
+          `${API_URL}/jobpost/2/applications/`,
+          formData,
+          config
+        );
+        console.log("Job application success");
+        return response.data;
+      } catch (error) {
+        console.log("Error on Apply job");
+      }
+    } else {
+      return thunkAPI.rejectWithValue("Access token not found");
+    }
+  }
+);

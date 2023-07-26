@@ -21,7 +21,7 @@ const Contact = () => {
             <ContactInfo
               icon="fa fa-map-marker-alt text-primary"
               title="Address"
-              info="123 Street, New York, USA"
+              info="Mid-Baneshwor, Kathmandu"
             />
             <ContactInfo
               icon="fa fa-phone-alt text-primary"
@@ -31,12 +31,12 @@ const Contact = () => {
             <ContactInfo
               icon="fa fa-phone-alt text-primary"
               title="Call Us Now"
-              info="+012 345 6789"
+              info="+977-9846014473"
             />
             <ContactInfo
               icon="fa fa-envelope-open text-primary"
               title="Mail Us Now"
-              info="info@example.com"
+              info="apexhubcontact@gmail.com"
             />
           </div>
           <div className="col-lg-6" data-wow-delay="0.5s">
