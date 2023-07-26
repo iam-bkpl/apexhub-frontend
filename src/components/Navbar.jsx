@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/actions/auth";
 import default_user from "../assets/defaults/user.png";
+
+import { useState } from "react";
+
 import apexHubLogo from "../assets/defaults/Apex_hub_logo.png"
 
 const Navbar = () => {
@@ -12,6 +15,15 @@ const Navbar = () => {
 
   const user = useSelector((state) => state.auth.user);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
+  const [avatar, setAvatar] = useState(default_user);
+  useEffect(() => {
+    if (user && user.avatar) {
+      setAvatar(user.avatar);
+    } else {
+      setAvatar(default_user);
+    }
+  }, [user]);
 
   const handleLogout = async () => {
     navigate("/home");
@@ -113,7 +125,7 @@ const Navbar = () => {
                 id="dropdownMenuLink"
               >
                 <img
-                  src={user ? user.avatar : default_user}
+                  src={avatar}
                   alt="Profile"
                   className="rounded-circle"
                   height="40px"
@@ -127,7 +139,7 @@ const Navbar = () => {
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuLink"
-                  style={{marginLeft:"-20px"}}
+                  style={{ marginLeft: "-20px" }}
                 >
                   <li>
                     <Link to="/profile" className="dropdown-item">

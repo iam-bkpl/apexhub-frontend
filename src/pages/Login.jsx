@@ -43,26 +43,31 @@ const Login = () => {
   return (
     <>
       <div className="container d-flex justify-content-center align-items-center min-vh-100">
-        <div className="row border rounded-5 p-3 bg-light shadow box-area">
+        <div className="p-3 border shadow row rounded-5 bg-light box-area">
           <div className="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box d-none d-md-block">
-            <div className="featured-image mb-3">
+            <div className="mb-3 featured-image">
               <img src={LoginImg} className="img-fluid" alt="Login" />
             </div>
-            {/* <p className="text-dark fs-2 p-0 m-0">Be Verified</p>
-            <small className="text-dark text-wrap text-center">Join experienced Designers on this platform.</small> */}
+            {/* <p className="p-0 m-0 text-dark fs-2">Be Verified</p>
+            <small className="text-center text-dark text-wrap">Join experienced Designers on this platform.</small> */}
           </div>
 
           <div className="col-md-6 right-box">
             <div className="row align-items-center">
               <form onSubmit={(e) => handleSubmit(e)}>
+
+                <div className="mb-4 header-text">
+                  <h2>Hello,| | from the other side</h2>
+
                 <div className="header-text mb-4">
                   <h2>Welcome !</h2>
+
                   <p>We are happy to have you back.</p>
                 </div>
-                <div className="input-group mb-3">
+                <div className="mb-3 input-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg bg-white rounded-pill shadow-sm fs-6"
+                    className="bg-white shadow-sm form-control form-control-lg rounded-pill fs-6"
                     placeholder="Email address"
                     value={email}
                     name="email"
@@ -70,10 +75,10 @@ const Login = () => {
                     required
                   />
                 </div>
-                <div className="input-group mb-1">
+                <div className="mb-1 input-group">
                   <input
                     type="password"
-                    className="form-control form-control-lg bg-white rounded-pill shadow-sm fs-6"
+                    className="bg-white shadow-sm form-control form-control-lg rounded-pill fs-6"
                     placeholder="Password"
                     required
                     name="password"
@@ -81,7 +86,7 @@ const Login = () => {
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
-                <div className="input-group mb-5 mt-3 d-flex justify-content-between">
+                <div className="mt-3 mb-5 input-group d-flex justify-content-between">
                   <div className="form-check">
                     <input
                       type="checkbox"
@@ -102,7 +107,7 @@ const Login = () => {
                     </small>
                   </div>
                 </div>
-                <div className="input-group mb-3">
+                <div className="mb-3 input-group">
                   <button
                     className="btn btn-lg btn-primary w-100 fs-6"
                     type="submit"
@@ -110,7 +115,7 @@ const Login = () => {
                     Login
                   </button>
                 </div>
-                <div className="input-group mb-3">
+                <div className="mb-3 input-group">
                   <button className="btn btn-lg btn-light w-100 fs-6">
                     <small>Sign In with Google</small>
                   </button>

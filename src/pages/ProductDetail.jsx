@@ -12,7 +12,19 @@ import KhaltiCheckout from "khalti-checkout-web";
 // import config from "../khalti/khaltiConfig";
 import config from "../khalti/khaltiConfig";
 
+import KhaltiCheckout from "khalti-checkout-web";
+import config from "../khalti/khaltiConfig";
+
 const ProductDetail = () => {
+  // khalti
+  let checkout = new KhaltiCheckout(config);
+
+  const handleBuy = (price) => {
+    console.log("handle buy function", price);
+    checkout.show({ amount: price });
+  };
+
+  //khalti
   const dispatch = useDispatch();
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -180,10 +192,24 @@ const ProductDetail = () => {
                       <div className="col d-grid">
                         <button
                           type="submit"
+                          id="submit"
+                          className="py-2 btn btn-primaryw btn-md mb-3"
+                          name="submit"
+                          // onClick={(e) => handleBuy(e)}
+                        >
+                          Pay To Seller
+                        </button>
+                        <button
+                          style={{ backgroundColor: "#56308E", color: "white" }}
+                          type="submit"
+                          id="submit"
                           className="py-2 btn btn-primary btn-md"
                           name="submit"
-                          value="buy"
+                          onClick={() => handleBuy(product.price)}
+                          // onClick={() => checkout.show({ amount: {product.price} })}
                         >
+
+
                           Pay to Seller
                         </button>
                       </div>
@@ -198,7 +224,7 @@ const ProductDetail = () => {
                           style={{backgroundColor:"#56308E"}}
                           onClick={()=> handleBuy(product.price)}
                         >
-                          Pay To Merchant
+                      Pay To Merchant
                         </button>
                       </div>
                     </div>

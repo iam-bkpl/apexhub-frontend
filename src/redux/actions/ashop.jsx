@@ -264,3 +264,9 @@ export const fetchCategorys = createAsyncThunk(
     }
   }
 );
+
+export const postPaymentConform = createAsyncThunk(
+  "ashop/payment",
+
+  async ({ token, amount ,}, thunkAPI) => {}
+);

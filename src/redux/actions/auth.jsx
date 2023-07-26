@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
 
 import {
   loginSuccess,
@@ -63,7 +62,7 @@ export const loadUser = createAsyncThunk(
         },
       };
       try {
-        const response = await axios.get(`${apiUrl}/auth/users/me/`, config);
+        const response = await axios.get(`${apiUrl}/core/users/me/`, config);
         thunkAPI.dispatch(userLoadSuccess(response.data));
         return response.data;
       } catch (error) {
@@ -221,6 +220,12 @@ export const updateProfile = createAsyncThunk(
   async (profileData, thunkAPI) => {
     const accessToken = localStorage.getItem("access");
     if (accessToken) {
+      // const config = {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     Authorization: `JWT ${accessToken}`,
+      //   },
+      // };
       const config = {
         headers: {
           Authorization: `JWT ${accessToken}`,
@@ -231,12 +236,16 @@ export const updateProfile = createAsyncThunk(
         console.log("Inside profile update try block");
 
         const response = await axios.put(
-          `${apiUrl}/auth/users/me/`,
+          `${apiUrl}/core/users/me/`,
           profileData,
           config
         );
         thunkAPI.dispatch(loginSuccess(response.data));
         thunkAPI.dispatch(loadUser(response.data));
+        console.log(response.data);
+
+        // thunkAPI.dispatch(loginSuccess(response.data));
+        // thunkAPI.dispatch(loadUser(response.data));
         return response.data;
       } catch (error) {
         console.log("Error while updating profile: " + error.message);
@@ -261,10 +270,11 @@ export const updateAvatar = createAsyncThunk(
 
       try {
         const response = await axios.put(
-          `${apiUrl}/auth/users/me/`,
+          `${apiUrl}/core/users/me/`,
           profileData,
           config
         );
+        console.log(response);
         thunkAPI.dispatch(loginSuccess(response.data));
         thunkAPI.dispatch(loadUser(response.data));
         return response.data;

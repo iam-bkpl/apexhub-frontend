@@ -1,4 +1,8 @@
 import KhaltiCheckout from "khalti-checkout-web";
+
+import { postPaymentConform } from "../redux/actions/ashop";
+
+
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -19,6 +23,17 @@ let config = {
         amount: payload.amount,
       };
 
+
+      axios
+        .post("http://localhost:8000/api/ashop/verify-payment/", data)
+        .then((response) => {
+          console.log(response.data);
+          alert("Payment Successful: Thank You!");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
       // axios
       //   .post("http://localhost:8000/api/ashop/verify-payment/", data)
       //   .then((response) => {
@@ -28,6 +43,7 @@ let config = {
       //   .catch((error) => {
       //     console.log(error);
       //   });
+
     },
     // onError handler is optional
     onError(error) {
