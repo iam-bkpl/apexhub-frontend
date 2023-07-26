@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/actions/auth";
 import default_user from "../assets/defaults/user.png";
-import { useState } from "react";
+// import { useState } from "react";
 
 const Navbar = () => {
   const dispatch = useDispatch();

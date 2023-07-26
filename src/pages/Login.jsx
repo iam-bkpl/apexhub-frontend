@@ -5,8 +5,6 @@ import LoginImg from "../assets/LoginImg.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userLoadFail } from "../redux/reducers/auth";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -58,6 +56,7 @@ const Login = () => {
                 <h2>Hello,| | from the other side</h2>
                 <p>We are happy to have you back.</p>
               </div>
+
               <form onSubmit={(e) => handleSubmit(e)}>
                 <div className="mb-3 input-group">
                   <input
