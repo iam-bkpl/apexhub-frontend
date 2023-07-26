@@ -54,16 +54,11 @@ const Login = () => {
 
           <div className="col-md-6 right-box">
             <div className="row align-items-center">
+              <div className="mb-4 header-text">
+                <h2>Hello,| | from the other side</h2>
+                <p>We are happy to have you back.</p>
+              </div>
               <form onSubmit={(e) => handleSubmit(e)}>
-
-                <div className="mb-4 header-text">
-                  <h2>Hello,| | from the other side</h2>
-
-                <div className="header-text mb-4">
-                  <h2>Welcome !</h2>
-
-                  <p>We are happy to have you back.</p>
-                </div>
                 <div className="mb-3 input-group">
                   <input
                     type="text"
@@ -102,7 +97,6 @@ const Login = () => {
                   </div>
                   <div className="forgot">
                     <small>
-                      {/* <Link to="/password/reset/confirm/:uid/:token"> */}
                       <Link to="/reset-password">Forgot Password?</Link>
                     </small>
                   </div>
@@ -134,5 +128,4 @@ const Login = () => {
   );
 };
 
-// export default connect(null, { login })(Login);
 export default Login;
