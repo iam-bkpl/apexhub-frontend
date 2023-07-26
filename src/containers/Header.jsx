@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import carouselImg1 from "../assets/banner-img-1.jpg";
-import carouselImg2 from "../assets/banner-img-2.jpg";
-const Header = () => {
+import carouselImg1 from "../assets/backgrounds/bg2.jpg";
+import carouselImg2 from "../assets/backgrounds/bg1.jpg";
+const Header = (props) => {
+  const{img1, img2 }=props;
   return (
     <>
       <header
@@ -23,7 +24,7 @@ const Header = () => {
               >
                 {/* carousel image  */}
                 <img
-                  src={carouselImg1}
+                  src={img1}
                   style={{ backgroundSize: "cover" }}
                 ></img>
               </div>
@@ -56,7 +57,7 @@ const Header = () => {
                 style={{ backgroundSize: "cover" }}
               >
                 {/* carousel image1  */}
-                <img src={carouselImg2}></img>
+                <img src={img2}></img>
               </div>
               <div className="top-0 position-absolute start-0 w-100 h-100 d-flex align-items-center">
                 <div className="container">
@@ -65,7 +66,7 @@ const Header = () => {
                       <h2 className="text-white text-capitalize">
                         Best price & offer
                       </h2>
-                      <h1 className="py-2 mb-5 text-white text-uppercase fw-bold">
+                      <h1 className="py-2 mb-5 text-dark text-uppercase fw-bold">
                         new season
                       </h1>
                       <Link

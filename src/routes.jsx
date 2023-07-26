@@ -26,6 +26,7 @@ import IndexDashboard from "./containers/Dashboard/index";
 import ProductDashboard from "./containers/Dashboard/ProductDashboard";
 import UserDashboard from "./containers/Dashboard/UserDashboard";
 import { useDispatch, useSelector } from "react-redux";
+import Blog from "./pages/Blog";
 
 const AppRoutes = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -44,6 +45,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/blog" element={<Blog />} />
         <Route path="/login" element={<Login />} />
         <Route path="/job-list" element={<JobList />} />
         <Route path="/register" element={<Register />} />
@@ -63,7 +65,7 @@ const AppRoutes = () => {
         <Route path="/product-list" element={<ProductList />} />
         <Route path="/product-detail/:id" element={<ProductDetail />} />
         <Route path="/product-post" element={<ProductPost />} />
-        <Route path="/product-buy" element={<ProductBuyPage />} />
+        <Route path="/  " element={<ProductBuyPage />} />
 
 
         {/* Dashboard */}

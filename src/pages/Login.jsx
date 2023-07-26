@@ -55,8 +55,13 @@ const Login = () => {
           <div className="col-md-6 right-box">
             <div className="row align-items-center">
               <form onSubmit={(e) => handleSubmit(e)}>
+
                 <div className="mb-4 header-text">
                   <h2>Hello,| | from the other side</h2>
+
+                <div className="header-text mb-4">
+                  <h2>Welcome !</h2>
+
                   <p>We are happy to have you back.</p>
                 </div>
                 <div className="mb-3 input-group">

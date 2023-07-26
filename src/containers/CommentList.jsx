@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { postComment } from "../redux/actions/ashop";
-import default_user from "../assets/defaults/user.png";
+import default_user from "../assets/defaults/sabita.png";
 
 const CommentList = () => {
   const dispatch = useDispatch();
@@ -15,6 +15,8 @@ const CommentList = () => {
   const [form_comment, setForm_comment] = useState("");
 
   const comments = useSelector((state) => state.ashop.comments);
+  const user = useSelector((state)=>state.auth.user)
+  console.log(user)
   useEffect(() => {
     const fetchCommentsData = async () => {
       try {
@@ -70,6 +72,7 @@ const CommentList = () => {
                 <div className="flex-row mt-4 mb-4 d-flex add-comment-section">
                   <img
                     className="img-fluid img-responsive rounded-circle me-2"
+                    // src={`http://localhost:8000${user.avatar}`}
                     src={default_user}
                     width="60"
                     alt="Profile"
