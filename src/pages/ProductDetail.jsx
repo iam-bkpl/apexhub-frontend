@@ -12,9 +12,6 @@ import KhaltiCheckout from "khalti-checkout-web";
 // import config from "../khalti/khaltiConfig";
 import config from "../khalti/khaltiConfig";
 
-import KhaltiCheckout from "khalti-checkout-web";
-import config from "../khalti/khaltiConfig";
-
 const ProductDetail = () => {
   // khalti
   let checkout = new KhaltiCheckout(config);
@@ -59,13 +56,6 @@ const ProductDetail = () => {
       day: "numeric",
     });
     return formattedDate;
-  };
-
-  let checkout = new KhaltiCheckout(config);
-
-  const handleBuy = (price) => {
-    console.log("handle buy function", price);
-    checkout.show({ amount: price });
   };
 
   if (loading) {
@@ -208,8 +198,6 @@ const ProductDetail = () => {
                           onClick={() => handleBuy(product.price)}
                           // onClick={() => checkout.show({ amount: {product.price} })}
                         >
-
-
                           Pay to Seller
                         </button>
                       </div>
@@ -221,10 +209,10 @@ const ProductDetail = () => {
                           className="py-2 btn btn-primary btn-md"
                           name="submit"
                           value="buy"
-                          style={{backgroundColor:"#56308E"}}
-                          onClick={()=> handleBuy(product.price)}
+                          style={{ backgroundColor: "#56308E" }}
+                          onClick={() => handleBuy(product.price)}
                         >
-                      Pay To Merchant
+                          Pay To Merchant
                         </button>
                       </div>
                     </div>
