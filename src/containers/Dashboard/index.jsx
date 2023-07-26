@@ -5,7 +5,7 @@ import { fetchJobPosts } from "../../redux/actions/acs";
 import { fetchUserList } from "../../redux/actions/auth";
 import { fetchProducts } from "../../redux/actions/ashop";
 import CardSmall from "./CardSmall";
-import SmallTableJobs from "./smallTableJobs";
+import SmallTableJobs from "./SmallTableJobs";
 import DashboardNavbar from "./Navbar";
 import DashboardSidebar from "./Sidebar";
 import SmallTableProduct from "./SmallTableProduct";
